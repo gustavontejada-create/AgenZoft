@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgenZoft — Software que ordena tu negocio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #07090d;
+  --bg2:     #0b0f16;
+  --bg3:     #0f1520;
+  --surface: #111a26;
+  --accent:  #00e5ff;
+  --accent2: #0099cc;
+  --accent-glow: rgba(0,229,255,0.18);
+  --accent-dim:  rgba(0,229,255,0.08);
+  --accent-border: rgba(0,229,255,0.2);
+  --text:    #dde6f0;
+  --muted:   #6b8099;
+  --dimmer:  #2d4560;
+  --white:   #ffffff;
+  --border:  rgba(255,255,255,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9000; opacity: 0.35;
+}
+
+/* ── CURSOR ── */
+.cursor {
+  width: 10px; height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed; pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s ease;
+  box-shadow: 0 0 12px var(--accent);
+}
+.cursor-ring {
+  width: 38px; height: 38px;
+  border: 1px solid rgba(0,229,255,0.35);
+  border-radius: 50%;
+  position: fixed; pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: all 0.15s ease;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 52px;
+  background: rgba(7,9,13,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,229,255,0.07);
+  transition: border-color 0.3s;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-wordmark {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 800;
+  color: var(--white); letter-spacing: -0.5px;
+}
+.nav-wordmark .z { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: 13px; font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+  background: var(--accent); color: #000 !important;
+  padding: 9px 20px; border-radius: 6px;
+  font-weight: 700 !important; font-size: 13px !important;
+  transition: box-shadow 0.2s, transform 0.2s !important;
+}
+.nav-cta:hover {
+  box-shadow: 0 0 28px rgba(0,229,255,0.4);
+  transform: translateY(-1px);
+  color: #000 !important;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 130px 24px 90px;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 100%);
+}
+.hero-glow {
+  position: absolute;
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,100,180,0.12) 0%, transparent 65%);
+  top: 50%; left: 50%; transform: translate(-50%, -60%);
+  pointer-events: none;
+}
+
+/* LOGO ANIMADO */
+.logo-wrap {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  animation: fadeUp 0.8s ease both;
+}
+.logo-svg-wrap {
+  position: relative; margin-bottom: 28px;
+  width: 120px; height: 120px;
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-ring {
+  position: absolute; inset: -20px; border-radius: 50%;
+  border: 1px solid rgba(0,229,255,0.15);
+  animation: spin 22s linear infinite;
+}
+.logo-ring::before {
+  content: '';
+  position: absolute; top: -4px; left: 50%;
+  width: 7px; height: 7px;
+  background: var(--accent); border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 14px var(--accent);
+}
+.logo-ring-2 {
+  position: absolute; inset: -40px; border-radius: 50%;
+  border: 1px dashed rgba(0,229,255,0.06);
+  animation: spin 36s linear infinite reverse;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  border-radius: 100px; padding: 6px 18px;
+  font-size: 12.5px; color: var(--accent); font-weight: 500;
+  margin-bottom: 28px;
+  animation: fadeUp 0.7s ease 0.1s both;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--accent);
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+.wordmark {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(58px, 9vw, 100px);
+  font-weight: 800; letter-spacing: -4px;
+  color: var(--white); line-height: 1;
+  animation: fadeUp 0.7s ease 0.1s both;
+}
+.wordmark .z {
+  color: var(--accent);
+  animation: zPulse 3s ease-in-out infinite;
+}
+@keyframes zPulse {
+  0%,100%{ text-shadow: 0 0 30px rgba(0,229,255,0.4); }
+  50%{ text-shadow: 0 0 60px rgba(0,229,255,0.9), 0 0 100px rgba(0,229,255,0.3); }
+}
+
+.hero-tagline {
+  font-size: 12.5px; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted); margin-top: 10px;
+  animation: fadeUp 0.7s ease 0.15s both;
+}
+.hero-sub {
+  max-width: 540px; margin: 28px auto 0;
+  font-size: 18px; color: var(--muted);
+  font-weight: 300; line-height: 1.75;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+.hero-sub strong { color: var(--text); font-weight: 500; }
+.hero-actions {
+  display: flex; gap: 14px; justify-content: center;
+  margin-top: 44px;
+  animation: fadeUp 0.7s ease 0.25s both;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: #000;
+  padding: 14px 30px; border-radius: 8px;
+  font-weight: 700; font-size: 14.5px;
+  text-decoration: none; cursor: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 28px rgba(0,229,255,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 48px rgba(0,229,255,0.5); }
+.btn-secondary {
+  display: inline-flex; align-items: center;
+  background: transparent; color: var(--text);
+  padding: 14px 30px; border-radius: 8px;
+  font-weight: 500; font-size: 14.5px;
+  text-decoration: none; cursor: none;
+  border: 1px solid var(--dimmer);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── STAT BAR ── */
+.stat-bar {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: center;
+  padding: 32px 48px; gap: 80px; flex-wrap: wrap;
+}
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px; font-weight: 800;
+  color: var(--white); letter-spacing: -1px;
+}
+.stat-num .z { color: var(--accent); }
+.stat-label { font-size: 12.5px; color: var(--muted); margin-top: 4px; text-align: center; }
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  overflow: hidden; padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.marquee-track {
+  display: flex; animation: marquee 28s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); padding-right: 48px;
+  white-space: nowrap; display: flex; align-items: center; gap: 16px;
+}
+.marquee-item span { color: var(--accent); font-size: 10px; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SECTIONS ── */
+.section-wrap { max-width: 1200px; margin: 0 auto; padding: 96px 48px; }
+.section-tag {
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-tag::before {
+  content: ''; width: 24px; height: 1px;
+  background: var(--accent); flex-shrink: 0;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(30px, 4.5vw, 52px);
+  font-weight: 800; letter-spacing: -1.5px;
+  color: var(--white); line-height: 1.1; margin-bottom: 14px;
+}
+.section-title .z { color: var(--accent); }
+.section-sub {
+  font-size: 17px; color: var(--muted);
+  font-weight: 300; max-width: 500px;
+  line-height: 1.75; margin-bottom: 60px;
+}
+
+/* ── PROBLEMA ── */
+.problema-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.pain-list { display: flex; flex-direction: column; gap: 14px; }
+.pain-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px 22px; background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 12px; transition: border-color 0.3s, transform 0.2s;
+}
+.pain-item:hover { border-color: var(--accent-border); transform: translateX(4px); }
+.pain-icon { font-size: 22px; flex-shrink: 0; }
+.pain-title { font-size: 14.5px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.pain-desc { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+/* ── SERVICIOS ── */
+.services-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+}
+.service-card {
+  padding: 40px 28px; background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: relative; transition: background 0.3s;
+}
+.service-card:last-child { border-right: none; }
+.service-card::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0); transition: transform 0.3s;
+}
+.service-card:hover { background: var(--bg3); }
+.service-card:hover::after { transform: scaleX(1); }
+.service-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 52px; font-weight: 800;
+  color: rgba(0,229,255,0.07); line-height: 1; margin-bottom: 16px;
+}
+.service-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--white); margin-bottom: 10px;
+}
+.service-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+/* ── PRODUCT SECTIONS ── */
+.product-section { border-top: 1px solid var(--border); }
+.product-section-alt { background: var(--bg2); border-top: 1px solid var(--border); }
+.product-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start; margin-bottom: 64px;
+}
+.product-emoji { font-size: 52px; margin-bottom: 20px; display: block; }
+.product-rubro {
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+}
+.product-name {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 4vw, 54px); font-weight: 800;
+  letter-spacing: -2px; color: var(--white); line-height: 1; margin-bottom: 16px;
+}
+.product-name .z { color: var(--accent); }
+.product-pitch {
+  font-size: 17px; color: var(--muted); font-weight: 300;
+  line-height: 1.7; margin-bottom: 28px;
+}
+.product-subdomain {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace; font-size: 12.5px; color: var(--muted);
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 14px;
+}
+.sdot { width: 6px; height: 6px; border-radius: 50%; animation: blink 2s infinite; }
+
+/* Benefits */
+.benefits-list { display: flex; flex-direction: column; gap: 12px; }
+.benefit-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 18px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--bg3);
+  transition: border-color 0.2s;
+}
+.benefit-item:hover { border-color: var(--accent-border); }
+.benefit-check { color: var(--accent); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.benefit-text { font-size: 14px; color: var(--muted); line-height: 1.55; }
+.benefit-text strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 2px; }
+
+/* Pricing */
+.pricing-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px; font-weight: 800;
+  color: var(--white); letter-spacing: -0.5px;
+  margin-bottom: 8px; text-align: center;
+}
+.pricing-sub { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 36px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.plan-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px 28px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.plan-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
+.plan-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(160deg, rgba(0,229,255,0.06) 0%, var(--surface) 60%);
+}
+.plan-card.featured::before {
+  content: 'MÁS POPULAR';
+  position: absolute; top: 16px; right: 16px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  background: var(--accent); color: #000;
+  padding: 3px 10px; border-radius: 100px;
+}
+.plan-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
+}
+.plan-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 40px; font-weight: 800;
+  color: var(--white); letter-spacing: -1.5px;
+  line-height: 1; margin-bottom: 4px;
+}
+.plan-price sup { font-size: 18px; vertical-align: super; font-weight: 600; color: var(--muted); }
+.plan-period { font-size: 12.5px; color: var(--muted); margin-bottom: 24px; }
+.plan-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+.plan-features {
+  list-style: none; display: flex; flex-direction: column;
+  gap: 10px; margin-bottom: 28px;
+}
+.plan-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13.5px; color: var(--muted); line-height: 1.4;
+}
+.plan-features li::before { content: '✓'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
+.plan-features li.no { color: var(--dimmer); }
+.plan-features li.no::before { content: '–'; color: var(--dimmer); }
+.btn-plan {
+  display: block; width: 100%; text-align: center;
+  padding: 13px; border-radius: 8px;
+  font-weight: 700; font-size: 14px;
+  text-decoration: none; cursor: none;
+  transition: all 0.2s;
+}
+.btn-plan-primary {
+  background: var(--accent); color: #000;
+  box-shadow: 0 0 24px rgba(0,229,255,0.25);
+}
+.btn-plan-primary:hover { box-shadow: 0 0 40px rgba(0,229,255,0.45); transform: translateY(-1px); }
+.btn-plan-outline {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-plan-outline:hover { border-color: var(--accent); color: var(--accent); }
+.trial-note {
+  text-align: center; margin-top: 18px;
+  font-size: 13px; color: var(--muted);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.trial-note strong { color: var(--accent); }
+
+/* ── POR QUÉ ── */
+.porque-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.porque-card {
+  padding: 30px; border: 1px solid var(--border);
+  border-radius: 12px; background: var(--surface);
+  transition: border-color 0.3s, transform 0.2s;
+}
+.porque-card:hover { border-color: var(--accent-border); transform: translateY(-3px); }
+.porque-icon { font-size: 28px; margin-bottom: 14px; }
+.porque-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px;
+}
+.porque-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+/* ── PROCESO ── */
+.proceso-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+}
+.proceso-step {
+  padding: 40px 28px; border-right: 1px solid var(--border);
+  position: relative; transition: background 0.2s;
+}
+.proceso-step:last-child { border-right: none; }
+.proceso-step:hover { background: var(--accent-dim); }
+.step-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 56px; font-weight: 800;
+  color: rgba(0,229,255,0.07); line-height: 1; margin-bottom: 16px;
+}
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 8px;
+}
+.step-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+.step-arrow {
+  position: absolute; top: 44px; right: -12px;
+  width: 24px; height: 24px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: var(--accent); z-index: 1;
+}
+.proceso-step:last-child .step-arrow { display: none; }
+
+/* ── CTA / CONTACTO ── */
+.cta-inner {
+  text-align: center; padding: 110px 48px;
+  position: relative; overflow: hidden;
+  max-width: 1200px; margin: 0 auto;
+}
+.cta-glow {
+  position: absolute; width: 700px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,100,180,0.12) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.cta-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 5vw, 64px); font-weight: 800;
+  color: var(--white); letter-spacing: -2px; line-height: 1.05; margin-bottom: 18px;
+}
+.cta-title .z { color: var(--accent); }
+.cta-sub { font-size: 17px; color: var(--muted); max-width: 460px; margin: 0 auto 48px; font-weight: 300; }
+.contact-cards {
+  display: flex; gap: 20px; justify-content: center;
+  flex-wrap: wrap; margin-top: 52px;
+}
+.contact-card {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 24px;
+  text-decoration: none; color: var(--text);
+  transition: border-color 0.2s, transform 0.2s; cursor: none;
+}
+.contact-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+.contact-card-icon { font-size: 26px; }
+.contact-card-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.contact-card-val { font-size: 14.5px; color: var(--white); font-weight: 500; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--white); }
+.footer-logo .z { color: var(--accent); }
+.footer-copy { font-size: 12.5px; color: var(--muted); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width: 960px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 64px 20px; }
+  .problema-grid, .product-header { grid-template-columns: 1fr; gap: 40px; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .porque-grid { grid-template-columns: 1fr 1fr; }
+  .proceso-grid { grid-template-columns: 1fr 1fr; }
+  .stat-bar { gap: 40px; padding: 28px 20px; }
+  footer { padding: 32px 20px; flex-direction: column; text-align: center; }
+}
+@media(max-width: 540px) {
+  .hero-actions { flex-direction: column; align-items: center; }
+  .services-grid, .porque-grid, .proceso-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+      <rect width="40" height="40" rx="8" fill="rgba(0,229,255,0.08)"/>
+      <path d="M11 12h18l-13 16h14" stroke="#00e5ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="nav-wordmark">Agen<span class="z">Z</span>oft</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#soluciones">Soluciones</a></li>
+    <li><a href="#ferregestion">FerreGestión</a></li>
+    <li><a href="#comerciopro">ComercioPro</a></li>
+    <li><a href="#supertecnico">SuperTécnico</a></li>
+    <li><a href="#inmobiliaria">InmobiliariaPro</a></li>
+    <li><a href="#contacto" class="nav-cta">💬 Contactar</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="logo-wrap">
+    <div class="logo-svg-wrap">
+      <div class="logo-ring"></div>
+      <div class="logo-ring-2"></div>
+      <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+        <rect x="14" y="14" width="92" height="92" rx="20" fill="rgba(0,229,255,0.05)" stroke="rgba(0,229,255,0.12)" stroke-width="1"/>
+        <path d="M36 38h48L50 82h35" stroke="#00e5ff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <animate attributeName="stroke-dasharray" from="0 220" to="148 220" dur="1.2s" fill="freeze" begin="0.4s"/>
+        </path>
+        <circle cx="85" cy="82" r="5" fill="#00e5ff" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" dur="0.3s" fill="freeze" begin="1.5s"/>
+        </circle>
+        <circle cx="85" cy="82" r="5" fill="#00e5ff" opacity="0">
+          <animate attributeName="r" values="5;13;5" dur="2.5s" repeatCount="indefinite" begin="1.8s"/>
+          <animate attributeName="opacity" values="0.35;0;0.35" dur="2.5s" repeatCount="indefinite" begin="1.8s"/>
+          <animate attributeName="opacity" from="0" to="0.35" dur="0.2s" fill="freeze" begin="1.5s"/>
+        </circle>
+      </svg>
+    </div>
+
+    <div class="hero-badge">Agencia de Software · Río Cuarto, Córdoba, Argentina</div>
+    <div class="wordmark">Agen<span class="z">Z</span>oft</div>
+    <p class="hero-tagline">Software que ordena tu negocio · Soluciones para PyMEs latinoamericanas</p>
+
+    <p class="hero-sub">
+      Tu negocio tiene <strong>todo el potencial del mundo</strong>. Solo necesita el sistema correcto para crecer sin caos, sin papeles y sin depender de vos las 24 horas.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#soluciones" class="btn-primary">Ver soluciones →</a>
+      <a href="#contacto" class="btn-secondary">Hablar con nosotros</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STAT BAR ══════════ -->
+<div class="stat-bar">
+  <div class="reveal">
+    <div class="stat-num">4<span class="z">+</span></div>
+    <div class="stat-label">Sistemas activos</div>
+  </div>
+  <div class="reveal" style="transition-delay:.08s">
+    <div class="stat-num">14</div>
+    <div class="stat-label">Días de prueba gratis</div>
+  </div>
+  <div class="reveal" style="transition-delay:.16s">
+    <div class="stat-num">100<span class="z">%</span></div>
+    <div class="stat-label">Hecho para Argentina</div>
+  </div>
+  <div class="reveal" style="transition-delay:.24s">
+    <div class="stat-num">0<span class="z">$</span></div>
+    <div class="stat-label">Costo de instalación</div>
+  </div>
+</div>
+
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Software a medida <span>✦</span> Precios en pesos <span>✦</span> Soporte real <span>✦</span> En la nube <span>✦</span> 14 días gratis <span>✦</span> Sin instalación <span>✦</span> Para PyMEs argentinas <span>✦</span> Control total <span>✦</span> Sin tarjeta de crédito <span>✦</span></div>
+    <div class="marquee-item">Software a medida <span>✦</span> Precios en pesos <span>✦</span> Soporte real <span>✦</span> En la nube <span>✦</span> 14 días gratis <span>✦</span> Sin instalación <span>✦</span> Para PyMEs argentinas <span>✦</span> Control total <span>✦</span> Sin tarjeta de crédito <span>✦</span></div>
+  </div>
+</div>
+
+<!-- ══════════ PROBLEMA ══════════ -->
+<div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border)">
+  <div class="section-wrap">
+    <div class="problema-grid">
+      <div>
+        <p class="section-tag reveal">El problema real</p>
+        <h2 class="section-title reveal" style="transition-delay:.08s">Tu negocio crece.<br>El desorden, también.</h2>
+        <p class="section-sub reveal" style="transition-delay:.12s; margin-bottom:32px">
+          La mayoría de los dueños de PyME no pierden por falta de trabajo. Pierden porque no tienen <strong style="color:var(--text)">control real</strong> sobre lo que pasa adentro del negocio. Nosotros resolvemos exactamente eso.
+        </p>
+        <div class="hero-actions reveal" style="justify-content:flex-start; margin-top:0; transition-delay:.16s">
+          <a href="#soluciones" class="btn-primary">Quiero tomar el control →</a>
+        </div>
+      </div>
+      <div class="pain-list">
+        <div class="pain-item reveal">
+          <div class="pain-icon">📋</div>
+          <div>
+            <div class="pain-title">Todo en papel o Excel</div>
+            <div class="pain-desc">Datos dispersos, errores manuales, información que se pierde. Nunca sabés qué tenés realmente.</div>
+          </div>
+        </div>
+        <div class="pain-item reveal" style="transition-delay:.06s">
+          <div class="pain-icon">🔍</div>
+          <div>
+            <div class="pain-title">Sin visibilidad de tus números</div>
+            <div class="pain-desc">No sabés cuánto vendiste hoy, cuánto te deben los clientes ni cuánto le debés a los proveedores.</div>
+          </div>
+        </div>
+        <div class="pain-item reveal" style="transition-delay:.1s">
+          <div class="pain-icon">⏱️</div>
+          <div>
+            <div class="pain-title">Todo depende de vos</div>
+            <div class="pain-desc">Si vos no estás, el negocio para. No podés delegar porque nada está sistematizado.</div>
+          </div>
+        </div>
+        <div class="pain-item reveal" style="transition-delay:.14s">
+          <div class="pain-icon">📉</div>
+          <div>
+            <div class="pain-title">Perdés plata sin darte cuenta</div>
+            <div class="pain-desc">Stock que desaparece, clientes que no pagan, márgenes que no controlás. El negocio sangra por mil heridas pequeñas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SOLUCIONES / SERVICIOS ══════════ -->
+<div id="soluciones">
+  <div class="section-wrap">
+    <p class="section-tag reveal">Lo que hacemos</p>
+    <h2 class="section-title reveal" style="transition-delay:.08s">No solo desarrollamos software.<br><span class="z">Diseñamos sistemas que gestionan.</span></h2>
+    <p class="section-sub reveal" style="transition-delay:.12s">Desde el análisis inicial hasta el soporte postventa. Nos involucramos en cada etapa para que el sistema realmente funcione en tu negocio.</p>
+    <div class="services-grid reveal" style="transition-delay:.16s">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-name">Análisis & Diagnóstico</div>
+        <div class="service-desc">Relevamos tus procesos actuales y diseñamos la solución ideal antes de escribir una línea de código. Primero entendemos, después construimos.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-name">Software a medida</div>
+        <div class="service-desc">Sistemas web 100% en la nube, accesibles desde cualquier dispositivo, construidos con tecnología moderna y pensados para escalar.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-name">Implementación & Migración</div>
+        <div class="service-desc">Cargamos tus datos actuales (Excel, papeles, lo que tengas). El primer día ya tenés todo tu historial en el sistema.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-name">Soporte continuo</div>
+        <div class="service-desc">Hablás con quien hizo el sistema. Sin tickets ni call centers. Soporte real, por WhatsApp, en tiempo real.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ══════ APP 1: FERREGESTIÓN ══════ -->
+<!-- ══════════════════════════════════════ -->
+<div class="product-section product-section-alt" id="ferregestion">
+  <div class="section-wrap">
+    <div class="product-header">
+      <div>
+        <span class="product-emoji">🔩</span>
+        <div class="product-rubro" style="color:#ff6b35">Ferreterías · Construcción · Materiales</div>
+        <div class="product-name reveal">Ferre<span class="z">G</span>estión</div>
+        <p class="product-pitch reveal" style="transition-delay:.06s">El sistema que necesita tu ferretería para dejar de perder tiempo, controlar el stock y cobrarle a tus clientes sin perseguirlos.</p>
+        <div class="product-subdomain reveal" style="transition-delay:.1s">
+          <div class="sdot" style="background:#ff6b35"></div>
+          tuferreteria.agenzoft.com
+        </div>
+      </div>
+      <div class="benefits-list">
+        <div class="benefit-item reveal"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Control de stock en tiempo real</strong>Sabé exactamente cuántas unidades tenés, cuándo se acaba y cuándo pedir más.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.05s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Cuenta corriente de clientes</strong>Registrá lo que te deben, cuándo pagan y enviá resúmenes automáticos. No más deudas perdidas.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.1s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Remitos y presupuestos digitales</strong>Generá en segundos. Convertí un presupuesto en venta con un solo clic.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.15s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Gestión de proveedores</strong>Controlá lo que comprás, a quién, a qué precio y qué debés. Todo centralizado.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.2s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Reportes de rentabilidad</strong>Sabé qué productos te dejan más margen y cómo va tu negocio mes a mes.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.25s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Alertas de stock mínimo</strong>Avisos automáticos cuando un producto llega a su mínimo. Nunca más sin mercadería.</div></div>
+      </div>
+    </div>
+    <div class="reveal"><div class="pricing-title">Planes FerreGestión</div><p class="pricing-sub">Todos incluyen <strong style="color:var(--accent)">14 días de prueba gratuita</strong> · Sin tarjeta de crédito</p></div>
+    <div class="pricing-grid reveal" style="transition-delay:.08s">
+      <div class="plan-card">
+        <div class="plan-name">Básico</div>
+        <div class="plan-price"><sup>$</sup>8.990</div>
+        <div class="plan-period">por mes · hasta 2 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Gestión de stock completa</li>
+          <li>Hasta 2.000 productos</li>
+          <li>Cuenta corriente de clientes</li>
+          <li>Remitos y presupuestos</li>
+          <li>1 sucursal · Reportes básicos</li>
+          <li class="no">Gestión de proveedores</li>
+          <li class="no">Alertas automáticas</li>
+          <li class="no">Multi-sucursal</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20FerreGesti%C3%B3n%20B%C3%A1sico%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-name">Profesional</div>
+        <div class="plan-price"><sup>$</sup>14.990</div>
+        <div class="plan-period">por mes · hasta 5 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo el plan Básico</li>
+          <li>Productos ilimitados</li>
+          <li>Gestión de proveedores</li>
+          <li>Alertas de stock mínimo</li>
+          <li>Hasta 3 sucursales</li>
+          <li>Reportes avanzados</li>
+          <li>Exportación a Excel</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20FerreGesti%C3%B3n%20Profesional%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-primary">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Empresarial</div>
+        <div class="plan-price"><sup>$</sup>24.990</div>
+        <div class="plan-period">por mes · usuarios ilimitados</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo el plan Profesional</li>
+          <li>Sucursales ilimitadas</li>
+          <li>Multi-depósito</li>
+          <li>API e integraciones</li>
+          <li>Reportes personalizados</li>
+          <li>Capacitación incluida</li>
+          <li>Migración de datos incluida</li>
+          <li>Soporte 24/7 por WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20FerreGesti%C3%B3n%20Empresarial%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+    </div>
+    <p class="trial-note reveal">🔒 Sin tarjeta de crédito · <strong>14 días gratis</strong> · Cancelás cuando querés</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ══════ APP 2: COMERCIOPRO ══════ -->
+<!-- ══════════════════════════════════════ -->
+<div class="product-section" id="comerciopro">
+  <div class="section-wrap">
+    <div class="product-header">
+      <div>
+        <span class="product-emoji">🛒</span>
+        <div class="product-rubro" style="color:#00e5ff">Comercios · Minimarket · Retail · Kiosco</div>
+        <div class="product-name reveal">Comercio<span class="z">P</span>ro</div>
+        <p class="product-pitch reveal" style="transition-delay:.06s">POS e inventario hecho para el comercio minorista argentino. Precios dinámicos, remarcado masivo y múltiples medios de pago en un sistema simple.</p>
+        <div class="product-subdomain reveal" style="transition-delay:.1s">
+          <div class="sdot" style="background:#00e5ff"></div>
+          tucomercio.agenzoft.com
+        </div>
+      </div>
+      <div class="benefits-list">
+        <div class="benefit-item reveal"><span class="benefit-check">✦</span><div class="benefit-text"><strong>POS táctil y rápido</strong>Vendé en segundos desde cualquier dispositivo, sin depender de una caja física.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.05s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Remarcado masivo de precios</strong>Actualizá toda tu mercadería de un golpe cuando sube el dólar o el proveedor.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.1s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Multi-pago y multi-precio</strong>Efectivo, tarjeta, transferencia, QR. Precios por lista, por cliente o por cantidad.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.15s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Cuenta corriente de clientes</strong>Que tus clientes de confianza lleven mercadería y paguen después. Todo registrado automáticamente.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.2s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Catálogos pre-cargados por rubro</strong>Empezás con tu catálogo de productos ya listo. Sin cargar nada desde cero el primer día.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.25s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>AFIP — Facturación electrónica (próximo)</strong>Integración con facturación electrónica AFIP directo desde el sistema, sin programas adicionales.</div></div>
+      </div>
+    </div>
+    <div class="reveal"><div class="pricing-title">Planes ComercioPro</div><p class="pricing-sub">Todos incluyen <strong style="color:var(--accent)">14 días de prueba gratuita</strong> · Sin tarjeta de crédito</p></div>
+    <div class="pricing-grid reveal" style="transition-delay:.08s">
+      <div class="plan-card">
+        <div class="plan-name">Básico</div>
+        <div class="plan-price"><sup>$</sup>7.990</div>
+        <div class="plan-period">por mes · hasta 2 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>POS táctil completo</li>
+          <li>Hasta 1.500 productos</li>
+          <li>Multi-pago</li>
+          <li>Control de stock</li>
+          <li>Cierre de caja diario</li>
+          <li class="no">Remarcado masivo</li>
+          <li class="no">Cuenta corriente</li>
+          <li class="no">Multi-lista de precios</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20ComercioPro%20B%C3%A1sico%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-name">Profesional</div>
+        <div class="plan-price"><sup>$</sup>12.990</div>
+        <div class="plan-period">por mes · hasta 5 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo el plan Básico</li>
+          <li>Productos ilimitados</li>
+          <li>Remarcado masivo</li>
+          <li>Cuenta corriente clientes</li>
+          <li>Multi-lista de precios</li>
+          <li>Reportes de rentabilidad</li>
+          <li>Catálogo pre-cargado</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20ComercioPro%20Profesional%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-primary">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Empresarial</div>
+        <div class="plan-price"><sup>$</sup>19.990</div>
+        <div class="plan-period">por mes · usuarios ilimitados</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo el plan Profesional</li>
+          <li>Múltiples sucursales</li>
+          <li>Facturación AFIP (próximo)</li>
+          <li>Integración e-commerce</li>
+          <li>Dashboard gerencial</li>
+          <li>Capacitación incluida</li>
+          <li>Migración de datos incluida</li>
+          <li>Soporte 24/7 WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20ComercioPro%20Empresarial%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+    </div>
+    <p class="trial-note reveal">🔒 Sin tarjeta de crédito · <strong>14 días gratis</strong> · Cancelás cuando querés</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ══════ APP 3: SUPERTÉCNICO ══════ -->
+<!-- ══════════════════════════════════════ -->
+<div class="product-section product-section-alt" id="supertecnico">
+  <div class="section-wrap">
+    <div class="product-header">
+      <div>
+        <span class="product-emoji">🔧</span>
+        <div class="product-rubro" style="color:#a855f7">Talleres técnicos · Reparaciones · Electrónica</div>
+        <div class="product-name reveal">Super<span class="z">T</span>écnico</div>
+        <p class="product-pitch reveal" style="transition-delay:.06s">Controlá cada orden de trabajo, seguí cada equipo en reparación y cobrá cada servicio sin que nada se te escape. Tu taller, ordenado.</p>
+        <div class="product-subdomain reveal" style="transition-delay:.1s">
+          <div class="sdot" style="background:#a855f7"></div>
+          tutaller.agenzoft.com
+        </div>
+      </div>
+      <div class="benefits-list">
+        <div class="benefit-item reveal"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Órdenes de trabajo digitales</strong>Registrá cada equipo que entra con foto, descripción, cliente y técnico asignado.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.05s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Seguimiento en tiempo real</strong>El cliente ve el estado de su reparación sin llamarte. Menos llamadas, más confianza.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.1s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Presupuestos aprobados digitalmente</strong>Enviá el presupuesto por WhatsApp. El cliente lo aprueba desde su celular. Queda registrado.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.15s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Historial completo por cliente</strong>Sabé qué trajo cada cliente, cuándo, qué se hizo y cuánto pagó. Un historial técnico real.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.2s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Control de repuestos y stock técnico</strong>Manejá el inventario de repuestos. Descontá automáticamente lo que usás en cada reparación.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.25s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Notificación automática al cliente</strong>Aviso automático cuando el equipo está listo. Sin llamadas de recordatorio innecesarias.</div></div>
+      </div>
+    </div>
+    <div class="reveal"><div class="pricing-title">Planes SuperTécnico</div><p class="pricing-sub">Todos incluyen <strong style="color:var(--accent)">14 días de prueba gratuita</strong> · Sin tarjeta de crédito</p></div>
+    <div class="pricing-grid reveal" style="transition-delay:.08s">
+      <div class="plan-card">
+        <div class="plan-name">Básico</div>
+        <div class="plan-price"><sup>$</sup>6.990</div>
+        <div class="plan-period">por mes · hasta 2 técnicos</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Órdenes de trabajo ilimitadas</li>
+          <li>Historial de clientes</li>
+          <li>Presupuestos digitales</li>
+          <li>Seguimiento de estado</li>
+          <li>Cobros y facturación simple</li>
+          <li class="no">Notificaciones al cliente</li>
+          <li class="no">Control de repuestos</li>
+          <li class="no">Tracking público</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20SuperT%C3%A9cnico%20B%C3%A1sico%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-name">Profesional</div>
+        <div class="plan-price"><sup>$</sup>11.990</div>
+        <div class="plan-period">por mes · hasta 5 técnicos</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo el plan Básico</li>
+          <li>Notificaciones por WhatsApp</li>
+          <li>Control de repuestos</li>
+          <li>Múltiples técnicos</li>
+          <li>Reportes de productividad</li>
+          <li>Garantías por trabajo</li>
+          <li>Exportación de datos</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20SuperT%C3%A9cnico%20Profesional%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-primary">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Empresarial</div>
+        <div class="plan-price"><sup>$</sup>17.990</div>
+        <div class="plan-period">por mes · técnicos ilimitados</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo el plan Profesional</li>
+          <li>Múltiples sucursales</li>
+          <li>Alquiler de equipos</li>
+          <li>Tracking público para clientes</li>
+          <li>Dashboard gerencial</li>
+          <li>Capacitación incluida</li>
+          <li>Migración de datos incluida</li>
+          <li>Soporte 24/7 WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20SuperT%C3%A9cnico%20Empresarial%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+    </div>
+    <p class="trial-note reveal">🔒 Sin tarjeta de crédito · <strong>14 días gratis</strong> · Cancelás cuando querés</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ══════ APP 4: INMOBILIARIAPRO ══════ -->
+<!-- ══════════════════════════════════════ -->
+<div class="product-section" id="inmobiliaria">
+  <div class="section-wrap">
+    <div class="product-header">
+      <div>
+        <span class="product-emoji">🏠</span>
+        <div class="product-rubro" style="color:#10b981">Inmobiliarias · Alquileres · Propiedades</div>
+        <div class="product-name reveal">Inmobiliaria<span class="z">P</span>ro</div>
+        <p class="product-pitch reveal" style="transition-delay:.06s">Todo lo que necesita una inmobiliaria moderna: propiedades, contratos, alquileres, vencimientos y cobros en un sistema limpio y claro.</p>
+        <div class="product-subdomain reveal" style="transition-delay:.1s">
+          <div class="sdot" style="background:#10b981"></div>
+          tuinmobiliaria.agenzoft.com
+        </div>
+      </div>
+      <div class="benefits-list">
+        <div class="benefit-item reveal"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Gestión completa de propiedades</strong>Registrá cada propiedad con fotos, descripción, propietario, estado y contratos asociados.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.05s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Contratos y renovaciones digitales</strong>Generá contratos, controlá vencimientos y renovaciones. Nunca más un contrato vencido sin aviso.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.1s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Liquidación automática de alquileres</strong>Calculá ajustes por ICL/IPC, generá el recibo y registrá el cobro en segundos.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.15s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Alertas de vencimientos automáticas</strong>Notificaciones de contratos que vencen, pagos atrasados y renovaciones pendientes.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.2s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Panel del propietario</strong>Cada propietario ve el estado de su propiedad y cobros. Generá confianza sin llamadas.</div></div>
+        <div class="benefit-item reveal" style="transition-delay:.25s"><span class="benefit-check">✦</span><div class="benefit-text"><strong>Comisiones e ingresos de la agencia</strong>Controlá las comisiones de cada operación. Sabé cuánto ganó tu inmobiliaria cada mes.</div></div>
+      </div>
+    </div>
+    <div class="reveal"><div class="pricing-title">Planes InmobiliariaPro</div><p class="pricing-sub">Todos incluyen <strong style="color:var(--accent)">14 días de prueba gratuita</strong> · Sin tarjeta de crédito</p></div>
+    <div class="pricing-grid reveal" style="transition-delay:.08s">
+      <div class="plan-card">
+        <div class="plan-name">Básico</div>
+        <div class="plan-price"><sup>$</sup>8.990</div>
+        <div class="plan-period">por mes · hasta 2 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Hasta 50 propiedades</li>
+          <li>Contratos digitales</li>
+          <li>Control de cobros</li>
+          <li>Historial de inquilinos</li>
+          <li>Alertas de vencimiento</li>
+          <li class="no">Liquidación automática ICL</li>
+          <li class="no">Panel del propietario</li>
+          <li class="no">Comisiones de agencia</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20InmobiliariaPro%20B%C3%A1sico%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-name">Profesional</div>
+        <div class="plan-price"><sup>$</sup>13.990</div>
+        <div class="plan-period">por mes · hasta 5 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Propiedades ilimitadas</li>
+          <li>Liquidación automática ICL</li>
+          <li>Panel del propietario</li>
+          <li>Ajuste por inflación</li>
+          <li>Comisiones de agencia</li>
+          <li>Reportes financieros</li>
+          <li>Recibos digitales</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20InmobiliariaPro%20Profesional%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-primary">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Empresarial</div>
+        <div class="plan-price"><sup>$</sup>21.990</div>
+        <div class="plan-period">por mes · usuarios ilimitados</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo el plan Profesional</li>
+          <li>Multi-sucursal</li>
+          <li>Portal público de propiedades</li>
+          <li>Firma digital de contratos</li>
+          <li>Dashboard gerencial</li>
+          <li>Capacitación incluida</li>
+          <li>Migración de datos incluida</li>
+          <li>Soporte 24/7 WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20InmobiliariaPro%20Empresarial%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+    </div>
+    <p class="trial-note reveal">🔒 Sin tarjeta de crédito · <strong>14 días gratis</strong> · Cancelás cuando querés</p>
+  </div>
+</div>
+
+<!-- ══════════ POR QUÉ AGENZOFT ══════════ -->
+<div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border)">
+  <div class="section-wrap">
+    <p class="section-tag reveal">Por qué AgenZoft</p>
+    <h2 class="section-title reveal" style="transition-delay:.08s">No somos una empresa genérica.<br><span class="z">Somos tu equipo de sistemas.</span></h2>
+    <p class="section-sub reveal" style="transition-delay:.12s">Trabajamos exclusivamente con PyMEs de Argentina y América Latina. Entendemos tus precios, tu forma de vender y los problemas reales de tu rubro.</p>
+    <div class="porque-grid">
+      <div class="porque-card reveal"><div class="porque-icon">🇦🇷</div><div class="porque-name">Hecho para Argentina</div><div class="porque-desc">Precios en pesos, lista de precios, IVA, cuenta corriente, ajuste por inflación. Todo lo que necesita un negocio argentino real, no un sistema traducido.</div></div>
+      <div class="porque-card reveal" style="transition-delay:.06s"><div class="porque-icon">⚡</div><div class="porque-name">Listo para usar el día 1</div><div class="porque-desc">No empezás de cero. Tus productos, clientes y datos ya están cargados cuando arrancás. Cero tiempo perdido en configuraciones interminables.</div></div>
+      <div class="porque-card reveal" style="transition-delay:.1s"><div class="porque-icon">☁️</div><div class="porque-name">En la nube, sin instalación</div><div class="porque-desc">Accedé desde cualquier dispositivo con internet. Sin instalaciones, sin actualizaciones manuales, sin perder datos si se rompe la compu.</div></div>
+      <div class="porque-card reveal" style="transition-delay:.14s"><div class="porque-icon">💬</div><div class="porque-name">Soporte real, por WhatsApp</div><div class="porque-desc">Hablás con quien hizo el sistema. Sin tickets, sin call centers, sin esperar días una respuesta. Soporte humano y en tiempo real.</div></div>
+      <div class="porque-card reveal" style="transition-delay:.18s"><div class="porque-icon">🔒</div><div class="porque-name">Tus datos son tuyos</div><div class="porque-desc">Exportá toda tu información cuando quieras, en formatos estándar. Sin dependencias ni rehenes digitales. Tu negocio, tus datos.</div></div>
+      <div class="porque-card reveal" style="transition-delay:.22s"><div class="porque-icon">📈</div><div class="porque-name">Crece con tu negocio</div><div class="porque-desc">Empezás con lo básico y agregás funciones a medida que tu negocio crece. Siempre pagás solo por lo que usás.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PROCESO ══════════ -->
+<div>
+  <div class="section-wrap">
+    <p class="section-tag reveal">Cómo trabajamos</p>
+    <h2 class="section-title reveal" style="transition-delay:.08s">Del caos al control<br><span class="z">en 4 pasos simples.</span></h2>
+    <p class="section-sub reveal" style="transition-delay:.12s">Un proceso claro, sin sorpresas, donde vos sabés exactamente qué pasa en cada etapa.</p>
+    <div class="proceso-grid reveal" style="transition-delay:.16s">
+      <div class="proceso-step">
+        <div class="step-arrow">→</div>
+        <div class="step-num">01</div>
+        <div class="step-title">Diagnóstico</div>
+        <div class="step-desc">Entendemos tu negocio, tus procesos actuales y qué necesitás controlar primero. Una charla de 15 minutos alcanza.</div>
+      </div>
+      <div class="proceso-step">
+        <div class="step-arrow">→</div>
+        <div class="step-num">02</div>
+        <div class="step-title">Propuesta clara</div>
+        <div class="step-desc">Te mostramos el plan exacto, el sistema que usarás y el precio final. Sin letras chicas ni sorpresas después.</div>
+      </div>
+      <div class="proceso-step">
+        <div class="step-arrow">→</div>
+        <div class="step-num">03</div>
+        <div class="step-title">Implementación</div>
+        <div class="step-desc">Configuramos el sistema, cargamos tus datos y capacitamos a tu equipo. Vos no movés un dedo.</div>
+      </div>
+      <div class="proceso-step">
+        <div class="step-num">04</div>
+        <div class="step-title">Soporte continuo</div>
+        <div class="step-desc">Nunca quedás solo. Te acompañamos con soporte real durante todo el tiempo que uses el sistema.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CTA / CONTACTO ══════════ -->
+<div style="background:var(--bg2); border-top:1px solid var(--border)" id="contacto">
+  <div class="cta-inner">
+    <div class="cta-glow"></div>
+    <p class="section-tag reveal" style="justify-content:center">Empezá hoy</p>
+    <h2 class="cta-title reveal" style="transition-delay:.08s">
+      ¿Listo para tener el <span class="z">control</span><br>de tu negocio?
+    </h2>
+    <p class="cta-sub reveal" style="transition-delay:.12s">Hablamos 15 minutos, entendemos tu situación y te decimos con honestidad si podemos ayudarte. Sin compromiso.</p>
+    <div class="hero-actions reveal" style="transition-delay:.16s">
+      <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20conocer%20m%C3%A1s%20sobre%20AgenZoft" class="btn-primary">💬 Escribinos por WhatsApp</a>
+      <a href="mailto:hola@agenzoft.com" class="btn-secondary">Enviar un email</a>
+    </div>
+    <div class="contact-cards reveal" style="transition-delay:.2s">
+      <a href="https://wa.me/5492615154308" class="contact-card">
+        <div class="contact-card-icon">💬</div>
+        <div>
+          <div class="contact-card-label">WhatsApp</div>
+          <div class="contact-card-val">+54 9 261 515-4308</div>
+        </div>
+      </a>
+      <a href="mailto:hola@agenzoft.com" class="contact-card">
+        <div class="contact-card-icon">✉️</div>
+        <div>
+          <div class="contact-card-label">Email</div>
+          <div class="contact-card-val">hola@agenzoft.com</div>
+        </div>
+      </a>
+      <div class="contact-card">
+        <div class="contact-card-icon">📍</div>
+        <div>
+          <div class="contact-card-label">Ubicación</div>
+          <div class="contact-card-val">Río Cuarto, Córdoba</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-logo">Agen<span class="z">Z</span>oft</div>
+  <div class="footer-copy">© 2025 AgenZoft · Río Cuarto, Córdoba, Argentina · Software que ordena tu negocio.</div>
+  <div class="footer-links">
+    <a href="#soluciones">Soluciones</a>
+    <a href="#contacto">Contacto</a>
+    <a href="mailto:hola@agenzoft.com">hola@agenzoft.com</a>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR TURQUESA ──
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx=0, my=0, rx=0, ry=0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+});
+
+(function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
+
+document.querySelectorAll('a, button, .plan-card, .pain-item, .benefit-item, .porque-card, .service-card, .proceso-step, .contact-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+    ring.style.transform   = 'translate(-50%,-50%) scale(1.6)';
+    ring.style.borderColor = 'rgba(0,229,255,0.65)';
+    ring.style.boxShadow   = '0 0 14px rgba(0,229,255,0.2)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    ring.style.transform   = 'translate(-50%,-50%) scale(1)';
+    ring.style.borderColor = 'rgba(0,229,255,0.35)';
+    ring.style.boxShadow   = 'none';
+  });
+});
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 55);
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── NAV scroll ──
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').style.borderBottomColor =
+    window.scrollY > 60 ? 'rgba(0,229,255,0.14)' : 'rgba(0,229,255,0.07)';
+});
+</script>
+</body>
+</html>
