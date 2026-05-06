@@ -102,7 +102,10 @@
     </svg>
     <span class="nav-wordmark">Agen<span class="z">Z</span>oft</span>
   </a>
-  <ul class="nav-links">
+  <button class="menu-btn" id="menuBtn">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html#soluciones">Soluciones</a></li>
     <li><a href="ferregestion.html">FerreGestión</a></li>
     <li><a href="comerciopro.html">ComercioPro</a></li>
@@ -205,6 +208,16 @@
 </footer>
 
 <script>
+
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+if(menuBtn) {
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.toggle('open');
+    navLinks.classList.toggle('active');
+  });
+}
+
 const cursor = document.getElementById('cursor');
 const ring   = document.getElementById('cursorRing');
 let mx=0, my=0, rx=0, ry=0;
