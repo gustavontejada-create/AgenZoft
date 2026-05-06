@@ -555,8 +555,37 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media(max-width: 960px) {
-  nav { padding: 16px 20px; }
-  .nav-links { display: none; }
+  nav { padding: 16px 20px; flex-wrap: wrap; }
+  
+  .menu-btn {
+    display: flex; flex-direction: column; gap: 5px;
+    cursor: none; z-index: 300; padding: 10px;
+    background: transparent; border: none;
+  }
+  .menu-btn span {
+    display: block; width: 24px; height: 2px;
+    background: var(--white); transition: all 0.3s;
+    border-radius: 2px;
+  }
+  .menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-btn.open span:nth-child(2) { opacity: 0; }
+  .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-links {
+    display: none; width: 100%; flex-direction: column;
+    text-align: center; gap: 20px; padding: 20px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 16px;
+  }
+  .nav-links.active {
+    display: flex;
+    animation: fadeDown 0.3s ease forwards;
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .section-wrap { padding: 64px 20px; }
   .problema-grid, .product-header { grid-template-columns: 1fr; gap: 40px; }
   .services-grid { grid-template-columns: 1fr 1fr; }
