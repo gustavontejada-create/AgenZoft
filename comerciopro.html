@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComercioPro — AgenZoft</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.product-hero {
+  padding: 160px 48px 60px;
+  text-align: center;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.product-hero img {
+  max-width: 1000px; width: 100%; border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  border: 1px solid var(--border);
+  margin-top: 40px;
+}
+.pricing-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px; font-weight: 800;
+  color: var(--white); letter-spacing: -0.5px;
+  margin-bottom: 8px; text-align: center;
+}
+.pricing-sub { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 36px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.plan-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px 28px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.plan-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
+.plan-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(160deg, rgba(0,229,255,0.06) 0%, var(--surface) 60%);
+}
+.plan-card.featured::before {
+  content: 'MÁS POPULAR';
+  position: absolute; top: 16px; right: 16px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  background: var(--accent); color: #000;
+  padding: 3px 10px; border-radius: 100px;
+}
+.plan-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
+}
+.plan-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 40px; font-weight: 800;
+  color: var(--white); letter-spacing: -1.5px;
+  line-height: 1; margin-bottom: 4px;
+}
+.plan-price sup { font-size: 18px; vertical-align: super; font-weight: 600; color: var(--muted); }
+.plan-period { font-size: 12.5px; color: var(--muted); margin-bottom: 24px; }
+.plan-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+.plan-features {
+  list-style: none; display: flex; flex-direction: column;
+  gap: 10px; margin-bottom: 28px;
+}
+.plan-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13.5px; color: var(--muted); line-height: 1.4;
+}
+.plan-features li::before { content: '✓'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
+.plan-features li.no { color: var(--dimmer); }
+.plan-features li.no::before { content: '–'; color: var(--dimmer); }
+.btn-plan {
+  display: block; width: 100%; text-align: center;
+  padding: 13px; border-radius: 8px;
+  font-weight: 700; font-size: 14px;
+  text-decoration: none; cursor: none;
+  transition: all 0.2s;
+}
+.btn-plan-primary {
+  background: var(--accent); color: #000;
+  box-shadow: 0 0 24px rgba(0,229,255,0.25);
+}
+.btn-plan-primary:hover { box-shadow: 0 0 40px rgba(0,229,255,0.45); transform: translateY(-1px); }
+.btn-plan-outline {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-plan-outline:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+      <rect width="40" height="40" rx="8" fill="rgba(0,229,255,0.08)"/>
+      <path d="M11 12h18l-13 16h14" stroke="#00e5ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="nav-wordmark">Agen<span class="z">Z</span>oft</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#soluciones">Soluciones</a></li>
+    <li><a href="ferregestion.html">FerreGestión</a></li>
+    <li><a href="comerciopro.html">ComercioPro</a></li>
+    <li><a href="supertecnico.html">SuperTécnico</a></li>
+    <li><a href="inmobiliariapro.html">InmobiliariaPro</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">💬 Contactar</a></li>
+  </ul>
+</nav>
+
+<div class="product-hero">
+  <div style="font-size: 11.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; color:var(--accent);">Comercios · Retail</div>
+  <div class="reveal" style="font-family: 'Outfit', sans-serif; font-size: clamp(36px, 4vw, 54px); font-weight: 800; letter-spacing: -2px; color: var(--white); line-height: 1; margin-bottom: 16px;">Comercio<span class="z" style="color:var(--accent);">P</span>ro</div>
+  <p class="section-sub reveal" style="margin: 0 auto 20px;">Punto de venta táctil e inventario ultra rápido para negocios minoristas.</p>
+  <div class="product-subdomain reveal" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 12.5px; color: var(--muted); background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; margin-bottom: 40px;">
+    <div style="width: 6px; height: 6px; border-radius: 50%; background:var(--accent); animation: blink 2s infinite;"></div>
+    <a href="https://comerciopro.agenzoft.com" target="_blank" style="color:var(--text); text-decoration:none;">comerciopro.agenzoft.com</a>
+  </div>
+  <div class="reveal">
+    <img src="assets/images/mockup_comerciopro.png" alt="Mockup">
+  </div>
+</div>
+
+<div class="section-wrap">
+  <div class="reveal">
+    <div class="pricing-title">Planes ComercioPro</div>
+    <p class="pricing-sub">Todos incluyen <strong style="color:var(--accent)">14 días de prueba gratuita</strong> · Sin tarjeta de crédito</p>
+  </div>
+  <div class="pricing-grid reveal" style="transition-delay:.08s">
+    
+      <div class="plan-card">
+        <div class="plan-name">Básico</div>
+        <div class="plan-price"><sup>$</sup>29.000</div>
+        <div class="plan-period">por mes · hasta 2 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>POS táctil completo</li>
+          <li>Hasta 1.500 productos</li>
+          <li>Multi-pago</li>
+          <li>Control de stock</li>
+          <li>Cierre de caja diario</li>
+          <li class="no">Remarcado masivo</li>
+          <li class="no">Cuenta corriente</li>
+          <li class="no">Multi-lista de precios</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20ComercioPro%20B%C3%A1sico%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-name">Profesional</div>
+        <div class="plan-price"><sup>$</sup>59.000</div>
+        <div class="plan-period">por mes · hasta 5 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo el plan Básico</li>
+          <li>Productos ilimitados</li>
+          <li>Remarcado masivo</li>
+          <li>Cuenta corriente clientes</li>
+          <li>Multi-lista de precios</li>
+          <li>Reportes de rentabilidad</li>
+          <li>Catálogo pre-cargado</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20ComercioPro%20Profesional%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-primary">Probar 14 días gratis</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price"><sup>$</sup>110.000</div>
+        <div class="plan-period">por mes · usuarios ilimitados</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo el plan Profesional</li>
+          <li>Múltiples sucursales</li>
+          <li>Facturación AFIP (próximo)</li>
+          <li>Integración e-commerce</li>
+          <li>Dashboard gerencial</li>
+          <li>Capacitación incluida</li>
+          <li>Migración de datos incluida</li>
+          <li>Soporte 24/7 WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20probar%20ComercioPro%20Enterprise%2014%20d%C3%ADas%20gratis" class="btn-plan btn-plan-outline">Probar 14 días gratis</a>
+      </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo" style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--white);">Agen<span class="z" style="color:var(--accent);">Z</span>oft</div>
+  <div class="footer-copy" style="font-size: 12.5px; color: var(--muted);">© 2025 AgenZoft · Río Cuarto, Córdoba, Argentina · Ingeniería de Software.</div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+});
+(function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 55);
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 60 ? 'rgba(0,229,255,0.14)' : 'rgba(0,229,255,0.07)';
+});
+</script>
+</body>
+</html>
