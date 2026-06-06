@@ -38,7 +38,7 @@
 .plan-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
 .plan-card.featured {
   border-color: var(--accent);
-  background: linear-gradient(160deg, rgba(0,229,255,0.06) 0%, var(--surface) 60%);
+  background: linear-gradient(160deg, rgba(96,85,212,0.09) 0%, var(--surface) 60%);
 }
 .plan-card.featured::before {
   content: 'MÁS POPULAR';
@@ -81,9 +81,9 @@
 }
 .btn-plan-primary {
   background: var(--accent); color: #000;
-  box-shadow: 0 0 24px rgba(0,229,255,0.25);
+  box-shadow: 0 0 24px rgba(96,85,212,0.3);
 }
-.btn-plan-primary:hover { box-shadow: 0 0 40px rgba(0,229,255,0.45); transform: translateY(-1px); }
+.btn-plan-primary:hover { box-shadow: 0 0 40px rgba(96,85,212,0.45); transform: translateY(-1px); }
 .btn-plan-outline {
   background: transparent; color: var(--text);
   border: 1px solid var(--border);
@@ -98,8 +98,8 @@
 <nav id="mainNav">
   <a href="index.html" class="nav-logo">
     <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-      <rect width="40" height="40" rx="8" fill="rgba(0,229,255,0.08)"/>
-      <path d="M11 12h18l-13 16h14" stroke="#00e5ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect width="40" height="40" rx="8" fill="rgba(96,85,212,0.12)"/>
+      <path d="M11 12h18l-13 16h14" stroke="#6055D4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <span class="nav-wordmark">Agen<span class="z">Z</span>oft</span>
   </a>
@@ -108,7 +108,6 @@
   </button>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html#soluciones">Soluciones</a></li>
-    <li><a href="ferregestion.html">FerreGestión</a></li>
     <li><a href="comerciopro.html">ComercioPro</a></li>
     <li><a href="supertecnico.html">SuperTécnico</a></li>
     <li><a href="inmobiliariapro.html">InmobiliariaPro</a></li>
@@ -232,7 +231,7 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 60 ? 'rgba(0,229,255,0.14)' : 'rgba(0,229,255,0.07)';
+  document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 60 ? 'rgba(96,85,212,0.22)' : 'rgba(96,85,212,0.08)';
 });
 </script>
 </body>

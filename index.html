@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AgenZoft — Software que ordena tu negocio</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="favicon-AgenZoft.png">
+<link rel="apple-touch-icon" href="favicon-AgenZoft.png">
+<meta name="theme-color" content="#6055D4">
+<meta name="description" content="AgenZoft — Ingeniería de software para PyMEs argentinas. Soluciones SaaS que ordenan tu negocio: punto de venta, inventario, cuenta corriente y más.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,61 +18,48 @@
 
 <!-- ══════════ NAV ══════════ -->
 <nav id="mainNav">
-  <a href="#" class="nav-logo">
-    <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-      <rect width="40" height="40" rx="8" fill="rgba(0,229,255,0.08)"/>
-      <path d="M11 12h18l-13 16h14" stroke="#00e5ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="nav-wordmark">Agen<span class="z">Z</span>oft</span>
+  <a href="#" class="nav-logo" aria-label="AgenZoft inicio">
+    <img src="logo-AgenZoft_fondooscuro.png" alt="AgenZoft" class="brand-logo-img">
   </a>
-  <button class="menu-btn" id="menuBtn">
+  <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html#soluciones">Soluciones</a></li>
-    <li><a href="ferregestion.html">FerreGestión</a></li>
     <li><a href="comerciopro.html">ComercioPro</a></li>
-    <li><a href="index.html#contacto" class="nav-cta">💬 Contactar</a></li>
+    <li><a href="index.html#equipo">Equipo</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Hablar con un experto</a></li>
   </ul>
 </nav>
 
 <!-- ══════════ HERO ══════════ -->
+<!--
+  ╔════════════════════════════════════════════════════════════════╗
+  ║ ESPACIO PARA VIDEO HERO (5 segundos, autoplay, muted, loop)    ║
+  ║ Archivo esperado: assets/videos/hero-loop.mp4                  ║
+  ║ Prompt Leonardo: ver PROMPTS-LEONARDO.md → "Hero loop"         ║
+  ╚════════════════════════════════════════════════════════════════╝
+-->
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
+  <video class="hero-bg-video" autoplay muted loop playsinline poster="assets/images/hero_agency.png">
+    <source src="assets/videos/hero-loop.mp4" type="video/mp4">
+  </video>
   <div class="hero-bg-img"></div>
 
   <div class="logo-wrap">
-    <div class="logo-svg-wrap">
-      <div class="logo-ring"></div>
-      <div class="logo-ring-2"></div>
-      <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-        <rect x="14" y="14" width="92" height="92" rx="20" fill="rgba(0,229,255,0.05)" stroke="rgba(0,229,255,0.12)" stroke-width="1"/>
-        <path d="M36 38h48L50 82h35" stroke="#00e5ff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
-          <animate attributeName="stroke-dasharray" from="0 220" to="148 220" dur="1.2s" fill="freeze" begin="0.4s"/>
-        </path>
-        <circle cx="85" cy="82" r="5" fill="#00e5ff" opacity="0">
-          <animate attributeName="opacity" from="0" to="1" dur="0.3s" fill="freeze" begin="1.5s"/>
-        </circle>
-        <circle cx="85" cy="82" r="5" fill="#00e5ff" opacity="0">
-          <animate attributeName="r" values="5;13;5" dur="2.5s" repeatCount="indefinite" begin="1.8s"/>
-          <animate attributeName="opacity" values="0.35;0;0.35" dur="2.5s" repeatCount="indefinite" begin="1.8s"/>
-          <animate attributeName="opacity" from="0" to="0.35" dur="0.2s" fill="freeze" begin="1.5s"/>
-        </circle>
-      </svg>
-    </div>
-
+    <img src="logo-AgenZoft_fondooscuro.png" alt="AgenZoft" class="hero-wordmark-img">
     <div class="hero-badge">Ingeniería de Software · Río Cuarto, Córdoba, Argentina</div>
-    <div class="wordmark">Agen<span class="z">Z</span>oft</div>
     <p class="hero-tagline">Negocios que se ordenan.<br><span class="z">Negocios que crecen.</span></p>
 
     <p class="hero-sub">
-      Escalar un negocio exige <strong>control absoluto</strong>. Desarrollamos plataformas de alta disponibilidad que eliminan el caos operativo y automatizan tu crecimiento. Ingeniería de primer nivel para empresas que buscan liderar su sector.
+      Diseñamos y desarrollamos <strong>software de gestión</strong> para PyMEs argentinas. Plataformas en la nube que ordenan tus ventas, tu stock y tus números — para que dejes de improvisar y empieces a decidir con datos.
     </p>
 
     <div class="hero-actions">
-      <a href="#soluciones" class="btn-primary">Descubrir Soluciones →</a>
-      <a href="#contacto" class="btn-secondary">Agendar Asesoría</a>
+      <a href="#soluciones" class="btn-primary">Ver nuestras soluciones →</a>
+      <a href="#contacto" class="btn-secondary">Hablar con un experto</a>
     </div>
   </div>
 </section>
@@ -191,29 +181,20 @@
     <p class="section-sub reveal" style="transition-delay:.12s">Conoce nuestras plataformas verticales construidas con arquitectura de nivel corporativo.</p>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px;">
-      <!-- FerreGestion -->
-      <a href="ferregestion.html" style="text-decoration:none; color:inherit;" class="reveal">
-        <div class="plan-card" style="padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%;">
-          <img src="assets/images/mockup_ferregestion.png" style="width:100%; height:220px; object-fit:cover; border-bottom:1px solid var(--border);">
-          <div style="padding: 24px; flex-grow:1;">
-            <h3 style="font-family:'Outfit',sans-serif; font-size:22px; font-weight:700; color:var(--white); margin-bottom:8px;">Ferre<span class="z" style="color:var(--accent);">G</span>estión</h3>
-            <p style="font-size:13.5px; color:var(--muted); line-height:1.5; font-weight:300;">El sistema definitivo para ferreterías y materiales de construcción.</p>
-          </div>
-        </div>
-      </a>
       <!-- ComercioPro -->
       <a href="comerciopro.html" style="text-decoration:none; color:inherit;" class="reveal" style="transition-delay:.08s">
-        <div class="plan-card" style="padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%;">
+        <div class="plan-card" style="padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; position:relative;">
+          <span style="position:absolute; top:14px; right:14px; z-index:2; font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; background:var(--accent); color:#fff; padding:5px 12px; border-radius:100px; box-shadow:0 4px 14px rgba(96,85,212,0.4);">Incluye tienda online</span>
           <img src="assets/images/mockup_comerciopro.png" style="width:100%; height:220px; object-fit:cover; border-bottom:1px solid var(--border);">
           <div style="padding: 24px; flex-grow:1;">
-            <h3 style="font-family:'Outfit',sans-serif; font-size:22px; font-weight:700; color:var(--white); margin-bottom:8px;">Comercio<span class="z" style="color:var(--accent);">P</span>ro</h3>
-            <p style="font-size:13.5px; color:var(--muted); line-height:1.5; font-weight:300;">Punto de venta súper ágil e inventario en tiempo real para retail.</p>
+            <h3 style="font-family:'Outfit',sans-serif; font-size:22px; font-weight:700; color:var(--white); margin-bottom:8px;">Comercio<span class="z" style="color:var(--accent2);">P</span>ro</h3>
+            <p style="font-size:13.5px; color:var(--muted); line-height:1.5; font-weight:300;">Punto de venta táctil, inventario en tiempo real y tienda online — todo en una sola plataforma para tu comercio.</p>
           </div>
         </div>
       </a>
       <!-- SuperTecnico — Próximamente -->
       <div class="reveal" style="transition-delay:.16s; position:relative; cursor:default;">
-        <div style="position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(5,5,8,0.78); border-radius:12px; backdrop-filter:blur(3px); border:1px solid rgba(0,229,255,0.18);">
+        <div style="position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(8,8,15,0.78); border-radius:12px; backdrop-filter:blur(3px); border:1px solid rgba(96,85,212,0.22);">
           <span style="font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); background:var(--accent-dim); border:1px solid var(--accent-border); padding:6px 18px; border-radius:100px; margin-bottom:10px;">Próximamente</span>
           <p style="font-size:13px; color:var(--muted); margin:0; text-align:center; padding:0 20px;">Estamos trabajando en esto. Pronto disponible.</p>
         </div>
@@ -227,7 +208,7 @@
       </div>
       <!-- InmobiliariaPro — Próximamente -->
       <div class="reveal" style="transition-delay:.24s; position:relative; cursor:default;">
-        <div style="position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(5,5,8,0.78); border-radius:12px; backdrop-filter:blur(3px); border:1px solid rgba(0,229,255,0.18);">
+        <div style="position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(8,8,15,0.78); border-radius:12px; backdrop-filter:blur(3px); border:1px solid rgba(96,85,212,0.22);">
           <span style="font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); background:var(--accent-dim); border:1px solid var(--accent-border); padding:6px 18px; border-radius:100px; margin-bottom:10px;">Próximamente</span>
           <p style="font-size:13px; color:var(--muted); margin:0; text-align:center; padding:0 20px;">Estamos trabajando en esto. Pronto disponible.</p>
         </div>
@@ -260,11 +241,48 @@
   </div>
 </div>
 
+<!-- ══════════ EQUIPO ══════════ -->
+<div id="equipo">
+  <div class="section-wrap">
+    <div class="equipo-grid">
+      <div class="equipo-photo reveal">
+        <img src="assets/images/equipo-oficina.jpg" alt="Equipo de AgenZoft trabajando en Río Cuarto">
+        <div class="equipo-photo-tag">En vivo desde Río Cuarto</div>
+      </div>
+      <div>
+        <p class="section-tag reveal">Quiénes lo hacemos</p>
+        <h2 class="section-title reveal" style="transition-delay:.08s">Cara a cara con quien<br><span class="z">hace tu software.</span></h2>
+        <p class="section-sub reveal" style="transition-delay:.12s; margin-bottom: 0;">
+          AgenZoft nace en Río Cuarto con una idea simple: que las PyMEs argentinas puedan competir con la tecnología que usan las grandes. Cada producto que armamos lo probamos con dueños reales, en negocios reales — porque hablamos con ellos todos los días.
+        </p>
+        <div class="equipo-stats reveal" style="transition-delay:.16s">
+          <div>
+            <div class="equipo-stat-num">100<span class="z">%</span></div>
+            <div class="equipo-stat-lbl">Hecho en Argentina</div>
+          </div>
+          <div>
+            <div class="equipo-stat-num">+10</div>
+            <div class="equipo-stat-lbl">Años de ingeniería</div>
+          </div>
+          <div>
+            <div class="equipo-stat-num">1<span class="z">:1</span></div>
+            <div class="equipo-stat-lbl">Soporte humano, sin tickets</div>
+          </div>
+        </div>
+        <div class="hero-actions reveal" style="justify-content:flex-start; margin-top:0; transition-delay:.2s">
+          <a href="#contacto" class="btn-primary">Hablemos 15 minutos →</a>
+          <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20conocer%20al%20equipo%20de%20AgenZoft" class="btn-secondary">Mandar WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══════════ PROCESO ══════════ -->
-<div>
+<div style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="section-wrap">
     <p class="section-tag reveal">Cómo trabajamos</p>
-    <h2 class="section-title reveal" style="transition-delay:.08s">Del caos al control<br><span class="z">en 4 pasos simples.</span></h2>
+    <h2 class="section-title reveal" style="transition-delay:.08s">Del caos al control<br><span class="z">en 4 simples pasos.</span></h2>
     <p class="section-sub reveal" style="transition-delay:.12s">Un proceso claro, sin sorpresas, donde vos sabés exactamente qué pasa en cada etapa.</p>
     <div class="proceso-grid reveal" style="transition-delay:.16s">
       <div class="proceso-step">
@@ -335,8 +353,8 @@
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
-  <div class="footer-logo">Agen<span class="z">Z</span>oft</div>
-  <div class="footer-copy">© 2025 AgenZoft · Río Cuarto, Córdoba, Argentina · Software que ordena tu negocio.</div>
+  <img src="logo-AgenZoft_fondooscuro.png" alt="AgenZoft" class="footer-logo-img">
+  <div class="footer-copy">© 2026 AgenZoft · Río Cuarto, Córdoba, Argentina · Ingeniería de Software.</div>
   <div class="footer-links">
     <a href="#soluciones">Soluciones</a>
     <a href="#contacto">Contacto</a>
@@ -378,13 +396,13 @@ document.querySelectorAll('a, button, .plan-card, .pain-item, .benefit-item, .po
   el.addEventListener('mouseenter', () => {
     cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
     ring.style.transform   = 'translate(-50%,-50%) scale(1.6)';
-    ring.style.borderColor = 'rgba(0,229,255,0.65)';
-    ring.style.boxShadow   = '0 0 14px rgba(0,229,255,0.2)';
+    ring.style.borderColor = 'rgba(139,127,232,0.7)';
+    ring.style.boxShadow   = '0 0 14px rgba(96,85,212,0.25)';
   });
   el.addEventListener('mouseleave', () => {
     cursor.style.transform = 'translate(-50%,-50%) scale(1)';
     ring.style.transform   = 'translate(-50%,-50%) scale(1)';
-    ring.style.borderColor = 'rgba(0,229,255,0.35)';
+    ring.style.borderColor = 'rgba(139,127,232,0.4)';
     ring.style.boxShadow   = 'none';
   });
 });
@@ -404,7 +422,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 // ── NAV scroll ──
 window.addEventListener('scroll', () => {
   document.getElementById('mainNav').style.borderBottomColor =
-    window.scrollY > 60 ? 'rgba(0,229,255,0.14)' : 'rgba(0,229,255,0.07)';
+    window.scrollY > 60 ? 'rgba(96,85,212,0.22)' : 'rgba(96,85,212,0.08)';
 });
 </script>
 </body>

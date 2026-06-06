@@ -3,92 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ComercioPro — AgenZoft</title>
+<title>ComercioPro — Punto de venta, stock y tienda online | AgenZoft</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="favicon-AgenZoft.png">
+<link rel="apple-touch-icon" href="favicon-AgenZoft.png">
+<meta name="theme-color" content="#6055D4">
+<meta name="description" content="ComercioPro — Punto de venta táctil, inventario en tiempo real, modo offline 72 horas y tienda online incluida. Hecho en Argentina por AgenZoft. 14 días gratis.">
 <link rel="stylesheet" href="style.css">
 <style>
 .product-hero {
-  padding: 160px 48px 60px;
+  padding: 150px 48px 40px;
   text-align: center;
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
 }
-.product-hero img {
-  max-width: 1000px; width: 100%; border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  border: 1px solid var(--border);
-  margin-top: 40px;
+.product-hero .hero-mockup-wrap {
+  position: relative;
+  max-width: 1040px; margin: 48px auto 0;
 }
-.pricing-title {
+.product-hero .hero-mockup-wrap img,
+.product-hero .hero-mockup-wrap video {
+  width: 100%; border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+  display: block;
+}
+.hero-mockup-wrap .media-placeholder { border-radius: 16px; }
+.product-eyebrow {
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: 14px;
+  color: var(--accent2);
+}
+.product-name-big {
   font-family: 'Outfit', sans-serif;
-  font-size: 26px; font-weight: 800;
-  color: var(--white); letter-spacing: -0.5px;
-  margin-bottom: 8px; text-align: center;
+  font-size: clamp(40px, 5.5vw, 68px);
+  font-weight: 800; letter-spacing: -2.5px;
+  color: var(--white); line-height: 1;
+  margin-bottom: 18px;
 }
-.pricing-sub { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 36px; }
+.product-name-big .z { color: var(--accent2); }
+.product-brand-mark {
+  width: 92px; height: 92px;
+  display: block; margin: 0 auto 22px;
+  filter: drop-shadow(0 10px 30px rgba(96,85,212,0.45));
+  animation: fadeUp 0.7s ease both;
+}
+.product-pitch-big {
+  font-size: clamp(17px, 2vw, 21px);
+  color: var(--text); font-weight: 300;
+  line-height: 1.55; max-width: 720px; margin: 0 auto 28px;
+}
+.product-pitch-big strong { color: var(--white); font-weight: 600; }
+.product-hero-actions {
+  display: flex; gap: 14px; justify-content: center;
+  margin-bottom: 18px; flex-wrap: wrap;
+}
+.product-hero-meta {
+  font-size: 13px; color: var(--muted);
+  display: flex; gap: 18px; justify-content: center;
+  flex-wrap: wrap; margin-top: 6px;
+}
+.product-hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.product-hero-meta .dot { color: var(--accent2); }
+
+.section-center { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+.section-center .section-tag { justify-content: center; }
+.section-center .section-sub { margin: 0 auto; }
+
+/* Plan cards (reused) */
 .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.plan-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 16px; padding: 32px 28px;
-  position: relative; overflow: hidden;
-  transition: border-color 0.3s, transform 0.2s;
-}
-.plan-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
-.plan-card.featured {
-  border-color: var(--accent);
-  background: linear-gradient(160deg, rgba(0,229,255,0.06) 0%, var(--surface) 60%);
-}
-.plan-card.featured::before {
-  content: 'MÁS POPULAR';
-  position: absolute; top: 16px; right: 16px;
-  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
-  background: var(--accent); color: #000;
-  padding: 3px 10px; border-radius: 100px;
-}
-.plan-name {
-  font-family: 'Outfit', sans-serif;
-  font-size: 14px; font-weight: 700; color: var(--muted);
-  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
-}
-.plan-price {
-  font-family: 'Outfit', sans-serif;
-  font-size: 40px; font-weight: 800;
-  color: var(--white); letter-spacing: -1.5px;
-  line-height: 1; margin-bottom: 4px;
-}
-.plan-price sup { font-size: 18px; vertical-align: super; font-weight: 600; color: var(--muted); }
-.plan-period { font-size: 12.5px; color: var(--muted); margin-bottom: 24px; }
-.plan-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
-.plan-features {
-  list-style: none; display: flex; flex-direction: column;
-  gap: 10px; margin-bottom: 28px;
-}
-.plan-features li {
-  display: flex; align-items: flex-start; gap: 10px;
-  font-size: 13.5px; color: var(--muted); line-height: 1.4;
-}
-.plan-features li::before { content: '✓'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
-.plan-features li.no { color: var(--dimmer); }
-.plan-features li.no::before { content: '–'; color: var(--dimmer); }
-.btn-plan {
-  display: block; width: 100%; text-align: center;
-  padding: 13px; border-radius: 8px;
-  font-weight: 700; font-size: 14px;
-  text-decoration: none; cursor: none;
-  transition: all 0.2s;
-}
-.btn-plan-primary {
-  background: var(--accent); color: #000;
-  box-shadow: 0 0 24px rgba(0,229,255,0.25);
-}
-.btn-plan-primary:hover { box-shadow: 0 0 40px rgba(0,229,255,0.45); transform: translateY(-1px); }
-.btn-plan-outline {
-  background: transparent; color: var(--text);
-  border: 1px solid var(--border);
-}
-.btn-plan-outline:hover { border-color: var(--accent); color: var(--accent); }
 .plan-subtitle {
   font-size: 12px; color: var(--muted); font-weight: 400;
   margin-bottom: 20px; margin-top: -10px; line-height: 1.4;
@@ -101,10 +85,18 @@
   font-size: 11.5px; color: var(--muted); text-align: center;
   margin-top: 10px; margin-bottom: 0;
 }
-.plan-features.compact li {
-  font-size: 12.5px; gap: 8px;
-}
+.plan-features.compact li { font-size: 12.5px; gap: 8px; }
 .plan-features.compact { gap: 7px; }
+.plan-highlight {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent2);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  border-radius: 100px;
+  padding: 4px 10px;
+  margin-bottom: 12px;
+}
 </style>
 </head>
 <body>
@@ -112,128 +104,372 @@
 <div class="cursor-ring" id="cursorRing"></div>
 
 <nav id="mainNav">
-  <a href="index.html" class="nav-logo">
-    <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-      <rect width="40" height="40" rx="8" fill="rgba(0,229,255,0.08)"/>
-      <path d="M11 12h18l-13 16h14" stroke="#00e5ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="nav-wordmark">Agen<span class="z">Z</span>oft</span>
+  <a href="index.html" class="nav-logo" aria-label="AgenZoft inicio">
+    <img src="logo-AgenZoft_fondooscuro.png" alt="AgenZoft" class="brand-logo-img">
   </a>
-  <button class="menu-btn" id="menuBtn">
+  <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html#soluciones">Soluciones</a></li>
-    <li><a href="ferregestion.html">FerreGestión</a></li>
     <li><a href="comerciopro.html">ComercioPro</a></li>
-    <li><a href="index.html#contacto" class="nav-cta">💬 Contactar</a></li>
+    <li><a href="index.html#equipo">Equipo</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Hablar con un experto</a></li>
   </ul>
 </nav>
 
+<!-- ══════════ HERO ══════════ -->
 <div class="product-hero">
-  <div style="font-size: 11.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; color:var(--accent);">Comercios · Retail</div>
-  <div class="reveal" style="font-family: 'Outfit', sans-serif; font-size: clamp(36px, 4vw, 54px); font-weight: 800; letter-spacing: -2px; color: var(--white); line-height: 1; margin-bottom: 16px;">Comercio<span class="z" style="color:var(--accent);">P</span>ro</div>
-  <p class="section-sub reveal" style="margin: 0 auto 20px;">Punto de venta táctil e inventario ultra rápido para negocios minoristas.</p>
-  <div class="product-subdomain reveal" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 12.5px; color: var(--muted); background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; margin-bottom: 40px;">
-    <div style="width: 6px; height: 6px; border-radius: 50%; background:var(--accent); animation: blink 2s infinite;"></div>
+  <img src="comercioPro.png" alt="ComercioPro" class="product-brand-mark reveal">
+  <div class="product-eyebrow reveal" style="transition-delay:.02s">Comercios · Retail · Minoristas</div>
+  <h1 class="product-name-big reveal" style="transition-delay:.04s">Comercio<span class="z">P</span>ro</h1>
+  <p class="product-pitch-big reveal" style="transition-delay:.08s">
+    Tu negocio abierto. Tu caja bajo control. Tu tiempo, tuyo.<br>
+    <strong>Vendé más rápido, controlá tu stock en tiempo real</strong> y cobrá de todas las formas — desde una pantalla táctil o una tablet.
+  </p>
+  <div class="product-hero-actions reveal" style="transition-delay:.12s">
+    <a href="https://comerciopro.agenzoft.com/registro" target="_blank" class="btn-primary">Empezar 14 días gratis →</a>
+    <a href="#planes" class="btn-secondary">Ver planes y precios</a>
+  </div>
+  <div class="product-hero-meta reveal" style="transition-delay:.16s">
+    <span><span class="dot">●</span> Sin tarjeta de crédito</span>
+    <span><span class="dot">●</span> Listo en minutos</span>
+    <span><span class="dot">●</span> Soporte por WhatsApp</span>
+  </div>
+  <div class="product-subdomain reveal" style="transition-delay:.18s; display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 12.5px; color: var(--muted); background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; margin-top: 22px;">
+    <div style="width: 6px; height: 6px; border-radius: 50%; background:var(--accent2); animation: blink 2s infinite;"></div>
     <a href="https://comerciopro.agenzoft.com" target="_blank" style="color:var(--text); text-decoration:none;">comerciopro.agenzoft.com</a>
   </div>
-  <div class="reveal">
-    <img src="assets/images/mockup_comerciopro.png" alt="Mockup">
+
+  <!-- HERO MOCKUP / VIDEO -->
+  <div class="reveal hero-mockup-wrap" style="transition-delay:.22s">
+    <!--
+      ESPACIO RESERVADO: VIDEO O IMAGEN PRINCIPAL DEL PANEL
+      Archivo esperado: assets/videos/comerciopro-panel.mp4 (5s, autoplay loop)
+      Fallback: assets/images/mockup_comerciopro.png
+      Prompt Leonardo: ver PROMPTS-LEONARDO.md → "Hero panel ComercioPro"
+    -->
+    <img src="assets/images/mockup_comerciopro.png" alt="ComercioPro panel principal">
   </div>
 </div>
 
+<!-- ══════════ TRUST BAR ══════════ -->
+<div class="trust-bar reveal">
+  <div class="trust-item"><div class="trust-item-icon">⚡</div><div>Búsqueda en <strong>&lt; 1 segundo</strong></div></div>
+  <div class="trust-item"><div class="trust-item-icon">☁</div><div><strong>72 horas</strong> sin internet</div></div>
+  <div class="trust-item"><div class="trust-item-icon">🇦🇷</div><div>AFIP + IVA + <strong>pesos argentinos</strong></div></div>
+  <div class="trust-item"><div class="trust-item-icon">🛒</div><div><strong>Tienda online</strong> incluida</div></div>
+</div>
+
+<!-- ══════════ PARA QUIÉN ES ══════════ -->
 <div class="section-wrap">
-  <div class="reveal">
-    <div class="pricing-title">Planes ComercioPro</div>
-    <p class="pricing-sub">Todos incluyen <strong style="color:var(--accent)">14 días de prueba gratuita</strong> · Sin tarjeta de crédito · Creá tu negocio en minutos</p>
+  <div class="section-center reveal">
+    <p class="section-tag">Hecho para tu rubro</p>
+    <h2 class="section-title">Si atendés al público,<br><span class="z">ComercioPro es para vos.</span></h2>
+    <p class="section-sub">Diseñado para los comercios minoristas argentinos. Sin importar el rubro, el flujo es el mismo: vendés, cobrás, descontás stock y seguís.</p>
   </div>
-  <div class="pricing-grid reveal" style="transition-delay:.08s">
+  <div class="target-grid reveal" style="transition-delay:.08s">
+    <div class="target-card"><span class="target-icon">🛒</span><div class="target-name">Mini market / Autoservicio</div><div class="target-desc">POS ágil con lector de códigos.</div></div>
+    <div class="target-card"><span class="target-icon">👕</span><div class="target-name">Ropa y calzado</div><div class="target-desc">Variantes por talle y color.</div></div>
+    <div class="target-card"><span class="target-icon">🍷</span><div class="target-name">Vinos y bebidas</div><div class="target-desc">Control de vencimientos.</div></div>
+    <div class="target-card"><span class="target-icon">💄</span><div class="target-name">Perfumería</div><div class="target-desc">Listas mayorista y minorista.</div></div>
+    <div class="target-card"><span class="target-icon">🎁</span><div class="target-name">Regalería / Bazar</div><div class="target-desc">Catálogo amplio, búsqueda rápida.</div></div>
+    <div class="target-card"><span class="target-icon">📦</span><div class="target-name">Mayorista</div><div class="target-desc">Pedidos, presupuestos y CC.</div></div>
+    <div class="target-card"><span class="target-icon">🐾</span><div class="target-name">Pet shop / Forrajería</div><div class="target-desc">Stock por bulto y unidad.</div></div>
+    <div class="target-card"><span class="target-icon">📱</span><div class="target-name">Tecnológicos</div><div class="target-desc">Celulares, accesorios, electrónica.</div></div>
+    <div class="target-card"><span class="target-icon">🍼</span><div class="target-name">Pañaleras</div><div class="target-desc">Pañales, mamaderas, indumentaria infantil.</div></div>
+    <div class="target-card"><span class="target-icon">🌿</span><div class="target-name">Dietéticas</div><div class="target-desc">Granel, suplementos, vencimientos.</div></div>
+    <div class="target-card"><span class="target-icon">🔧</span><div class="target-name">Ferreterías</div><div class="target-desc">Stock por bulto, etiquetas, mayorista.</div></div>
+    <div class="target-card"><span class="target-icon">🏬</span><div class="target-name">Polirubros</div><div class="target-desc">Múltiples categorías, búsqueda rápida.</div></div>
+  </div>
+</div>
 
-    <!-- BÁSICO -->
-    <div class="plan-card">
-      <div class="plan-name">Básico</div>
-      <div class="plan-subtitle">Comercio chico, local único</div>
-      <div class="plan-price"><sup>$</sup>29.000</div>
-      <div class="plan-period">/mes · 1 usuario · 1 sesión activa</div>
-      <div class="plan-annual">Anual: $319.000</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li>Punto de venta (POS)</li>
-        <li>Cierre de caja diario</li>
-        <li>Control de stock</li>
-        <li>Panel de control y métricas</li>
-        <li>Gestión de inventario</li>
-        <li>Modo sin internet (7 días de gracia)</li>
-        <li>Generador de códigos de barras</li>
-        <li>Notificaciones automáticas</li>
-        <li>Remarcado masivo de precios</li>
-        <li>Cuenta corriente de clientes</li>
-      </ul>
-      <a href="https://comerciopro.agenzoft.com/registro" target="_blank" class="btn-plan btn-plan-outline">Crear mi negocio →</a>
-      <p class="btn-plan-note">14 días gratis · Sin tarjeta de crédito</p>
+<!-- ══════════ FEATURE SHOWCASE ══════════ -->
+<div style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-wrap">
+    <div class="section-center reveal">
+      <p class="section-tag">Lo que ComercioPro hace por vos</p>
+      <h2 class="section-title">Una plataforma.<br><span class="z">Todo el negocio bajo control.</span></h2>
+      <p class="section-sub">Cada pantalla está pensada para el ritmo real de tu mostrador. Atajos, lector de código, búsqueda instantánea — para que vendas más rápido.</p>
     </div>
 
-    <!-- PROFESIONAL -->
-    <div class="plan-card featured">
-      <div class="plan-name">Profesional</div>
-      <div class="plan-subtitle">Comercio en crecimiento, créditos y proveedores</div>
-      <div class="plan-price"><sup>$</sup>49.000</div>
-      <div class="plan-period">/mes · 3 usuarios · 3 sesiones activas</div>
-      <div class="plan-annual">Anual: $539.000</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features compact">
-        <li>Todo lo del plan Básico, más:</li>
-        <li>Usuarios y roles de acceso</li>
-        <li>Marca e identidad propia</li>
-        <li>Registro de compras a proveedores</li>
-        <li>Presupuestos y cotizaciones</li>
-        <li>Precios por bulto / mayorista</li>
-        <li>Buscador inteligente de precios</li>
-        <li>Análisis de rentabilidad</li>
-        <li>Importar listas de precios</li>
-        <li>Anulación de ventas</li>
-        <li>Impresión de tickets</li>
-        <li>Historial de cambios de precio</li>
-        <li>Pedidos a proveedores</li>
-        <li>Importar / exportar artículos</li>
-      </ul>
-      <a href="https://comerciopro.agenzoft.com/registro" target="_blank" class="btn-plan btn-plan-primary">Crear mi negocio →</a>
-      <p class="btn-plan-note">14 días gratis · Sin tarjeta de crédito</p>
+    <!-- FEATURE 1: POS RÁPIDO -->
+    <div class="feature-row reveal">
+      <div class="feature-text">
+        <span class="feature-tag">Punto de venta</span>
+        <h3 class="feature-title">Cobrá en segundos.<br>Sin que el cliente <span class="z">espere</span>.</h3>
+        <p class="feature-desc">Buscador full-text que encuentra entre <strong>10.000 artículos en menos de 1 segundo</strong>. Lector de código de barras detectado automáticamente. Atajos de teclado para los pasos repetitivos.</p>
+        <ul class="feature-bullets">
+          <li><strong>F1</strong> buscar artículo · <strong>F3</strong> cambiar cliente · <strong>F4</strong> lista de precios · <strong>F12</strong> cobrar</li>
+          <li>Cobrá en efectivo, tarjeta, transferencia, cheque o cuenta corriente — en la misma venta</li>
+          <li>Cálculo de vuelto automático y emisión de ticket al instante</li>
+        </ul>
+      </div>
+      <div class="feature-media">
+        <img src="assets/images/feature-pos.jpg" alt="Pantalla del POS de ComercioPro en uso" loading="lazy">
+      </div>
     </div>
 
-    <!-- ENTERPRISE -->
-    <div class="plan-card">
-      <div class="plan-name">Enterprise</div>
-      <div class="plan-subtitle">Cadena de locales, AFIP, WhatsApp</div>
-      <div class="plan-price"><sup>$</sup>79.000</div>
-      <div class="plan-period">/mes · 10 usuarios · 10 sesiones activas</div>
-      <div class="plan-annual">Anual: $869.000</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li>Todo lo del plan Profesional</li>
-        <li>Gestión de múltiples sucursales</li>
-        <li>Integración con WhatsApp</li>
-        <li>Control de vencimientos</li>
-        <li>Exportación de reportes (Excel / PDF)</li>
-        <li>Control de cheques</li>
-        <li>Facturación electrónica AFIP</li>
-        <li>Soporte VIP 24/7 por WhatsApp</li>
-      </ul>
-      <a href="https://comerciopro.agenzoft.com/registro" target="_blank" class="btn-plan btn-plan-outline">Crear mi negocio →</a>
-      <p class="btn-plan-note">14 días gratis · Sin tarjeta de crédito</p>
+    <!-- FEATURE 2: MODO OFFLINE -->
+    <div class="feature-row reverse reveal">
+      <div class="feature-text">
+        <span class="feature-tag">Modo offline</span>
+        <h3 class="feature-title">Se va la luz, se va internet.<br>Vos <span class="z">seguís vendiendo</span>.</h3>
+        <p class="feature-desc">ComercioPro sigue funcionando hasta <strong>72 horas sin conexión</strong>. Cuando vuelve internet, sincroniza solo cada venta, cada pago y cada movimiento de stock. Cero pérdida de datos.</p>
+        <ul class="feature-bullets">
+          <li>Hasta 500 ventas guardadas localmente, listas para sincronizar</li>
+          <li>Resolución automática de conflictos al volver online</li>
+          <li>Service Worker que cachea la app — funciona apenas la abrís</li>
+        </ul>
+      </div>
+      <div class="feature-media">
+        <img src="assets/images/feature-offline.jpg" alt="Modo offline de ComercioPro sincronizando ventas" loading="lazy">
+      </div>
+    </div>
+
+    <!-- FEATURE 3: CUENTA CORRIENTE -->
+    <div class="feature-row reveal">
+      <div class="feature-text">
+        <span class="feature-tag">Cuenta corriente</span>
+        <h3 class="feature-title">Adiós al cuaderno.<br>Cada cliente, <span class="z">cada peso</span>.</h3>
+        <p class="feature-desc">Llevá el fiado de tus clientes con la prolijidad de un banco. Asignación FIFO automática de pagos, límite de crédito por cliente y alertas cuando alguien se atrasa.</p>
+        <ul class="feature-bullets">
+          <li>Resumen de cuenta <strong>copiable a WhatsApp</strong> en un toque</li>
+          <li>Exportación a PDF para mandar por mail</li>
+          <li>Histórico completo: qué compró, qué pagó, cuánto debe</li>
+        </ul>
+      </div>
+      <div class="feature-media">
+        <img src="assets/images/feature-cuenta-corriente.jpg" alt="Cuenta corriente con resumen enviado por WhatsApp" loading="lazy">
+      </div>
+    </div>
+
+    <!-- FEATURE 4: PRECIOS Y RENTABILIDAD -->
+    <div class="feature-row reverse reveal">
+      <div class="feature-text">
+        <span class="feature-tag">Precios · Rentabilidad</span>
+        <h3 class="feature-title">Subiste el precio.<br>¿Lo <span class="z">recordás</span>? Yo sí.</h3>
+        <p class="feature-desc">Historial completo de cada cambio de precio — quién lo hizo, por qué (compra, remarcado, manual, importación). Gráfico de evolución de precios por artículo. <strong>Remarcado masivo</strong> con un click.</p>
+        <ul class="feature-bullets">
+          <li>Múltiples listas: minorista, mayorista, especiales</li>
+          <li>Análisis de rentabilidad por producto y categoría</li>
+          <li>Importación de listas de proveedores en segundos</li>
+        </ul>
+      </div>
+      <div class="feature-media">
+        <img src="assets/images/feature-precios.jpg" alt="Historial de precios y análisis de rentabilidad" loading="lazy">
+      </div>
+    </div>
+
+    <!-- FEATURE 5: STOCK MULTI-LOCAL -->
+    <div class="feature-row reveal">
+      <div class="feature-text">
+        <span class="feature-tag">Stock · Sucursales</span>
+        <h3 class="feature-title">¿Cuántos tengo<br>en el <span class="z">otro local</span>?</h3>
+        <p class="feature-desc">Stock en tiempo real por local. Movimientos entre sucursales auditados. Control de vencimientos para productos perecederos. Códigos de barras imprimibles desde la misma app.</p>
+        <ul class="feature-bullets">
+          <li>Stock materializado por sucursal — consulta inmediata</li>
+          <li>Alertas de quiebre de stock antes de quedarte sin nada</li>
+          <li>Etiquetas con código de barras + precio listas para imprimir</li>
+        </ul>
+      </div>
+      <div class="feature-media">
+        <img src="assets/images/feature-stock.jpg" alt="Vista de stock por sucursal en ComercioPro" loading="lazy">
+      </div>
+    </div>
+
+    <!-- FEATURE 6: ALERTAS Y DASHBOARD -->
+    <div class="feature-row reverse reveal">
+      <div class="feature-text">
+        <span class="feature-tag">Dashboard · Alertas</span>
+        <h3 class="feature-title">Tu negocio te avisa<br><span class="z">qué necesita</span>.</h3>
+        <p class="feature-desc">Panel principal con los números del día: ventas, cobros, productos vendidos, deudas pendientes. <strong>Alertas operativas</strong> que te avisan cuando hay un problema — antes de que se vuelva uno.</p>
+        <ul class="feature-bullets">
+          <li>KPIs en tiempo real: hoy, semana, mes</li>
+          <li>Alertas de stock crítico, vencimientos próximos, clientes vencidos</li>
+          <li>Comparación de períodos para ver si crecés o decrecés</li>
+        </ul>
+      </div>
+      <div class="feature-media">
+        <img src="assets/images/feature-dashboard.jpg" alt="Dashboard principal de ComercioPro con KPIs y alertas" loading="lazy">
+      </div>
     </div>
 
   </div>
 </div>
 
+<!-- ══════════ TIENDA ONLINE BANNER ══════════ -->
+<div class="section-wrap">
+  <div class="shop-banner reveal">
+    <div>
+      <span class="shop-banner-tag">★ Incluido en plan Profesional</span>
+      <h2>Tu tienda online,<br>sin pagar comisión a <span class="z">Mercado Libre</span>.</h2>
+      <p>ComercioPro genera tu storefront público en minutos. Tus productos, tus precios, <strong>tu marca</strong>. Los clientes navegan, agregan al carrito y te mandan el pedido — todo conectado a tu inventario en tiempo real.</p>
+      <ul class="feature-bullets" style="margin-bottom: 28px;">
+        <li>Tu propio dominio o subdominio gratuito (.agenzoft.com)</li>
+        <li>3 temas visuales: <strong>Limpio · Audaz · Elegante</strong></li>
+        <li>Variantes de producto (talles, colores) y fotos múltiples</li>
+        <li>Pedidos con seguimiento por estado y notificación al dueño</li>
+      </ul>
+      <a href="#planes" class="btn-primary">Ver plan Profesional →</a>
+    </div>
+    <div class="feature-media" style="aspect-ratio: 4 / 5;">
+      <img src="assets/images/tienda-online-vertical.jpg" alt="Tienda online de ComercioPro en mobile y desktop" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PLANES ══════════ -->
+<div style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);" id="planes">
+  <div class="section-wrap">
+    <div class="section-center reveal">
+      <p class="section-tag">Planes y precios</p>
+      <h2 class="section-title">Elegí el plan<br><span class="z">que crece con vos.</span></h2>
+      <p class="section-sub">Todos incluyen <strong style="color:var(--accent2)">14 días de prueba gratuita</strong> · Sin tarjeta de crédito · Sin permanencia · Cambiá de plan cuando quieras.</p>
+    </div>
+    <div class="pricing-grid reveal" style="transition-delay:.08s">
+
+      <!-- BÁSICO -->
+      <div class="plan-card">
+        <div class="plan-name">Básico</div>
+        <div class="plan-subtitle">Comercio chico, local único</div>
+        <div class="plan-price"><sup>$</sup>31.800</div>
+        <div class="plan-period">/mes · 1 usuario · 1 sesión activa</div>
+        <div class="plan-annual">Anual: $349.800 (1 mes bonificado)</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Punto de venta (POS) táctil</li>
+          <li>Cierre de caja diario</li>
+          <li>Control de stock y artículos</li>
+          <li>Panel de control con KPIs</li>
+          <li>Modo offline 72 horas</li>
+          <li>Generador de códigos de barras</li>
+          <li>Remarcado masivo de precios</li>
+          <li>Cuenta corriente de clientes</li>
+          <li>Alertas operativas</li>
+          <li>Soporte por WhatsApp en horario comercial</li>
+        </ul>
+        <a href="https://comerciopro.agenzoft.com/registro" target="_blank" class="btn-plan btn-plan-outline">Empezar 14 días gratis →</a>
+        <p class="btn-plan-note">Sin tarjeta de crédito</p>
+      </div>
+
+      <!-- PROFESIONAL -->
+      <div class="plan-card featured">
+        <div class="plan-highlight">★ Tienda online incluida</div>
+        <div class="plan-name">Profesional</div>
+        <div class="plan-subtitle">Comercio en crecimiento, e-commerce, proveedores</div>
+        <div class="plan-price"><sup>$</sup>53.400</div>
+        <div class="plan-period">/mes · 3 usuarios · 3 sesiones activas</div>
+        <div class="plan-annual">Anual: $587.400 (1 mes bonificado)</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features compact">
+          <li><strong>Todo lo del plan Básico, más:</strong></li>
+          <li>🛒 <strong>Tienda online</strong> con dominio propio</li>
+          <li>Usuarios y roles de acceso</li>
+          <li>Marca e identidad propia (logo, colores)</li>
+          <li>Registro de compras a proveedores</li>
+          <li>Presupuestos y cotizaciones</li>
+          <li>Precios por bulto / mayorista</li>
+          <li>Buscador inteligente de precios</li>
+          <li>Análisis de rentabilidad</li>
+          <li>Importar listas de precios (Excel/CSV)</li>
+          <li>Anulación de ventas con auditoría</li>
+          <li>Historial completo de cambios de precio</li>
+          <li>Pedidos a proveedores</li>
+          <li>Importar / exportar artículos</li>
+        </ul>
+        <a href="https://comerciopro.agenzoft.com/registro" target="_blank" class="btn-plan btn-plan-primary">Empezar 14 días gratis →</a>
+        <p class="btn-plan-note">Sin tarjeta de crédito · El más elegido</p>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="plan-card">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-subtitle">Cadena de locales, AFIP, soporte VIP</div>
+        <div class="plan-price"><sup>$</sup>85.900</div>
+        <div class="plan-period">/mes · 10 usuarios · 10 sesiones activas</div>
+        <div class="plan-annual">Anual: $944.900 (1 mes bonificado)</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><strong>Todo lo del plan Profesional, más:</strong></li>
+          <li>Múltiples sucursales con stock independiente</li>
+          <li>Integración con WhatsApp (envío automático)</li>
+          <li>Control de vencimientos</li>
+          <li>Exportación de reportes (Excel / PDF)</li>
+          <li>Control de cheques propios y de terceros</li>
+          <li>Facturación electrónica AFIP</li>
+          <li>Tienda online avanzada (variantes, fotos extra)</li>
+          <li>Soporte VIP 24/7 por WhatsApp</li>
+        </ul>
+        <a href="https://comerciopro.agenzoft.com/registro" target="_blank" class="btn-plan btn-plan-outline">Empezar 14 días gratis →</a>
+        <p class="btn-plan-note">Onboarding personalizado incluido</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FAQ ══════════ -->
+<div class="section-wrap">
+  <div class="section-center reveal">
+    <p class="section-tag">Preguntas frecuentes</p>
+    <h2 class="section-title">Lo que <span class="z">probablemente</span><br>te estás preguntando.</h2>
+  </div>
+  <div class="faq-list reveal" style="transition-delay:.08s">
+    <details class="faq-item">
+      <summary>¿Necesito instalar algo en mi computadora?</summary>
+      <div class="faq-body">No. ComercioPro es 100% en la nube. Entrás desde el navegador (Chrome, Edge, Safari) en cualquier dispositivo: computadora, notebook, tablet o celular. Si querés, también podés instalarla como app nativa en tu PC o tu pantalla táctil.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Y si se cae internet en mi local?</summary>
+      <div class="faq-body">Seguís vendiendo igual. ComercioPro tiene modo offline de hasta 72 horas: hace hasta 500 ventas sin conexión y sincroniza todo automáticamente cuando internet vuelve. Cero pérdida de datos, cero ventas perdidas.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Puedo migrar mis datos del sistema viejo?</summary>
+      <div class="faq-body">Sí. Importamos tu catálogo de artículos, tu lista de clientes y proveedores desde Excel o CSV. Si necesitás ayuda, nuestro equipo lo hace por vos durante el onboarding — sin costo extra.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cuánto tarda en estar listo?</summary>
+      <div class="faq-body">Si tenés tus productos en Excel, en una tarde estás vendiendo. Si arrancás de cero, el sistema te guía con un checklist de configuración para que cargues todo en orden. Sin curva de aprendizaje gigante.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿La tienda online tiene costo extra?</summary>
+      <div class="faq-body">No, la tienda online viene incluida en el plan Profesional y Enterprise. No pagás comisión por venta como en Mercado Libre — el cliente te paga directamente. Solo pagás la mensualidad del plan.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Puedo cambiar de plan o cancelar cuando quiera?</summary>
+      <div class="faq-body">Sí. Sin permanencia, sin letra chica. Subís o bajás de plan cuando quieras desde tu panel. Si cancelás, exportás todos tus datos en formatos estándar (Excel, CSV) — tu información es tuya.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Quién me da soporte cuando tengo un problema?</summary>
+      <div class="faq-body">Nosotros, directamente por WhatsApp. No tickets, no call centers, no esperar 3 días por un mail. Hablás con la persona que entiende el sistema. En el plan Enterprise, soporte 24/7.</div>
+    </details>
+  </div>
+</div>
+
+<!-- ══════════ CTA FINAL ══════════ -->
+<div style="background:var(--bg2); border-top:1px solid var(--border)" id="contacto">
+  <div class="cta-inner">
+    <div class="cta-glow"></div>
+    <p class="section-tag reveal" style="justify-content:center">Tu próximo paso</p>
+    <h2 class="cta-title reveal" style="transition-delay:.08s">
+      Probalo 14 días.<br><span class="z">Decidí después.</span>
+    </h2>
+    <p class="cta-sub reveal" style="transition-delay:.12s">Creá tu cuenta en minutos. Sin tarjeta. Sin compromiso. Si en 14 días no te enamorás, te ayudamos a exportar tus datos y listo — sin rencores.</p>
+    <div class="hero-actions reveal" style="transition-delay:.16s">
+      <a href="https://comerciopro.agenzoft.com/registro" target="_blank" class="btn-primary">Crear mi negocio →</a>
+      <a href="https://wa.me/5492615154308?text=Hola!%20Quiero%20info%20de%20ComercioPro" class="btn-secondary">Hablar con un humano</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
 <footer>
-  <div class="footer-logo" style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--white);">Agen<span class="z" style="color:var(--accent);">Z</span>oft</div>
-  <div class="footer-copy" style="font-size: 12.5px; color: var(--muted);">© 2025 AgenZoft · Río Cuarto, Córdoba, Argentina · Ingeniería de Software.</div>
+  <img src="logo-AgenZoft_fondooscuro.png" alt="AgenZoft" class="footer-logo-img">
+  <div class="footer-copy" style="font-size: 12.5px; color: var(--muted);">© 2026 AgenZoft · Río Cuarto, Córdoba, Argentina · Ingeniería de Software.</div>
 </footer>
 
 <script>
-
 const menuBtn = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
 if(menuBtn) {
@@ -258,6 +494,22 @@ document.addEventListener('mousemove', e => {
   ring.style.top  = ry + 'px';
   requestAnimationFrame(animRing);
 })();
+
+document.querySelectorAll('a, button, .plan-card, .target-card, .faq-item, .feature-media').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+    ring.style.transform   = 'translate(-50%,-50%) scale(1.6)';
+    ring.style.borderColor = 'rgba(139,127,232,0.7)';
+    ring.style.boxShadow   = '0 0 14px rgba(96,85,212,0.25)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    ring.style.transform   = 'translate(-50%,-50%) scale(1)';
+    ring.style.borderColor = 'rgba(139,127,232,0.4)';
+    ring.style.boxShadow   = 'none';
+  });
+});
+
 const obs = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
@@ -267,8 +519,9 @@ const obs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
 window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 60 ? 'rgba(0,229,255,0.14)' : 'rgba(0,229,255,0.07)';
+  document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 60 ? 'rgba(96,85,212,0.18)' : 'rgba(96,85,212,0.08)';
 });
 </script>
 </body>
