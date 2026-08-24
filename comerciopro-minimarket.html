@@ -6,7 +6,7 @@
 <title>ComercioPro para tu minimarket — AgenZoft</title>
 <meta name="description" content="El sistema para tu minimarket: cobrás en segundos, sabés qué reponer y la caja cierra sola. Probalo funcionando sin cargar un solo producto. 14 días gratis, sin tarjeta.">
 <link rel="icon" type="image/svg+xml" href="favicon%20AgenZoft.svg">
-<meta name="theme-color" content="#100C2B">
+<meta name="theme-color" content="#08080F">
 
 <!-- Vista previa al compartir por WhatsApp / redes -->
 <meta property="og:type" content="website">
@@ -27,17 +27,20 @@
 
 <style>
   /* Tarjeta digital para compartir por WhatsApp — una sola pantalla.
-     Tipografía Outfit en todos los roles (igual que index.html),
-     DM Mono solo para el dato chico. Fondo violeta de marca, siempre oscuro. */
+     Tipografía Outfit en todos los roles (igual que index.html) y DM Mono
+     para el dato chico. Paleta tomada de style.css: --accent, --accent3 y
+     --bg reales de la marca. El grano es el mismo body::before del sitio. */
   :root {
-    --deep:   #100C2B;
-    --violet: #2A1D6E;
-    --lift:   #3A2A8C;
-    --line:   rgba(255,255,255,.13);
-    --white:  #FFFFFF;
-    --text:   #EDEAF8;
-    --soft:   #B8B0DE;
-    --amber:  #FFC46B;
+    --deep:    #08080F;   /* = --bg de style.css */
+    --violet:  #241C5E;
+    --lift:    #4A40B8;   /* = --accent3 */
+    --accent:  #6055D4;   /* = --accent  */
+    --accent2: #8B7FE8;   /* = --accent2 */
+    --line:    rgba(255,255,255,.13);
+    --white:   #FFFFFF;
+    --text:    #E2E4EE;   /* = --text    */
+    --soft:    #A9A3D4;
+    --amber:   #FFC46B;
   }
 
   * { box-sizing: border-box; }
@@ -49,7 +52,7 @@
     min-height: 100dvh;
     background: var(--deep);
     background-image:
-      radial-gradient(120% 70% at 50% -10%, var(--lift) 0%, var(--violet) 42%, var(--deep) 100%);
+      radial-gradient(125% 72% at 50% -12%, var(--lift) 0%, var(--violet) 44%, var(--deep) 100%);
     color: var(--text);
     font-family: 'Outfit', ui-sans-serif, system-ui, -apple-system, sans-serif;
     font-weight: 400;
@@ -58,7 +61,17 @@
     flex-direction: column;
   }
 
+  /* Grano — mismo filtro que el body::before de style.css */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9000; opacity: 0.35;
+  }
+
   .card {
+    position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 430px;
     margin: 0 auto;
@@ -71,24 +84,22 @@
 
   .top { display: flex; flex-direction: column; gap: 15px; }
 
+  /* Marca: isotipo + wordmark con la Z en acento, como en el sitio */
   .mark {
     display: flex;
     align-items: center;
-    gap: 9px;
-    font-size: 11.5px;
+    gap: 10px;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
     color: var(--soft);
   }
 
-  .mark i {
-    width: 7px;
-    height: 7px;
-    border-radius: 2px;
-    background: var(--amber);
-    font-style: normal;
-  }
+  .mark svg { width: 17px; height: 17px; flex: none; color: var(--white); }
+
+  .mark b { font-weight: 700; color: var(--white); letter-spacing: -0.2px; }
+
+  .mark .z { color: var(--accent2); }
 
   h1 {
     margin: 0;
@@ -147,9 +158,9 @@
   /* ── La demo: el argumento fuerte ─────────────── */
 
   .demo {
-    border: 1px solid var(--line);
+    border: 1px solid rgba(96,85,212,.32);   /* = --accent-border */
     border-radius: 12px;
-    background: rgba(255,255,255,.06);
+    background: rgba(96,85,212,.10);
     padding: 17px 18px;
     display: flex;
     flex-direction: column;
@@ -209,10 +220,10 @@
     background: var(--white);
     color: var(--deep);
     font-weight: 700;
-    box-shadow: 0 6px 24px rgba(0,0,0,.42);
+    box-shadow: 0 6px 24px rgba(0,0,0,.45);
   }
 
-  .btn-go:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(0,0,0,.5); }
+  .btn-go:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(0,0,0,.55); }
 
   .btn-web {
     border: 1px solid var(--line);
@@ -221,7 +232,7 @@
     font-weight: 600;
   }
 
-  .btn-web:hover { border-color: var(--amber); color: var(--amber); }
+  .btn-web:hover { border-color: var(--accent2); color: var(--accent2); }
 
   .wa {
     margin: 5px 0 0;
@@ -267,7 +278,13 @@
 
 <main class="card">
   <div class="top">
-    <div class="mark"><i></i>ComercioPro · AgenZoft</div>
+    <div class="mark">
+      <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <path d="M0 0 H80 L0 80 Z" fill="currentColor"/>
+        <path d="M100 20 V100 H20 Z" fill="currentColor"/>
+      </svg>
+      <span><b>ComercioPro</b> · por Agen<span class="z">Z</span>oft</span>
+    </div>
     <h1>El sistema para tu <span>minimarket</span>.</h1>
   </div>
 
