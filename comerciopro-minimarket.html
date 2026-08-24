@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComercioPro para tu minimarket — AgenZoft</title>
+<meta name="description" content="El sistema para tu minimarket: cobrás en segundos, sabés qué reponer y la caja cierra sola. Probalo funcionando sin cargar un solo producto. 14 días gratis, sin tarjeta.">
+<link rel="icon" type="image/svg+xml" href="favicon%20AgenZoft.svg">
+<meta name="theme-color" content="#100C2B">
+
+<!-- Vista previa al compartir por WhatsApp / redes -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agenzoft.com/comerciopro-minimarket.html">
+<meta property="og:title" content="ComercioPro — el sistema para tu minimarket">
+<meta property="og:description" content="Cobrás en segundos, sabés qué reponer y la caja cierra sola. Probalo funcionando sin cargar un solo producto. 14 días gratis, sin tarjeta.">
+<meta property="og:image" content="https://agenzoft.com/comercioPro.png">
+<meta property="og:locale" content="es_AR">
+<meta property="og:site_name" content="AgenZoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ComercioPro — el sistema para tu minimarket">
+<meta name="twitter:description" content="Cobrás en segundos, sabés qué reponer y la caja cierra sola. Probalo sin cargar un solo producto. 14 días gratis.">
+<meta name="twitter:image" content="https://agenzoft.com/comercioPro.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* Tarjeta digital para compartir por WhatsApp — una sola pantalla.
+     Tipografía Outfit en todos los roles (igual que index.html),
+     DM Mono solo para el dato chico. Fondo violeta de marca, siempre oscuro. */
+  :root {
+    --deep:   #100C2B;
+    --violet: #2A1D6E;
+    --lift:   #3A2A8C;
+    --line:   rgba(255,255,255,.13);
+    --white:  #FFFFFF;
+    --text:   #EDEAF8;
+    --soft:   #B8B0DE;
+    --amber:  #FFC46B;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--deep);
+    background-image:
+      radial-gradient(120% 70% at 50% -10%, var(--lift) 0%, var(--violet) 42%, var(--deep) 100%);
+    color: var(--text);
+    font-family: 'Outfit', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 3.4vh, 30px);
+    padding: clamp(26px, 5vh, 44px) 26px clamp(22px, 3.4vh, 34px);
+  }
+
+  .top { display: flex; flex-direction: column; gap: 15px; }
+
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+
+  .mark i {
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--amber);
+    font-style: normal;
+  }
+
+  h1 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(34px, 9vw, 44px);
+    line-height: 1.02;
+    letter-spacing: -2px;
+    text-wrap: balance;
+    color: var(--white);
+  }
+
+  h1 span { color: var(--amber); }
+
+  /* ── Beneficios ───────────────────────────────── */
+
+  .points { display: flex; flex-direction: column; gap: 0; }
+
+  .points p {
+    margin: 0;
+    padding: 13px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    border-top: 1px solid var(--line);
+  }
+
+  .points p:first-child { border-top: 0; padding-top: 0; }
+
+  .points p::before {
+    content: "";
+    flex: none;
+    width: 6px;
+    height: 6px;
+    margin-top: 7px;
+    border-radius: 999px;
+    background: var(--amber);
+  }
+
+  .points b {
+    display: block;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.2px;
+    color: var(--white);
+    margin-bottom: 3px;
+  }
+
+  .points em {
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(14px, 3.7vw, 15px);
+    line-height: 1.6;
+    color: var(--soft);
+  }
+
+  /* ── La demo: el argumento fuerte ─────────────── */
+
+  .demo {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(255,255,255,.06);
+    padding: 17px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .demo strong {
+    font-weight: 700;
+    font-size: 16.5px;
+    letter-spacing: -0.5px;
+    color: var(--white);
+  }
+
+  .demo p {
+    margin: 0;
+    font-weight: 400;
+    font-size: clamp(13.5px, 3.6vw, 14.5px);
+    line-height: 1.6;
+    color: var(--soft);
+  }
+
+  .demo p b { color: var(--text); font-weight: 600; }
+
+  /* ── Acciones ─────────────────────────────────── */
+
+  .actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .free {
+    align-self: flex-start;
+    font-family: 'DM Mono', ui-monospace, monospace;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--amber);
+    padding: 5px 12px;
+    border: 1px solid rgba(255,196,107,.35);
+    border-radius: 999px;
+    margin-bottom: 3px;
+  }
+
+  .btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 15px;
+    letter-spacing: -0.1px;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .btn-go {
+    background: var(--white);
+    color: var(--deep);
+    font-weight: 700;
+    box-shadow: 0 6px 24px rgba(0,0,0,.42);
+  }
+
+  .btn-go:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(0,0,0,.5); }
+
+  .btn-web {
+    border: 1px solid var(--line);
+    color: var(--text);
+    background: transparent;
+    font-weight: 600;
+  }
+
+  .btn-web:hover { border-color: var(--amber); color: var(--amber); }
+
+  .wa {
+    margin: 5px 0 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--soft);
+  }
+
+  .wa a {
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    padding-bottom: 1px;
+  }
+
+  .wa a:hover { border-bottom-color: var(--amber); color: var(--amber); }
+
+  a:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+  }
+
+  .card > * { animation: rise .55s cubic-bezier(.22,.7,.3,1) backwards; }
+  .card > :nth-child(1) { animation-delay: .05s; }
+  .card > :nth-child(2) { animation-delay: .13s; }
+  .card > :nth-child(3) { animation-delay: .21s; }
+  .card > :nth-child(4) { animation-delay: .29s; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card > * { animation: none; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<main class="card">
+  <div class="top">
+    <div class="mark"><i></i>ComercioPro · AgenZoft</div>
+    <h1>El sistema para tu <span>minimarket</span>.</h1>
+  </div>
+
+  <div class="points">
+    <p><span><b>Cobrás en segundos.</b><em>Pasás el código de barras o buscás por nombre: el total y el vuelto salen solos.</em></span></p>
+    <p><span><b>Sabés qué reponer.</b><em>Te avisa cuando un producto baja del mínimo, antes de que te quedes sin nada.</em></span></p>
+    <p><span><b>La caja cierra sola.</b><em>Efectivo, débito y transferencia del día, y la diferencia marcada al cerrar.</em></span></p>
+  </div>
+
+  <div class="demo">
+    <strong>Probalo sin cargar un solo producto</strong>
+    <p>Entrás, tocás <b>«Ver cómo funciona»</b> y aparece un minimarket completo: productos, ventas de los últimos 30 días, la caja de hoy y las alertas de stock. Lo borrás con un clic y cargás lo tuyo.</p>
+  </div>
+
+  <div class="actions">
+    <span class="free">14 días gratis · sin tarjeta</span>
+    <a class="btn btn-go" href="https://comerciopro.agenzoft.com/registro" target="_blank" rel="noopener">Probar gratis ahora</a>
+    <a class="btn btn-web" href="comerciopro.html">Ver la web</a>
+    <p class="wa">¿Dudas? <a href="https://wa.me/5492615154308?text=Hola!%20Vi%20la%20info%20de%20ComercioPro%20y%20queria%20consultarte" target="_blank" rel="noopener">Escribime por WhatsApp</a></p>
+  </div>
+</main>
+
+</body>
+</html>
