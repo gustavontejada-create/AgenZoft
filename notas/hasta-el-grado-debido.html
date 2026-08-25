@@ -34,6 +34,9 @@
     --mark-soft:   #EDE9FC;
 
     --fs: 20px;
+    --lh: 1.55;
+    --rowpad: .30rem;
+    --gap: 1.25rem;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -91,7 +94,7 @@
     color: var(--text);
     font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     font-size: var(--fs);
-    line-height: 1.5;
+    line-height: var(--lh);
     margin: 0;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
@@ -124,16 +127,19 @@
     background: var(--s0); transition: background .2s;
   }
 
-  .btns { display: flex; gap: .3rem; flex: none; }
+  .btns { display: flex; align-items: center; gap: .55rem; flex: none; }
+  .grp { display: flex; gap: .22rem; }
 
   .btns button {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-weight: 600; line-height: 1;
     background: var(--surface); color: var(--text-2);
     border: 1px solid var(--line-2); border-radius: .42rem;
-    min-width: 2.3rem; height: 2.3rem; padding: 0 .4rem;
+    min-width: 2.15rem; height: 2.25rem; padding: 0 .3rem;
     cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
   }
+  .btns svg { display: block; }
   .btns button:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
   .btns .lg { font-size: 1.1rem; }
   .btns .sm { font-size: .78rem; }
@@ -213,12 +219,13 @@
 
   /* ================= renglones ================= */
 
-  .g { margin-bottom: 1.15rem; }
+  .g { margin-bottom: var(--gap); }
   .g:last-child { margin-bottom: 0; }
 
   .l {
     display: grid; grid-template-columns: 1.7rem 1fr; gap: .35rem;
-    padding: .22rem .35rem .22rem 0;
+    align-items: baseline;
+    padding: var(--rowpad) .35rem var(--rowpad) 0;
     border-radius: .35rem;
     cursor: pointer;
     border-left: 3px solid transparent;
@@ -228,7 +235,7 @@
   .l .n {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: .56rem; font-weight: 500; color: var(--text-3);
-    text-align: right; padding-top: .62em;
+    text-align: right;
     font-variant-numeric: tabular-nums;
     user-select: none; -webkit-user-select: none;
   }
@@ -261,7 +268,7 @@
     border-left: 5px solid var(--gold-bar);
     border-radius: .2rem .6rem .6rem .2rem;
     padding: .8rem .9rem .9rem;
-    margin: .3rem 0 1.15rem;
+    margin: .3rem 0 var(--gap);
   }
 
   .leer-top {
@@ -276,28 +283,30 @@
   .leer q {
     display: block;
     font-family: "Newsreader", Georgia, serif;
-    font-size: 1.1em; line-height: 1.45; color: var(--text);
+    font-size: 1.1em; line-height: calc(var(--lh) - .12); color: var(--text);
     quotes: "\201C" "\201D" "\2018" "\2019";
   }
   .leer q + q { margin-top: .45rem; }
 
   /* ================= listas ================= */
 
-  ul.pts { margin: .1rem 0 1.15rem; padding: 0; list-style: none; display: grid; gap: .5rem; }
+  ul.pts { margin: .1rem 0 var(--gap); padding: 0; list-style: none; display: grid; gap: calc(var(--gap) * .42); }
   ul.pts li {
     display: grid; grid-template-columns: 1.7rem 1fr; gap: .35rem;
-    padding: .22rem .35rem .22rem 0; border-radius: .35rem;
+    align-items: baseline;
+    padding: var(--rowpad) .35rem var(--rowpad) 0; border-radius: .35rem;
     cursor: pointer; border-left: 3px solid transparent; margin-left: -3px;
   }
   ul.pts li .n {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: .56rem; font-weight: 500; color: var(--text-3);
-    text-align: right; padding-top: .62em; font-variant-numeric: tabular-nums;
+    text-align: right; font-variant-numeric: tabular-nums;
     user-select: none; -webkit-user-select: none;
   }
   ul.pts li .t { position: relative; padding-left: 1.05rem; }
   ul.pts li .t::before {
-    content: ""; position: absolute; left: 0; top: .62em;
+    content: ""; position: absolute; left: 0;
+    top: calc((var(--lh) * 1em - .4rem) / 2);
     width: .4rem; height: .4rem; border-radius: 50%; background: var(--sc);
   }
   ul.pts li.marked { background: var(--mark-soft); border-left-color: var(--mark); }
@@ -308,7 +317,7 @@
 
   .box {
     background: var(--surface); border: 1px solid var(--line);
-    border-radius: .6rem; padding: .8rem .9rem; margin: .3rem 0 1.15rem;
+    border-radius: .6rem; padding: .8rem .9rem; margin: .3rem 0 var(--gap);
   }
   .box-top {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
@@ -364,8 +373,14 @@
   <div id="here"><span class="dot"></span><span class="lbl">Apertura</span></div>
   <div class="btns">
     <button id="goMark" type="button" hidden aria-label="Volver a mi marca">&#9656;</button>
-    <button class="sm" type="button" data-step="-1" aria-label="Achicar la letra">A</button>
-    <button class="lg" type="button" data-step="1" aria-label="Agrandar la letra">A</button>
+    <span class="grp">
+      <button class="sm" type="button" data-step="-1" aria-label="Achicar la letra">A</button>
+      <button class="lg" type="button" data-step="1" aria-label="Agrandar la letra">A</button>
+    </span>
+    <span class="grp">
+      <button type="button" data-space="-1" aria-label="Juntar los renglones"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2.5" y1="6" x2="13.5" y2="6"/><line x1="2.5" y1="8" x2="13.5" y2="8"/><line x1="2.5" y1="10" x2="13.5" y2="10"/></g></svg></button>
+      <button type="button" data-space="1" aria-label="Separar los renglones"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2.5" y1="3" x2="13.5" y2="3"/><line x1="2.5" y1="8" x2="13.5" y2="8"/><line x1="2.5" y1="13" x2="13.5" y2="13"/></g></svg></button>
+    </span>
   </div>
 </div>
 
@@ -383,7 +398,7 @@
     </div>
     <div class="tip">
       <span class="ic">&#9656;</span>
-      <span><b>Toc&aacute; cualquier rengl&oacute;n</b> para marcar por d&oacute;nde vas. Cuando levantes la mirada y vuelvas, apret&aacute; el bot&oacute;n <b>&#9656;</b> de arriba y te lleva justo ah&iacute;. La marca queda guardada aunque cierres la p&aacute;gina.</span>
+      <span><b>Toc&aacute; cualquier rengl&oacute;n</b> para marcar por d&oacute;nde vas. Cuando levantes la mirada y vuelvas, apret&aacute; el bot&oacute;n <b>&#9656;</b> de arriba y te lleva justo ah&iacute;.<br>Los botones <b>A A</b> cambian el tama&ntilde;o de la letra y los de las <b>rayitas</b> la separaci&oacute;n entre renglones. Todo queda guardado aunque cierres la p&aacute;gina.</span>
     </div>
   </header>
 
@@ -873,6 +888,40 @@
       });
     }
     applyFs();
+
+    /* ---------- separación entre renglones ---------- */
+    /* [line-height, alto extra del renglón, aire entre bloques] */
+    var spaces = [
+      [1.30, ".10rem", ".75rem"],
+      [1.42, ".20rem", 1.00 + "rem"],
+      [1.55, ".30rem", "1.25rem"],
+      [1.72, ".46rem", "1.60rem"],
+      [1.90, ".64rem", "2.00rem"],
+      [2.10, ".85rem", "2.50rem"]
+    ];
+    var pi = 2;
+    try {
+      var pv = parseInt(localStorage.getItem("tesoros-sp"), 10);
+      if (!isNaN(pv) && pv >= 0 && pv < spaces.length) pi = pv;
+    } catch (e) {}
+
+    function applySp() {
+      var s = spaces[pi];
+      var r = document.documentElement.style;
+      r.setProperty("--lh", String(s[0]));
+      r.setProperty("--rowpad", s[1]);
+      r.setProperty("--gap", s[2]);
+      try { localStorage.setItem("tesoros-sp", String(pi)); } catch (e) {}
+    }
+
+    var sbtns = document.querySelectorAll(".btns button[data-space]");
+    for (var p = 0; p < sbtns.length; p++) {
+      sbtns[p].addEventListener("click", function () {
+        pi = Math.min(spaces.length - 1, Math.max(0, pi + (+this.dataset.space)));
+        applySp();
+      });
+    }
+    applySp();
   })();
 </script>
 </body>
