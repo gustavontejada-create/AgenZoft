@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<title>Hasta el grado debido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+
+<style>
+  :root {
+    --ground:      #F4F6F7;
+    --surface:     #FFFFFF;
+    --text:        #111A20;
+    --text-2:      #4B5A64;
+    --text-3:      #808E97;
+    --line:        #DBE1E5;
+    --line-2:      #C2CCD2;
+
+    --gold:        #B87C15;
+    --gold-bar:    #C89024;
+    --gold-soft:   #FBF2E0;
+    --gold-ink:    #6F430A;
+
+    --s0:          #6F8089;
+    --s1:          #0C6E76;
+    --s2:          #2A5DA6;
+    --s3:          #9A3A69;
+
+    --mark:        #6B4FD8;
+    --mark-soft:   #EDE9FC;
+
+    --fs: 20px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:    #0B1115;
+      --surface:   #141D23;
+      --text:      #E6ECEF;
+      --text-2:    #A5B2BB;
+      --text-3:    #78868F;
+      --line:      #243138;
+      --line-2:    #35454E;
+
+      --gold:      #EBBC6C;
+      --gold-bar:  #D9A244;
+      --gold-soft: #241B0F;
+      --gold-ink:  #F0CE93;
+
+      --s0:        #8B9BA4;
+      --s1:        #4FBCC4;
+      --s2:        #6E9FE8;
+      --s3:        #E081AE;
+
+      --mark:      #A48CF5;
+      --mark-soft: #201B38;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:    #0B1115;
+    --surface:   #141D23;
+    --text:      #E6ECEF;
+    --text-2:    #A5B2BB;
+    --text-3:    #78868F;
+    --line:      #243138;
+    --line-2:    #35454E;
+
+    --gold:      #EBBC6C;
+    --gold-bar:  #D9A244;
+    --gold-soft: #241B0F;
+    --gold-ink:  #F0CE93;
+
+    --s0:        #8B9BA4;
+    --s1:        #4FBCC4;
+    --s2:        #6E9FE8;
+    --s3:        #E081AE;
+
+    --mark:      #A48CF5;
+    --mark-soft: #201B38;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--text);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: var(--fs);
+    line-height: 1.5;
+    margin: 0;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .wrap { max-width: 41rem; margin: 0 auto; padding: 0 .85rem 7rem; }
+
+  /* ================= barra fija ================= */
+
+  .bar {
+    position: sticky; top: 0; z-index: 30;
+    display: flex; align-items: center; gap: .5rem;
+    padding: .45rem .85rem;
+    background: color-mix(in srgb, var(--ground) 93%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  #here {
+    display: flex; align-items: center; gap: .45rem;
+    flex: 1; min-width: 0;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--text-2);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  #here .dot {
+    flex: none; width: .62rem; height: .62rem; border-radius: 50%;
+    background: var(--s0); transition: background .2s;
+  }
+
+  .btns { display: flex; gap: .3rem; flex: none; }
+
+  .btns button {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-weight: 600; line-height: 1;
+    background: var(--surface); color: var(--text-2);
+    border: 1px solid var(--line-2); border-radius: .42rem;
+    min-width: 2.3rem; height: 2.3rem; padding: 0 .4rem;
+    cursor: pointer;
+  }
+  .btns button:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+  .btns .lg { font-size: 1.1rem; }
+  .btns .sm { font-size: .78rem; }
+
+  #goMark { color: var(--mark); border-color: var(--mark); font-size: .95rem; }
+  #goMark[hidden] { display: none; }
+
+  /* ================= portada ================= */
+
+  header.hero { padding: 1.9rem 0 1.4rem; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .66rem; font-weight: 500; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--s1); margin: 0 0 .8rem;
+  }
+
+  h1 {
+    font-family: "Newsreader", Georgia, serif; font-weight: 600;
+    font-size: clamp(1.75rem, 7vw, 2.4rem); line-height: 1.14;
+    letter-spacing: -.015em; text-wrap: balance; margin: 0 0 1rem;
+  }
+
+  .facts { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.1rem; }
+
+  .fact {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .66rem; font-weight: 500; color: var(--text-2);
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 2rem; padding: .28rem .65rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tip {
+    display: flex; gap: .7rem; align-items: flex-start;
+    background: var(--mark-soft);
+    border: 1px solid color-mix(in srgb, var(--mark) 30%, transparent);
+    border-radius: .6rem; padding: .8rem .9rem;
+    font-size: .78rem; line-height: 1.45; color: var(--text-2);
+  }
+  .tip b { color: var(--mark); }
+  .tip .ic { flex: none; color: var(--mark); font-size: 1rem; line-height: 1.3; }
+
+  /* ================= secciones ================= */
+
+  section {
+    --sc: var(--s0);
+    border-left: 3px solid var(--sc);
+    padding: 1.5rem 0 1.2rem .85rem;
+    margin: 1.6rem 0;
+  }
+  section.p1 { --sc: var(--s1); }
+  section.p2 { --sc: var(--s2); }
+  section.p3 { --sc: var(--s3); }
+
+  .shead { margin-bottom: 1.1rem; }
+
+  .stag {
+    display: flex; align-items: center; gap: .5rem;
+    margin-bottom: .45rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .64rem; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--sc);
+    font-variant-numeric: tabular-nums;
+  }
+  .stag .time { color: var(--text-3); margin-left: auto; letter-spacing: .05em; }
+  .stag .noread {
+    color: var(--text-3); border: 1px solid var(--line-2);
+    border-radius: .3rem; padding: .1rem .35rem; letter-spacing: .06em;
+  }
+
+  h2 {
+    font-family: "Newsreader", Georgia, serif; font-weight: 600;
+    font-size: clamp(1.25rem, 5vw, 1.6rem); line-height: 1.2;
+    letter-spacing: -.01em; text-wrap: balance; margin: 0; color: var(--text);
+  }
+
+  /* ================= renglones ================= */
+
+  .g { margin-bottom: 1.15rem; }
+  .g:last-child { margin-bottom: 0; }
+
+  .l {
+    display: grid; grid-template-columns: 1.7rem 1fr; gap: .35rem;
+    padding: .22rem .35rem .22rem 0;
+    border-radius: .35rem;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    margin-left: -3px;
+  }
+
+  .l .n {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .56rem; font-weight: 500; color: var(--text-3);
+    text-align: right; padding-top: .62em;
+    font-variant-numeric: tabular-nums;
+    user-select: none; -webkit-user-select: none;
+  }
+
+  .l .t { min-width: 0; }
+
+  .l.ask .t { color: var(--sc); font-weight: 600; }
+  .l.key .t { font-weight: 700; }
+
+  .l.cue .t {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .74em; font-weight: 600; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--gold);
+  }
+
+  .l.marked { background: var(--mark-soft); border-left-color: var(--mark); }
+  .l.marked .n { color: var(--mark); font-weight: 600; }
+  .l.marked .n::after { content: "\25B8"; margin-left: .1rem; }
+
+  @media (hover: hover) {
+    .l:hover { background: color-mix(in srgb, var(--sc) 7%, transparent); }
+    .l.marked:hover { background: var(--mark-soft); }
+  }
+
+  /* ================= texto para leer ================= */
+
+  .leer {
+    background: var(--gold-soft);
+    border: 1px solid color-mix(in srgb, var(--gold-bar) 38%, transparent);
+    border-left: 5px solid var(--gold-bar);
+    border-radius: .2rem .6rem .6rem .2rem;
+    padding: .8rem .9rem .9rem;
+    margin: .3rem 0 1.15rem;
+  }
+
+  .leer-top {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: .6rem; margin-bottom: .45rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .6rem; font-weight: 600; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .leer-top .ref { white-space: nowrap; }
+
+  .leer q {
+    display: block;
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 1.1em; line-height: 1.45; color: var(--text);
+    quotes: "\201C" "\201D" "\2018" "\2019";
+  }
+  .leer q + q { margin-top: .45rem; }
+
+  /* ================= listas ================= */
+
+  ul.pts { margin: .1rem 0 1.15rem; padding: 0; list-style: none; display: grid; gap: .5rem; }
+  ul.pts li {
+    display: grid; grid-template-columns: 1.7rem 1fr; gap: .35rem;
+    padding: .22rem .35rem .22rem 0; border-radius: .35rem;
+    cursor: pointer; border-left: 3px solid transparent; margin-left: -3px;
+  }
+  ul.pts li .n {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .56rem; font-weight: 500; color: var(--text-3);
+    text-align: right; padding-top: .62em; font-variant-numeric: tabular-nums;
+    user-select: none; -webkit-user-select: none;
+  }
+  ul.pts li .t { position: relative; padding-left: 1.05rem; }
+  ul.pts li .t::before {
+    content: ""; position: absolute; left: 0; top: .62em;
+    width: .4rem; height: .4rem; border-radius: 50%; background: var(--sc);
+  }
+  ul.pts li.marked { background: var(--mark-soft); border-left-color: var(--mark); }
+  ul.pts li.marked .n { color: var(--mark); font-weight: 600; }
+  ul.pts li.marked .n::after { content: "\25B8"; margin-left: .1rem; }
+
+  /* ================= recuadros ================= */
+
+  .box {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: .6rem; padding: .8rem .9rem; margin: .3rem 0 1.15rem;
+  }
+  .box-top {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .6rem; font-weight: 600; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--sc); margin-bottom: .4rem;
+  }
+  .box p { margin: 0; font-size: .95em; }
+
+  .alt { border-style: dashed; border-color: var(--line-2); }
+  .alt .box-top { color: var(--text-3); }
+  .alt .body p { margin: 0 0 .4rem; color: var(--text-2); }
+  .alt .body p:last-child { margin: 0; }
+
+  .cut {
+    display: flex; align-items: center; gap: .55rem; margin: 1.2rem 0;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .58rem; font-weight: 500; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--text-3);
+  }
+  .cut::before, .cut::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+
+  /* ================= pie ================= */
+
+  footer { margin-top: 2.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  footer h3 {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .64rem; font-weight: 600; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--text-3); margin: 0 0 .8rem;
+  }
+  .src { width: 100%; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .76rem; }
+  th, td {
+    text-align: left; padding: .45rem .5rem .45rem 0;
+    border-bottom: 1px solid var(--line); vertical-align: top; color: var(--text-2);
+  }
+  th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .6rem; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--text-3); white-space: nowrap;
+  }
+  td:first-child {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 500;
+    color: var(--text); white-space: nowrap; padding-right: .8rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<div class="bar">
+  <div id="here"><span class="dot"></span><span class="lbl">Apertura</span></div>
+  <div class="btns">
+    <button id="goMark" type="button" hidden aria-label="Volver a mi marca">&#9656;</button>
+    <button class="sm" type="button" data-step="-1" aria-label="Achicar la letra">A</button>
+    <button class="lg" type="button" data-step="1" aria-label="Agrandar la letra">A</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Tesoros de la Biblia &middot; 24-30 de agosto de 2026</p>
+    <h1>Jehov&aacute; disciplina a sus siervos hasta el grado debido</h1>
+    <div class="facts">
+      <span class="fact">Asignado 10 min</span>
+      <span class="fact">Hablado &asymp;8:30</span>
+      <span class="fact">1.097 palabras</span>
+      <span class="fact">Jerem&iacute;as 29 y 30</span>
+      <span class="fact">Sur R&iacute;o Cuarto</span>
+    </div>
+    <div class="tip">
+      <span class="ic">&#9656;</span>
+      <span><b>Toc&aacute; cualquier rengl&oacute;n</b> para marcar por d&oacute;nde vas. Cuando levantes la mirada y vuelvas, apret&aacute; el bot&oacute;n <b>&#9656;</b> de arriba y te lleva justo ah&iacute;. La marca queda guardada aunque cierres la p&aacute;gina.</span>
+    </div>
+  </header>
+
+  <!-- ==================== APERTURA ==================== -->
+  <section id="s0" data-label="Apertura" data-color="--s0">
+    <div class="shead">
+      <div class="stag"><span>Apertura</span><span class="time">1:30</span></div>
+      <h2>El m&eacute;dico y el diagn&oacute;stico duro</h2>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Imagine que hace unas semanas NO se viene sintiendo bien.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Se siente cansado, con dolor en el cuerpo, y sin ganas de nada.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Y bueno, despu&eacute;s de darle vueltas al asunto, decide ir al m&eacute;dico.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">El m&eacute;dico lo revisa, le pide unos estudios&hellip;</span></div>
+      <div class="l"><span class="n"></span><span class="t">Y cuando vuelve con los resultados&hellip;</span></div>
+      <div class="l"><span class="n"></span><span class="t">Le dice algo que no quer&iacute;a escuchar&hellip;</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Le da un diagn&oacute;stico DURO.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Y adem&aacute;s, le da un tratamiento que va a doler.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Qu&eacute; har&iacute;a usted en ese momento?</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Y bueno, podr&iacute;amos reaccionar de distintas maneras:</span></div>
+    </div>
+
+    <ul class="pts">
+      <li><span class="n"></span><span class="t">O: no hacemos nada&hellip;</span></li>
+      <li><span class="n"></span><span class="t">O buscamos otro m&eacute;dico, que nos diga lo que queremos escuchar&hellip;</span></li>
+      <li><span class="n"></span><span class="t">O mejor a&uacute;n: aceptamos el diagn&oacute;stico y hacemos el tratamiento.</span></li>
+    </ul>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Bueno, esto mismo fue lo que pas&oacute; en tiempo de Jerem&iacute;as.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Porque Jehov&aacute;, como un buen m&eacute;dico, le hizo un diagn&oacute;stico a su pueblo&hellip;</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">Y ellos &iquest;Qu&eacute; hicieron?</span></div>
+      <div class="l"><span class="n"></span><span class="t">Fueron a buscar otro m&eacute;dico&hellip;</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Ellos prefirieron escuchar a sus l&iacute;deres religiosos,</span></div>
+      <div class="l"><span class="n"></span><span class="t">que les dec&iacute;an que todo iba bien.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Y cu&aacute;l fue el resultado?</span></div>
+      <div class="l"><span class="n"></span><span class="t">Jerusal&eacute;n destruida. Y desterrados en Babilonia.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Es decir, recibieron una fuerte disciplina por parte de Jehov&aacute;.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l key"><span class="n"></span><span class="t">Lo bueno que esta disciplina nos deja a nosotros tres lecciones muy importantes.</span></div>
+    </div>
+  </section>
+
+  <!-- ==================== PUNTO 1 ==================== -->
+  <section id="s1" class="p1" data-label="Punto 1" data-color="--s1">
+    <div class="shead">
+      <div class="stag"><span>Punto 1</span><span class="time">1:30</span></div>
+      <h2>Jehov&aacute; les dijo a sus siervos, exactamente, lo qu&eacute; ten&iacute;an que hacer para curarse</h2>
+    </div>
+
+    <div class="g">
+      <div class="l cue"><span class="n"></span><span class="t">Leamos Jerem&iacute;as 29:12, 13</span></div>
+    </div>
+
+    <div class="leer">
+      <div class="leer-top"><span>Leer en voz alta</span><span class="ref">Jerem&iacute;as 29:12, 13</span></div>
+      <q>Ustedes me llamar&aacute;n, acudir&aacute;n a m&iacute; en oraci&oacute;n, y yo los escuchar&eacute;.</q>
+      <q>Ustedes me buscar&aacute;n y me encontrar&aacute;n, porque me buscar&aacute;n con todo el coraz&oacute;n.</q>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Se fijaron que era lo que ten&iacute;an que hacer?</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">S&iacute;, Buscarlo&hellip; Pero no de cualquier manera.</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Buscarlo con TODO el coraz&oacute;n. (dice el texto)</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">Ahora la pregunta es, &iquest;c&oacute;mo se hace eso?</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;C&oacute;mo se busca a Jehov&aacute; con todo el coraz&oacute;n?</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l key"><span class="n"></span><span class="t">La CLAVE est&aacute; en la ORACI&Oacute;N.</span></div>
+      <div class="l"><span class="n"></span><span class="t">(En la manera en como hablamos con Jehov&aacute;)</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Y un ejemplo de esto, es ver como David hablaba con Jehov&aacute;</span></div>
+      <div class="l cue"><span class="n"></span><span class="t">F&iacute;jense lo que le ped&iacute;a en el Salmo 25:4</span></div>
+    </div>
+
+    <div class="leer">
+      <div class="leer-top"><span>Leer en voz alta</span><span class="ref">Salmo 25:4</span></div>
+      <q>Dame a conocer tus caminos, oh, Jehov&aacute;; ens&eacute;&ntilde;ame tus sendas.</q>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">O sea, David no le ped&iacute;a a Jehov&aacute; que le sacara el problema.</span></div>
+      <div class="l"><span class="n"></span><span class="t">(o los problemas, porque ten&iacute;a muchos)</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Le ped&iacute;a que le ENSE&Ntilde;ARA.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Y eso es lo que debemos pedir nosotros cuando recibimos disciplina,</span></div>
+      <div class="l"><span class="n"></span><span class="t">no solo dejar de hacer lo que est&aacute; mal y listo&hellip;</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Lo mas importante que pide Jehov&aacute; es que nos arrepintamos y lo busquemos de nuevo,</span></div>
+      <div class="l key"><span class="n"></span><span class="t">con todo nuestro CORAZ&Oacute;N.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Ah&iacute; es cuando cobra verdadero sentido la disciplina de Jehov&aacute;.</span></div>
+    </div>
+  </section>
+
+  <!-- ==================== PUNTO 2 ==================== -->
+  <section id="s2" class="p2" data-label="Punto 2" data-color="--s2">
+    <div class="shead">
+      <div class="stag"><span>Punto 2</span><span class="noread">no leer</span><span class="time">2:00</span></div>
+      <h2>Jehov&aacute; les prometi&oacute; que iban a volver a casa</h2>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">Ahora, &iquest;Qu&eacute; efecto produce esto en Jehov&aacute;?</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Bueno si nos arrepentimos y lo buscamos, Jehov&aacute; promete algo muy lindo&hellip;</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Y aqu&iacute; est&aacute; la segunda lecci&oacute;n que nos deja su disciplina:</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l cue"><span class="n"></span><span class="t">Leamos ahora el Jerem&iacute;as 29 vers&iacute;culo 14</span></div>
+    </div>
+
+    <div class="leer">
+      <div class="leer-top"><span>Leer en voz alta</span><span class="ref">Jerem&iacute;as 29:14</span></div>
+      <q>Y yo dejar&eacute; que me encuentren &mdash;afirma Jehov&aacute;&mdash;. Reunir&eacute; a sus cautivos, los recoger&eacute; a ustedes de todas las naciones y de todos los lugares a los que los he dispersado &mdash;afirma Jehov&aacute;&mdash;. Y los traer&eacute; de vuelta al lugar del que los desterr&eacute;.</q>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">Entonces &iquest;Qu&eacute; es lo que nos promete Jehov&aacute;, si lo buscamos?</span></div>
+      <div class="l"><span class="n"></span><span class="t">El texto es muy claro, all&iacute; dice:</span></div>
+    </div>
+
+    <ul class="pts">
+      <li><span class="n"></span><span class="t">&ldquo;Dejar&eacute; que me encuentren&rdquo;</span></li>
+      <li><span class="n"></span><span class="t">&ldquo;Los recoger&eacute;&rdquo;</span></li>
+      <li><span class="n"></span><span class="t">&ldquo;Los traer&eacute; de vuelta&rdquo;</span></li>
+    </ul>
+
+    <div class="g">
+      <div class="l key"><span class="n"></span><span class="t">Son todas acciones que hace Jehov&aacute;, no nosotros.</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Se dieron cuenta?</span></div>
+      <div class="l"><span class="n"></span><span class="t">Todo el trabajo pesado lo hace &eacute;l.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Pero lo interesante es cuando prometi&oacute; esto Jehov&aacute;&hellip;</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Y si leemos los primeros vers&iacute;culos del capitulo 29 de Jerem&iacute;as,</span></div>
+      <div class="l"><span class="n"></span><span class="t">all&iacute; dice que Jerem&iacute;as les envi&oacute; esta carta a todos los desterrados que estaban en Babilonia.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Es decir, Jehov&aacute; prometi&oacute; traerlos a casa,</span></div>
+      <div class="l key"><span class="n"></span><span class="t">cuando todav&iacute;a nadie mostraba se&ntilde;ales de arrepentimientos.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Qu&eacute; lindo esto, &iquest;No?</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Porque nos ense&ntilde;a algo muy importante:</span></div>
+      <div class="l key"><span class="n"></span><span class="t">La disciplina de Jehov&aacute; nunca es un callej&oacute;n sin salida.</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Siempre tiene un camino de vuelta.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Por eso, si hoy siente que este lejos de Jehov&aacute;, porque ha perdido un privilegio&hellip;</span></div>
+      <div class="l"><span class="n"></span><span class="t">O ha recibi&oacute; un consejo fuerte&hellip;</span></div>
+      <div class="l"><span class="n"></span><span class="t">O incluso ha sido sacado de la congregaci&oacute;n.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l key"><span class="n"></span><span class="t">No piense ni por un segundo que Jehov&aacute; se olvid&oacute; de Usted.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Porque &eacute;l mismo, que permiti&oacute; esa disciplina,</span></div>
+      <div class="l"><span class="n"></span><span class="t">ya tiene preparado el camino para traerlo de vuelta.</span></div>
+    </div>
+  </section>
+
+  <!-- ==================== PUNTO 3 ==================== -->
+  <section id="s3" class="p3" data-label="Punto 3" data-color="--s3">
+    <div class="shead">
+      <div class="stag"><span>Punto 3</span><span class="time">2:10</span></div>
+      <h2>Jehov&aacute; mide exactamente la dosis que necesitamos para recuperarnos</h2>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Y la ultima Lecci&oacute;n que nos ense&ntilde;a la manera en que Jehov&aacute; nos disciplina es que&hellip;</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;C&oacute;mo es esto?</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l cue"><span class="n"></span><span class="t">Leamos Jerem&iacute;as 30:11</span></div>
+    </div>
+
+    <div class="leer">
+      <div class="leer-top"><span>Leer en voz alta</span><span class="ref">Jerem&iacute;as 30:11</span></div>
+      <q>Porque yo estoy contigo &mdash;afirma Jehov&aacute;&mdash; para salvarte. Pero voy a exterminar a todas las naciones por las que te he esparcido; sin embargo, a ti no te voy a exterminar. Te disciplinar&eacute; hasta el grado debido; de ninguna manera te dejar&eacute; sin castigo.</q>
+    </div>
+
+    <div class="g">
+      <div class="l ask key"><span class="n"></span><span class="t">&iquest;Se fijaron en esta expresi&oacute;n?: &ldquo;hasta el grado debido&rdquo;.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Si nos ponemos a pensar, esto es igual a la dosis de un remedio.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Porque si el m&eacute;dico nos da menos de lo que necesitamos, no nos curamos.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Y si nos da de m&aacute;s, nos podr&iacute;a hacer da&ntilde;o.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l key"><span class="n"></span><span class="t">Por eso el buen m&eacute;dico calcula bien.</span></div>
+      <div class="l key"><span class="n"></span><span class="t">La dosis exacta, y el tiempo exacto.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Bueno, eso mismo hizo Jehov&aacute; con su Pueblo.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Hizo que estuvieran 70 a&ntilde;os en destierro,</span></div>
+      <div class="l key"><span class="n"></span><span class="t">ni un a&ntilde;o m&aacute;s, ni un a&ntilde;o menos.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Y por qu&eacute; esa medida y no otra?</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Bueno porque si les daba mas tiempo, los exterminar&iacute;a&hellip;</span></div>
+      <div class="l"><span class="n"></span><span class="t">y no era ese el objetivo.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Como all&iacute; menciona la referencia del libro de Jerem&iacute;as.</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Dice que el objetivo era que REFLEXIONARAN Y REGRESARAN A &Eacute;L.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Y si les daba menos tiempo&hellip;</span></div>
+      <div class="l"><span class="n"></span><span class="t">Bueno, para Jehov&aacute; no era suficiente para que recapacitar&aacute;n del grave error.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l cue"><span class="n"></span><span class="t">Por eso, todo esto encaja perfecto con lo que dice el ap&oacute;stol Pablo en Hebreos 12:6</span></div>
+    </div>
+
+    <div class="leer">
+      <div class="leer-top"><span>Leer en voz alta</span><span class="ref">Hebreos 12:6</span></div>
+      <q>&hellip;porque Jehov&aacute; disciplina a quienes ama. De hecho, castiga a todo el que recibe como hijo.</q>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Entonces, cuando nos toca recibir una disciplina,</span></div>
+      <div class="l"><span class="n"></span><span class="t">la primera pregunta no deber&iacute;a ser &ldquo;&iquest;por qu&eacute; a m&iacute;?&rdquo;.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Mejor, la primera conclusi&oacute;n deber&iacute;a ser:</span></div>
+      <div class="l key"><span class="n"></span><span class="t">&ldquo;Jehov&aacute; me AMA y me trata como a un hijo&rdquo;.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Eso es lo que queremos pensar&hellip;</span></div>
+    </div>
+  </section>
+
+  <!-- ==================== IMAGEN / MEDITAR ==================== -->
+  <section id="s4" data-label="Imagen" data-color="--s0">
+    <div class="shead">
+      <div class="stag"><span>Imagen y para meditar</span><span class="time">0:50</span></div>
+      <h2>El hermano que escucha</h2>
+    </div>
+
+    <div class="box">
+      <div class="box-top">Imagen de la gu&iacute;a</div>
+      <p>Tres ancianos se re&uacute;nen con un hermano. El hermano los escucha con atenci&oacute;n.</p>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Y si vemos all&iacute; la imagen de la gu&iacute;a,</span></div>
+      <div class="l"><span class="n"></span><span class="t">eso es lo que debe estar pensando este hermano.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">&Eacute;l all&iacute; esta reunido con tres ancianos.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Pero no esta discutiendo,</span></div>
+      <div class="l"><span class="n"></span><span class="t">no esta mirando para otro lado,</span></div>
+      <div class="l"><span class="n"></span><span class="t">tampoco est&aacute; de brazos cruzados.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l key"><span class="n"></span><span class="t">&Eacute;l est&aacute; escuchando con mucha atenci&oacute;n.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Y esa postura nos dice que &eacute;l entendi&oacute; algo muy importante:</span></div>
+      <div class="l"><span class="n"></span><span class="t">Que esos tres hermanos no son sus enemigos.</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Son el instrumento que Jehov&aacute; est&aacute; usando para curarlo.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Por eso, que importante que es la pregunta que nos deja la gu&iacute;a para meditar:</span></div>
+    </div>
+
+    <div class="box">
+      <div class="box-top">Para meditar</div>
+      <p>&iquest;C&oacute;mo debemos reaccionar cuando Jehov&aacute; nos disciplina?</p>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Bueno, la realidad es que si hemos entendido los beneficios de la disciplina de Jehov&aacute;,</span></div>
+      <div class="l"><span class="n"></span><span class="t">ya sabemos como debe ser nuestra reacci&oacute;n.</span></div>
+    </div>
+  </section>
+
+  <!-- ==================== CIERRE ==================== -->
+  <section id="s5" data-label="Cierre" data-color="--s0">
+    <div class="shead">
+      <div class="stag"><span>Cierre</span><span class="time">0:30</span></div>
+      <h2>Los tres remedios</h2>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Por eso, cuando Jehov&aacute; nos d&eacute; un diagn&oacute;stico duro,</span></div>
+      <div class="l"><span class="n"></span><span class="t">no salgamos a buscar otro m&eacute;dico que nos diga lo que queremos escuchar.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Mejor recordemos estas tres cosas:</span></div>
+    </div>
+
+    <ul class="pts">
+      <li><span class="n"></span><span class="t">Que Jehov&aacute; nos pide NUEVAMENTE que lo busquemos con todo el coraz&oacute;n.</span></li>
+      <li><span class="n"></span><span class="t">Que &eacute;l ya tiene preparado nuestro camino de vuelta.</span></li>
+      <li><span class="n"></span><span class="t">Y que la dosis que nos da es siempre la exacta, porque nos ama como a hijos.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <h3>Textos verificados en jw.org</h3>
+    <div class="src">
+      <table>
+        <thead><tr><th>Texto</th><th>Detalle</th></tr></thead>
+        <tbody>
+          <tr><td>Jer. 29:12-14</td><td>Traducci&oacute;n del Nuevo Mundo, revisi&oacute;n de 2019</td></tr>
+          <tr><td>Jer. 30:11</td><td>Traducci&oacute;n del Nuevo Mundo, revisi&oacute;n de 2019</td></tr>
+          <tr><td>Sal. 25:4</td><td>Revisi&oacute;n de 2019. El libro <em>jr</em> lo cita con la redacci&oacute;n vieja de 1987</td></tr>
+          <tr><td>Heb. 12:6</td><td>Revisi&oacute;n de 2019. Es parte de la cita que abre en el vers&iacute;culo 5, por eso arranca en min&uacute;scula</td></tr>
+          <tr><td>Jer. 29:1</td><td>Respalda lo que dec&iacute;s en el punto 2: &ldquo;Estas son las palabras de la carta que el profeta Jerem&iacute;as les envi&oacute; desde Jerusal&eacute;n al resto de los ancianos que hab&iacute;a entre los desterrados&hellip; a quienes Nabucodonosor hab&iacute;a desterrado de Jerusal&eacute;n a Babilonia&rdquo;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    "use strict";
+
+    /* ---------- numerar renglones ---------- */
+    var lines = document.querySelectorAll(".l, ul.pts li");
+    for (var i = 0; i < lines.length; i++) {
+      lines[i].dataset.idx = String(i);
+      var n = lines[i].querySelector(".n");
+      if (n) n.textContent = String(i + 1);
+    }
+
+    /* ---------- marca de lugar ---------- */
+    var KEY = "tesoros-marca";
+    var marked = null;
+
+    function setMark(el, save) {
+      if (marked) marked.classList.remove("marked");
+      if (marked === el) {
+        marked = null;
+        try { if (save) localStorage.removeItem(KEY); } catch (e) {}
+      } else {
+        marked = el;
+        el.classList.add("marked");
+        try { if (save) localStorage.setItem(KEY, el.dataset.idx); } catch (e) {}
+      }
+      document.getElementById("goMark").hidden = !marked;
+    }
+
+    for (var j = 0; j < lines.length; j++) {
+      lines[j].addEventListener("click", function () { setMark(this, true); });
+    }
+
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved !== null && lines[+saved]) {
+        marked = lines[+saved];
+        marked.classList.add("marked");
+        document.getElementById("goMark").hidden = false;
+      }
+    } catch (e) {}
+
+    document.getElementById("goMark").addEventListener("click", function () {
+      if (marked) marked.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+
+    /* ---------- en qué sección estoy ---------- */
+    var here = document.getElementById("here");
+    var dot = here.querySelector(".dot");
+    var lbl = here.querySelector(".lbl");
+    var secs = document.querySelectorAll("section");
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        for (var k = 0; k < entries.length; k++) {
+          if (entries[k].isIntersecting) {
+            var s = entries[k].target;
+            lbl.textContent = s.dataset.label;
+            dot.style.background = "var(" + s.dataset.color + ")";
+          }
+        }
+      }, { rootMargin: "-15% 0px -70% 0px" });
+      for (var m = 0; m < secs.length; m++) io.observe(secs[m]);
+    }
+
+    /* ---------- tamaño de letra ---------- */
+    var sizes = [17, 19, 21, 23, 26, 29];
+    var si = 2;
+    try {
+      var sv = parseInt(localStorage.getItem("tesoros-fs"), 10);
+      if (!isNaN(sv) && sv >= 0 && sv < sizes.length) si = sv;
+    } catch (e) {}
+
+    function applyFs() {
+      document.documentElement.style.setProperty("--fs", sizes[si] + "px");
+      try { localStorage.setItem("tesoros-fs", String(si)); } catch (e) {}
+    }
+
+    var btns = document.querySelectorAll(".btns button[data-step]");
+    for (var b = 0; b < btns.length; b++) {
+      btns[b].addEventListener("click", function () {
+        si = Math.min(sizes.length - 1, Math.max(0, si + (+this.dataset.step)));
+        applyFs();
+      });
+    }
+    applyFs();
+  })();
+</script>
+</body>
+</html>
