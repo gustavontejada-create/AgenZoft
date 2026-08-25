@@ -34,6 +34,7 @@
     --mark-soft:   #EDE9FC;
 
     --fs: 20px;
+    --fw: 500;
     --lh: 1.55;
     --rowpad: .30rem;
     --gap: 1.25rem;
@@ -94,6 +95,7 @@
     color: var(--text);
     font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     font-size: var(--fs);
+    font-weight: var(--fw);
     line-height: var(--lh);
     margin: 0;
     -webkit-text-size-adjust: 100%;
@@ -234,7 +236,7 @@
 
   .l .n {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: .56rem; font-weight: 500; color: var(--text-3);
+    font-size: .56rem; font-weight: 600; color: var(--text-3);
     text-align: right;
     font-variant-numeric: tabular-nums;
     user-select: none; -webkit-user-select: none;
@@ -243,6 +245,7 @@
   .l .t { min-width: 0; }
 
   .l.ask .t { color: var(--sc); font-weight: 600; }
+  .box p, .cita p, .tip { font-weight: 500; }
   .l.key .t { font-weight: 700; }
 
   .l.cue .t {
@@ -282,7 +285,7 @@
 
   .leer q {
     display: block;
-    font-family: "Newsreader", Georgia, serif;
+    font-family: "Newsreader", Georgia, serif; font-weight: 500;
     font-size: 1.1em; line-height: calc(var(--lh) - .12); color: var(--text);
     quotes: "\201C" "\201D" "\2018" "\2019";
   }
@@ -391,8 +394,8 @@
     <h1>Jehov&aacute; disciplina a sus siervos hasta el grado debido</h1>
     <div class="facts">
       <span class="fact">Asignado 10 min</span>
-      <span class="fact">Hablado &asymp;8:30</span>
-      <span class="fact">1.120 palabras</span>
+      <span class="fact">Hablado &asymp;9:15</span>
+      <span class="fact">1.214 palabras</span>
       <span class="fact">Jerem&iacute;as 29 y 30</span>
       <span class="fact">Sur R&iacute;o Cuarto</span>
     </div>
@@ -405,32 +408,30 @@
   <!-- ==================== APERTURA ==================== -->
   <section id="s0" data-label="Apertura" data-color="--s0">
     <div class="shead">
-      <div class="stag"><span>Apertura</span><span class="time">1:30</span></div>
+      <div class="stag"><span>Apertura</span><span class="time">1:25</span></div>
       <h2>El m&eacute;dico y el diagn&oacute;stico duro</h2>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Imagine que hace unas semanas NO se viene sintiendo bien.</span></div>
-      <div class="l"><span class="n"></span><span class="t">Se siente cansado, con dolor en el cuerpo, y sin ganas de nada.</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Le ha pasado alguna vez de no sentirse bien durante varias semanas?</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Y bueno, despu&eacute;s de darle vueltas al asunto, decide ir al m&eacute;dico.</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Y que es lo mejor que tenemos que hacer en esa situaci&oacute;n?</span></div>
+      <div class="l"><span class="n"></span><span class="t">Y si, ir al m&eacute;dico para que nos controle. &iquest;verdad?</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">El m&eacute;dico lo revisa, le pide unos estudios&hellip;</span></div>
-      <div class="l"><span class="n"></span><span class="t">Y cuando vuelve con los resultados&hellip;</span></div>
-      <div class="l"><span class="n"></span><span class="t">Le dice algo que no quer&iacute;a escuchar&hellip;</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">Ahora &iquest;qu&eacute; pasa si despu&eacute;s de hacernos los estudios, nos dice algo que no queremos escuchar?</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Le da un diagn&oacute;stico DURO.</span></div>
-      <div class="l"><span class="n"></span><span class="t">Y adem&aacute;s, le da un tratamiento que va a doler.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Nos da un diagn&oacute;stico DURO.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Y, adem&aacute;s, nos da un tratamiento que sabemos que va a doler.</span></div>
     </div>
 
     <div class="g">
-      <div class="l ask"><span class="n"></span><span class="t">&iquest;Qu&eacute; har&iacute;a usted en ese momento?</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Qu&eacute; har&iacute;a usted en esa situaci&oacute;n?</span></div>
     </div>
 
     <div class="g">
@@ -455,15 +456,12 @@
 
     <div class="g">
       <div class="l"><span class="n"></span><span class="t">Ellos prefirieron escuchar a sus l&iacute;deres religiosos,</span></div>
-      <div class="l"><span class="n"></span><span class="t">que les dec&iacute;an que todo iba bien.</span></div>
+      <div class="l"><span class="n"></span><span class="t">que les dec&iacute;an que todo estaba bien.</span></div>
     </div>
 
     <div class="g">
-      <div class="l ask"><span class="n"></span><span class="t">&iquest;Y cu&aacute;l fue el resultado?</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">Pero &iquest;cu&aacute;l fue el resultado?</span></div>
       <div class="l"><span class="n"></span><span class="t">Jerusal&eacute;n destruida. Y desterrados en Babilonia.</span></div>
-    </div>
-
-    <div class="g">
       <div class="l"><span class="n"></span><span class="t">Es decir, recibieron una fuerte disciplina por parte de Jehov&aacute;.</span></div>
     </div>
 
@@ -475,11 +473,17 @@
   <!-- ==================== PUNTO 1 ==================== -->
   <section id="s1" class="p1" data-label="Punto 1" data-color="--s1">
     <div class="shead">
-      <div class="stag"><span>Punto 1</span><span class="time">1:30</span></div>
+      <div class="stag"><span>Punto 1</span><span class="time">1:40</span></div>
       <h2>Jehov&aacute; les dijo a sus siervos, exactamente, lo qu&eacute; ten&iacute;an que hacer para curarse</h2>
     </div>
 
     <div class="g">
+      <div class="l"><span class="n"></span><span class="t">La primera lecci&oacute;n es que Jehov&aacute; les dijo a sus siervos, exactamente,</span></div>
+      <div class="l"><span class="n"></span><span class="t">lo que ten&iacute;an que hacer para curarse.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Y que es lo que ten&iacute;an que hacer?</span></div>
       <div class="l cue"><span class="n"></span><span class="t">Leamos Jerem&iacute;as 29:12, 13</span></div>
     </div>
 
@@ -494,7 +498,7 @@
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">S&iacute;, Buscarlo&hellip; Pero no de cualquier manera.</span></div>
+      <div class="l key"><span class="n"></span><span class="t">S&iacute;, Buscarlo&hellip; Pero no de cualquier manera.</span></div>
       <div class="l key"><span class="n"></span><span class="t">Buscarlo con TODO el coraz&oacute;n. (dice el texto)</span></div>
     </div>
 
@@ -521,7 +525,11 @@
     <div class="g">
       <div class="l"><span class="n"></span><span class="t">O sea, David no le ped&iacute;a a Jehov&aacute; que le sacara el problema.</span></div>
       <div class="l"><span class="n"></span><span class="t">(o los problemas, porque ten&iacute;a muchos)</span></div>
-      <div class="l key"><span class="n"></span><span class="t">Le ped&iacute;a que le ENSE&Ntilde;ARA.</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Qu&eacute; le ped&iacute;a David?</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Le ped&iacute;a que le ENSE&Ntilde;ARA a buscarlo&hellip;</span></div>
     </div>
 
     <div class="g">
@@ -530,28 +538,28 @@
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Lo mas importante que pide Jehov&aacute; es que nos arrepintamos y lo busquemos de nuevo,</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Lo m&aacute;s importante que pide Jehov&aacute; es que nos arrepintamos y lo busquemos de nuevo,</span></div>
       <div class="l key"><span class="n"></span><span class="t">con todo nuestro CORAZ&Oacute;N.</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Ah&iacute; es cuando cobra verdadero sentido la disciplina de Jehov&aacute;.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Eso&hellip; es exactamente lo que pide Jehov&aacute; para curarnos.</span></div>
     </div>
   </section>
 
   <!-- ==================== PUNTO 2 ==================== -->
   <section id="s2" class="p2" data-label="Punto 2" data-color="--s2">
     <div class="shead">
-      <div class="stag"><span>Punto 2</span><span class="noread">no leer</span><span class="time">2:00</span></div>
+      <div class="stag"><span>Punto 2</span><span class="noread">no leer</span><span class="time">2:05</span></div>
       <h2>Jehov&aacute; les prometi&oacute; que iban a volver a casa</h2>
     </div>
 
     <div class="g">
-      <div class="l ask"><span class="n"></span><span class="t">Ahora, &iquest;Qu&eacute; efecto produce esto en Jehov&aacute;?</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">Ahora, &iquest;Qu&eacute; efecto produce en Jehov&aacute;, lograr esto?</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Bueno si nos arrepentimos y lo buscamos, Jehov&aacute; promete algo muy lindo&hellip;</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Bueno si nos arrepentimos y lo buscamos, Jehov&aacute; promete algo muy lindo&hellip;</span></div>
       <div class="l key"><span class="n"></span><span class="t">Y aqu&iacute; est&aacute; la segunda lecci&oacute;n que nos deja su disciplina:</span></div>
     </div>
 
@@ -576,12 +584,12 @@
     </ul>
 
     <div class="g">
-      <div class="l key"><span class="n"></span><span class="t">Son todas acciones que hace Jehov&aacute;, no nosotros.</span></div>
-      <div class="l ask"><span class="n"></span><span class="t">&iquest;Se dieron cuenta?</span></div>
+      <div class="l"><span class="n"></span><span class="t">Son todas acciones que hace Jehov&aacute;, no nosotros.</span></div>
       <div class="l"><span class="n"></span><span class="t">Todo el trabajo pesado lo hace &eacute;l.</span></div>
     </div>
 
     <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">Por eso, &iquest;Qu&eacute; lecci&oacute;n nos deja esto a nosotros?</span></div>
       <div class="l"><span class="n"></span><span class="t">Pero lo interesante es cuando prometi&oacute; esto Jehov&aacute;&hellip;</span></div>
     </div>
 
@@ -600,13 +608,13 @@
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Porque nos ense&ntilde;a algo muy importante:</span></div>
-      <div class="l key"><span class="n"></span><span class="t">La disciplina de Jehov&aacute; nunca es un callej&oacute;n sin salida.</span></div>
-      <div class="l key"><span class="n"></span><span class="t">Siempre tiene un camino de vuelta.</span></div>
+      <div class="l"><span class="n"></span><span class="t">La realidad es que nos ense&ntilde;a algo muy importante:</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Que la disciplina de Jehov&aacute; nunca es un callej&oacute;n sin salida.</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Jehov&aacute; siempre tiene un camino de vuelta para sus siervos.</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Por eso, si hoy siente que este lejos de Jehov&aacute;, porque ha perdido un privilegio&hellip;</span></div>
+      <div class="l"><span class="n"></span><span class="t">Por eso, si hoy siente que est&aacute; lejos de Jehov&aacute;, porque ha perdido un privilegio&hellip;</span></div>
       <div class="l"><span class="n"></span><span class="t">O ha recibi&oacute; un consejo fuerte&hellip;</span></div>
       <div class="l"><span class="n"></span><span class="t">O incluso ha sido sacado de la congregaci&oacute;n.</span></div>
     </div>
@@ -624,16 +632,17 @@
   <!-- ==================== PUNTO 3 ==================== -->
   <section id="s3" class="p3" data-label="Punto 3" data-color="--s3">
     <div class="shead">
-      <div class="stag"><span>Punto 3</span><span class="time">2:10</span></div>
+      <div class="stag"><span>Punto 3</span><span class="time">2:35</span></div>
       <h2>Jehov&aacute; mide exactamente la dosis que necesitamos para recuperarnos</h2>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Y la ultima Lecci&oacute;n que nos ense&ntilde;a la manera en que Jehov&aacute; nos disciplina es que&hellip;</span></div>
-      <div class="l ask"><span class="n"></span><span class="t">&iquest;C&oacute;mo es esto?</span></div>
+      <div class="l"><span class="n"></span><span class="t">Y la &uacute;ltima Lecci&oacute;n que nos ense&ntilde;a la manera en que Jehov&aacute; nos disciplina es que;</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Jehov&aacute; mide exactamente la DOSIS que necesitamos para recuperarnos.</span></div>
     </div>
 
     <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;C&oacute;mo es esto?</span></div>
       <div class="l cue"><span class="n"></span><span class="t">Leamos Jerem&iacute;as 30:11</span></div>
     </div>
 
@@ -651,7 +660,7 @@
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Porque si el m&eacute;dico nos da menos de lo que necesitamos, no nos curamos.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Porque si el m&eacute;dico nos da menos dosis de lo que necesitamos, no vamos a poder curarnos.</span></div>
       <div class="l"><span class="n"></span><span class="t">Y si nos da de m&aacute;s, nos podr&iacute;a hacer da&ntilde;o.</span></div>
     </div>
 
@@ -671,21 +680,22 @@
 
     <div class="g">
       <div class="l ask"><span class="n"></span><span class="t">&iquest;Y por qu&eacute; esa medida y no otra?</span></div>
+      <div class="l"><span class="n"></span><span class="t">Bueno porque si les daba m&aacute;s tiempo, seguro, los exterminar&iacute;a&hellip;</span></div>
+      <div class="l"><span class="n"></span><span class="t">y no era ese el objetivo de Jehov&aacute;</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Bueno porque si les daba mas tiempo, los exterminar&iacute;a&hellip;</span></div>
-      <div class="l"><span class="n"></span><span class="t">y no era ese el objetivo.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Su objetivo era, lo que menciona all&iacute;, la referencia del libro de Jerem&iacute;as, en la p&aacute;gina 168.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Al final dice; Jehov&aacute; iba a corregir a su pueblo, a castigarlo &ldquo;hasta el grado debido&rdquo;&hellip;</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Como all&iacute; menciona la referencia del libro de Jerem&iacute;as.</span></div>
-      <div class="l key"><span class="n"></span><span class="t">Dice que el objetivo era que REFLEXIONARAN Y REGRESARAN A &Eacute;L.</span></div>
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Para qu&eacute;?</span></div>
+      <div class="l key"><span class="n"></span><span class="t">&hellip;Para ver si alguien REFLEXIONABA Y REGRESABA A &Eacute;L.</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Y si les daba menos tiempo&hellip;</span></div>
-      <div class="l"><span class="n"></span><span class="t">Bueno, para Jehov&aacute; no era suficiente para que recapacitar&aacute;n del grave error.</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Su objetivo siempre fue recibir de nuevo a sus siervos, con los brazos abiertos.</span></div>
     </div>
 
     <div class="g">
@@ -698,12 +708,16 @@
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Entonces, cuando nos toca recibir una disciplina,</span></div>
-      <div class="l"><span class="n"></span><span class="t">la primera pregunta no deber&iacute;a ser &ldquo;&iquest;por qu&eacute; a m&iacute;?&rdquo;.</span></div>
+      <div class="l key"><span class="n"></span><span class="t">Si, Jehov&aacute; nos ama tanto que su disciplina es para que volvamos&hellip;</span></div>
     </div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Mejor, la primera conclusi&oacute;n deber&iacute;a ser:</span></div>
+      <div class="l"><span class="n"></span><span class="t">Por eso, cuando nos toca recibir una disciplina,</span></div>
+      <div class="l"><span class="n"></span><span class="t">la primera pregunta no deber&iacute;a ser &ldquo;&iquest;por qu&eacute; a m&iacute;?&rdquo; o &iquest;Es para tanto?</span></div>
+    </div>
+
+    <div class="g">
+      <div class="l"><span class="n"></span><span class="t">Mejor, la primera conclusi&oacute;n que debemos sacar, es:</span></div>
       <div class="l key"><span class="n"></span><span class="t">&ldquo;Jehov&aacute; me AMA y me trata como a un hijo&rdquo;.</span></div>
       <div class="l"><span class="n"></span><span class="t">Eso es lo que queremos pensar&hellip;</span></div>
     </div>
@@ -780,7 +794,7 @@
     <ul class="pts">
       <li><span class="n"></span><span class="t">Que Jehov&aacute; nos pide NUEVAMENTE que lo busquemos con todo el coraz&oacute;n.</span></li>
       <li><span class="n"></span><span class="t">Que &eacute;l ya tiene preparado nuestro camino de vuelta.</span></li>
-      <li><span class="n"></span><span class="t">Y que la dosis que nos da es siempre la exacta, porque nos ama como a hijos.</span></li>
+      <li><span class="n"></span><span class="t">Y que la dosis que nos da es siempre la mejor, porque nos ama.</span></li>
     </ul>
 
     <div class="g">
@@ -799,6 +813,7 @@
           <tr><td>Jer. 30:11</td><td>Traducci&oacute;n del Nuevo Mundo, revisi&oacute;n de 2019</td></tr>
           <tr><td>Sal. 25:4</td><td>Revisi&oacute;n de 2019. El libro <em>jr</em> lo cita con la redacci&oacute;n vieja de 1987</td></tr>
           <tr><td>Heb. 12:6</td><td>Revisi&oacute;n de 2019. Es parte de la cita que abre en el vers&iacute;culo 5, por eso arranca en min&uacute;scula</td></tr>
+          <tr><td><em>jr</em> 168 p&aacute;rr. 2</td><td><em>Dios nos habla mediante Jerem&iacute;as</em>, cap. 14: castigarlo &ldquo;hasta el grado debido&rdquo;, &ldquo;a ver si alguien reflexionaba y regresaba a &eacute;l&rdquo;</td></tr>
           <tr><td>Jer. 29:1</td><td>Respalda lo que dec&iacute;s en el punto 2: &ldquo;Estas son las palabras de la carta que el profeta Jerem&iacute;as les envi&oacute; desde Jerusal&eacute;n al resto de los ancianos que hab&iacute;a entre los desterrados&hellip; a quienes Nabucodonosor hab&iacute;a desterrado de Jerusal&eacute;n a Babilonia&rdquo;</td></tr>
         </tbody>
       </table>
@@ -898,7 +913,7 @@
     /* [line-height, alto extra del renglón, aire entre bloques] */
     var spaces = [
       [1.30, ".10rem", ".75rem"],
-      [1.42, ".20rem", 1.00 + "rem"],
+      [1.42, ".20rem", "1.00rem"],
       [1.55, ".30rem", "1.25rem"],
       [1.72, ".46rem", "1.60rem"],
       [1.90, ".64rem", "2.00rem"],
