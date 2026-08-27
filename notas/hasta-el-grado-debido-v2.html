@@ -30,6 +30,8 @@
     --s2:          #2A5DA6;
     --s3:          #9A3A69;
     --s4:          #AF4526;
+    --stage:       #1F7A57;
+    --stage-soft:  #E2F2EA;
 
     --mark:        #6B4FD8;
     --mark-soft:   #EDE9FC;
@@ -61,6 +63,8 @@
       --s2:        #6E9FE8;
       --s3:        #E081AE;
       --s4:        #F58E6B;
+      --stage:     #63C89A;
+      --stage-soft:#10261E;
 
       --mark:      #A48CF5;
       --mark-soft: #201B38;
@@ -86,6 +90,8 @@
     --s2:        #6E9FE8;
     --s3:        #E081AE;
     --s4:        #F58E6B;
+    --stage:     #63C89A;
+    --stage-soft:#10261E;
 
     --mark:      #A48CF5;
     --mark-soft: #201B38;
@@ -213,7 +219,8 @@
   }
   .stag .time { color: var(--text-3); margin-left: auto; letter-spacing: .05em; }
   .stag .noread {
-    color: var(--text-3); border: 1px solid var(--line-2);
+    color: var(--stage); background: var(--stage-soft);
+    border: 1px solid color-mix(in srgb, var(--stage) 45%, transparent);
     border-radius: .3rem; padding: .1rem .35rem; letter-spacing: .06em;
   }
 
@@ -222,6 +229,22 @@
     font-size: clamp(1.25rem, 5vw, 1.6rem); line-height: 1.2;
     letter-spacing: -.01em; text-wrap: balance; margin: 0; color: var(--text);
   }
+
+  /* ============ marcas que NO se leen ============ */
+
+  .pause {
+    display: inline-flex; align-items: center; gap: .4rem;
+    margin: calc(var(--gap) * .8) 0;
+    padding: .2rem .6rem .22rem;
+    background: var(--stage-soft);
+    border: 1px solid color-mix(in srgb, var(--stage) 45%, transparent);
+    border-radius: 2rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .6rem; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--stage);
+    user-select: none; -webkit-user-select: none;
+  }
+  .pause::before { content: "½A½A"; letter-spacing: -.1em; font-size: .72rem; line-height: 1; }
 
   /* ================= renglones ================= */
 
@@ -398,8 +421,8 @@
     <h1>Jehov&aacute; disciplina a sus siervos hasta el grado debido</h1>
     <div class="facts">
       <span class="fact">Asignado 10 min</span>
-      <span class="fact">Hablado &asymp;8:36</span>
-      <span class="fact">1.117 palabras</span>
+      <span class="fact">Hablado &asymp;8:42</span>
+      <span class="fact">1.131 palabras</span>
       <span class="fact">Jerem&iacute;as 29 y 30</span>
       <span class="fact">Sur R&iacute;o Cuarto</span>
     </div>
@@ -412,17 +435,12 @@
   <!-- ==================== APERTURA ==================== -->
   <section id="s0" class="p0" data-label="Apertura" data-color="--s4">
     <div class="shead">
-      <div class="stag"><span>Apertura</span><span class="time">0:45</span></div>
+      <div class="stag"><span>Apertura</span><span class="time">0:55</span></div>
       <h2>La disciplina m&aacute;s grande de la historia</h2>
     </div>
 
     <div class="g">
       <div class="l ask"><span class="n"></span><span class="t">&iquest;C&oacute;mo se sinti&oacute; la &uacute;ltima vez que Jehov&aacute; lo disciplin&oacute;?</span></div>
-    </div>
-
-    <div class="pause">Pausa</div>
-
-    <div class="g">
       <div class="l"><span class="n"></span><span class="t">O le hago otra pregunta&hellip;</span></div>
       <div class="l ask"><span class="n"></span><span class="t">&iquest;Cu&aacute;l fue su reacci&oacute;n?</span></div>
     </div>
@@ -430,20 +448,25 @@
     <div class="pause">Pausa</div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Bueno, en tiempos de Jerem&iacute;as, los jud&iacute;os recibieron una fuerte disciplina de Jehov&aacute;</span></div>
+      <div class="l"><span class="n"></span><span class="t">Bueno, recordar&aacute; un poco lo que pas&oacute; en tiempos de Jerem&iacute;as,</span></div>
+      <div class="l key"><span class="n"></span><span class="t">cuando los jud&iacute;os recibieron una fuerte DISCIPLINA por parte de Jehov&aacute;</span></div>
       <div class="l"><span class="n"></span><span class="t">porque estaban haciendo todo mal.</span></div>
     </div>
 
     <div class="g">
+      <div class="l ask"><span class="n"></span><span class="t">&iquest;Cu&aacute;l fue la disciplina?</span></div>
       <div class="l"><span class="n"></span><span class="t">Jehov&aacute; permiti&oacute; que destruyeran su propio templo.</span></div>
-      <div class="l"><span class="n"></span><span class="t">Que quemaran Jerusal&eacute;n.</span></div>
+      <div class="l"><span class="n"></span><span class="t">Permiti&oacute; que destruyeran Jerusal&eacute;n.</span></div>
       <div class="l"><span class="n"></span><span class="t">Y que su pueblo entero terminara desterrado en Babilonia.</span></div>
     </div>
 
     <div class="pause">Pausa larga</div>
 
     <div class="g">
-      <div class="l"><span class="n"></span><span class="t">Pero&hellip; la pregunta es&hellip;</span></div>
+      <div class="l"><span class="n"></span><span class="t">Pero la pregunta es&hellip;</span></div>
+    </div>
+
+    <div class="g">
       <div class="l ask"><span class="n"></span><span class="t">&iquest;Quedaron abandonados para siempre?</span></div>
     </div>
 
