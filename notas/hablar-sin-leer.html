@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<title>Hablar sin leer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+
+<style>
+  :root {
+    --paper:      #FAFAFA;
+    --card:       #FFFFFF;
+    --ink:        #14191E;
+    --ink-2:      #4E5B65;
+    --ink-3:      #7E8B94;
+    --rule:       #DFE4E8;
+    --rule-2:     #C4CDD3;
+
+    --nav:        #14526B;
+    --nav-soft:   #E3EFF4;
+
+    --safe:       #1F7A57;
+    --safe-soft:  #E2F2EA;
+
+    --warn:       #AF4526;
+    --warn-soft:  #FBEAE4;
+
+    --gold:       #8F5D0B;
+    --gold-bar:   #C89024;
+    --gold-soft:  #FBF2E0;
+
+    --fs: 17px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0E1216;
+      --card:       #161D23;
+      --ink:        #E7ECEF;
+      --ink-2:      #A3B0B9;
+      --ink-3:      #74828B;
+      --rule:       #242F37;
+      --rule-2:     #35434C;
+
+      --nav:        #6FB9D8;
+      --nav-soft:   #0E2733;
+
+      --safe:       #63C89A;
+      --safe-soft:  #10261E;
+
+      --warn:       #F58E6B;
+      --warn-soft:  #2A1710;
+
+      --gold:       #EBBC6C;
+      --gold-bar:   #D9A244;
+      --gold-soft:  #241B0F;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0E1216;
+    --card:       #161D23;
+    --ink:        #E7ECEF;
+    --ink-2:      #A3B0B9;
+    --ink-3:      #74828B;
+    --rule:       #242F37;
+    --rule-2:     #35434C;
+
+    --nav:        #6FB9D8;
+    --nav-soft:   #0E2733;
+
+    --safe:       #63C89A;
+    --safe-soft:  #10261E;
+
+    --warn:       #F58E6B;
+    --warn-soft:  #2A1710;
+
+    --gold:       #EBBC6C;
+    --gold-bar:   #D9A244;
+    --gold-soft:  #241B0F;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: var(--fs);
+    font-weight: 400;
+    line-height: 1.62;
+    margin: 0;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.1rem 5rem; }
+
+  /* ---------------- tipografía base ---------------- */
+
+  h1 {
+    font-family: "Newsreader", Georgia, serif; font-weight: 600;
+    font-size: clamp(2.1rem, 8vw, 3rem); line-height: 1.08;
+    letter-spacing: -.02em; text-wrap: balance; margin: 0 0 .9rem;
+  }
+
+  h2 {
+    font-family: "Newsreader", Georgia, serif; font-weight: 600;
+    font-size: clamp(1.4rem, 5vw, 1.85rem); line-height: 1.2;
+    letter-spacing: -.012em; text-wrap: balance; margin: 0 0 .3rem;
+  }
+
+  h3 {
+    font-size: 1rem; font-weight: 600; line-height: 1.35;
+    margin: 0 0 .35rem; color: var(--ink);
+  }
+
+  p { margin: 0 0 .95rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead { font-size: 1.1em; color: var(--ink-2); }
+
+  strong { font-weight: 600; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .67rem; font-weight: 600; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--nav); margin: 0 0 .9rem;
+  }
+
+  /* ---------------- estructura ---------------- */
+
+  header.hero { padding: 3rem 0 1.6rem; }
+
+  section { padding: 2.4rem 0 .4rem; border-top: 1px solid var(--rule); }
+  section.first { border-top: none; padding-top: 1rem; }
+
+  .snum {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .67rem; font-weight: 600; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 .5rem; font-variant-numeric: tabular-nums;
+  }
+
+  .sintro { color: var(--ink-2); margin-bottom: 1.5rem; }
+
+  /* ---------------- datos ---------------- */
+
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: .55rem; margin: 1.4rem 0 0;
+  }
+  .stat {
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: .6rem; padding: .7rem .8rem;
+  }
+  .stat b {
+    display: block; font-family: "Newsreader", Georgia, serif;
+    font-size: 1.65rem; font-weight: 600; line-height: 1;
+    color: var(--nav); font-variant-numeric: tabular-nums; margin-bottom: .2rem;
+  }
+  .stat span {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .6rem; font-weight: 500; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-3); line-height: 1.35; display: block;
+  }
+
+  /* ---------------- las tres capas ---------------- */
+
+  .layer {
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: .7rem; padding: 1rem 1.1rem; margin-bottom: .8rem;
+  }
+  .layer-top {
+    display: flex; align-items: center; gap: .55rem; margin-bottom: .5rem;
+  }
+  .chip {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .6rem; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; padding: .18rem .5rem .2rem;
+    border-radius: 2rem; white-space: nowrap;
+  }
+  .c-lit  { color: var(--gold); background: var(--gold-soft); border: 1px solid color-mix(in srgb, var(--gold-bar) 40%, transparent); }
+  .c-ramp { color: var(--nav);  background: var(--nav-soft);  border: 1px solid color-mix(in srgb, var(--nav) 35%, transparent); }
+  .c-key  { color: var(--safe); background: var(--safe-soft); border: 1px solid color-mix(in srgb, var(--safe) 40%, transparent); }
+  .c-warn { color: var(--warn); background: var(--warn-soft); border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+
+  .layer p { font-size: .94em; color: var(--ink-2); }
+  .layer .demo {
+    margin-top: .65rem; padding: .6rem .75rem;
+    background: var(--paper); border: 1px dashed var(--rule-2);
+    border-radius: .45rem; font-size: .92em; color: var(--ink);
+  }
+  .layer .demo em { color: var(--ink-3); font-style: normal; font-size: .85em; }
+
+  /* ---------------- escalera ---------------- */
+
+  ol.steps { margin: 0; padding: 0; list-style: none; display: grid; gap: .7rem; counter-reset: s; }
+  ol.steps li {
+    display: grid; grid-template-columns: 2rem 1fr; gap: .8rem;
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: .7rem; padding: .85rem 1rem;
+  }
+  ol.steps li::before {
+    counter-increment: s; content: counter(s);
+    font-family: "Newsreader", Georgia, serif; font-size: 1.5rem; font-weight: 600;
+    color: var(--nav); line-height: 1; padding-top: .1rem;
+  }
+  ol.steps h3 { margin-bottom: .15rem; }
+  ol.steps p { font-size: .92em; color: var(--ink-2); margin: 0; }
+  ol.steps .goal {
+    display: block; margin-top: .35rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .62rem; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--safe);
+  }
+
+  /* ---------------- bosquejo ---------------- */
+
+  .tools {
+    display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.2rem;
+  }
+  .tools button {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .64rem; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase;
+    background: var(--card); color: var(--ink-2);
+    border: 1px solid var(--rule-2); border-radius: .45rem;
+    padding: .45rem .75rem; cursor: pointer;
+  }
+  .tools button:hover { color: var(--nav); border-color: var(--nav); }
+  .tools button:focus-visible { outline: 2px solid var(--nav); outline-offset: 2px; }
+
+  .blk {
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: .8rem; padding: 1rem 1.1rem 1.1rem; margin-bottom: .9rem;
+  }
+  .blk-top {
+    display: flex; align-items: baseline; gap: .6rem;
+    margin-bottom: .8rem; padding-bottom: .7rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .blk-top h3 { flex: 1; font-size: 1.02rem; margin: 0; }
+  .blk-top .t {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .64rem; font-weight: 600; color: var(--ink-3);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+
+  .ramp {
+    border-left: 3px solid var(--nav); padding: .1rem 0 .1rem .75rem;
+    margin: 0 0 .8rem; font-weight: 600; color: var(--ink);
+  }
+  .ramp .lbl {
+    display: block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .58rem; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--nav); margin-bottom: .15rem;
+  }
+
+  .keys { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 .8rem; }
+  .keys span {
+    font-size: .82em; font-weight: 500;
+    color: var(--safe); background: var(--safe-soft);
+    border: 1px solid color-mix(in srgb, var(--safe) 30%, transparent);
+    border-radius: .35rem; padding: .18rem .5rem .2rem;
+  }
+  .keys span.arrow { border: none; background: none; color: var(--ink-3); padding: .18rem .1rem; }
+
+  .verse {
+    background: var(--gold-soft);
+    border: 1px solid color-mix(in srgb, var(--gold-bar) 35%, transparent);
+    border-left: 4px solid var(--gold-bar);
+    border-radius: .2rem .5rem .5rem .2rem;
+    padding: .6rem .8rem .7rem; margin: 0 0 .8rem;
+  }
+  .verse .ref {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .6rem; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: .25rem;
+  }
+  .verse q {
+    display: block; font-family: "Newsreader", Georgia, serif;
+    font-size: 1.02em; line-height: 1.45; color: var(--ink);
+    quotes: "\201C" "\201D";
+  }
+
+  .note {
+    font-size: .88em; color: var(--ink-3); margin: 0 0 .8rem;
+    padding-left: .75rem; border-left: 2px solid var(--rule-2);
+  }
+
+  details { margin: .3rem 0 0; }
+  details summary {
+    display: inline-flex; align-items: center; gap: .35rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .62rem; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-3);
+    cursor: pointer; list-style: none;
+    border: 1px dashed var(--rule-2); border-radius: .4rem;
+    padding: .35rem .6rem;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before { content: "\25B8"; transition: transform .15s; }
+  details[open] summary::before { transform: rotate(90deg); }
+  details summary:hover { color: var(--warn); border-color: var(--warn); }
+  details summary:focus-visible { outline: 2px solid var(--nav); outline-offset: 2px; }
+  details .full {
+    margin-top: .6rem; padding: .75rem .85rem;
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: .5rem; font-size: .93em; color: var(--ink-2);
+  }
+  details .full p { margin: 0 0 .45rem; }
+  details .full p:last-child { margin: 0; }
+
+  /* ---------------- emergencia ---------------- */
+
+  .sos {
+    background: var(--warn-soft);
+    border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+    border-radius: .8rem; padding: 1.1rem 1.2rem;
+  }
+  .sos h3 { color: var(--warn); margin-bottom: .7rem; }
+  ol.sosl { margin: 0; padding: 0 0 0 1.15rem; display: grid; gap: .5rem; }
+  ol.sosl li { color: var(--ink); }
+  ol.sosl li strong { color: var(--warn); }
+  ol.sosl::marker, ol.sosl li::marker { color: var(--warn); font-weight: 600; }
+
+  footer {
+    margin-top: 2.6rem; padding-top: 1.4rem; border-top: 1px solid var(--rule);
+    font-size: .85em; color: var(--ink-3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media print {
+    .tools { display: none; }
+    details summary { display: none; }
+    .blk, .layer, ol.steps li { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Gu&iacute;a de oratoria &middot; Gustavo</p>
+    <h1>Hablar sin leer</h1>
+    <p class="lead">No se trata de memorizar el discurso. Se trata de memorizar <strong>mucho menos de lo que cre&eacute;s</strong>, y de dejar por escrito exactamente lo que hace falta. Ac&aacute; est&aacute; el m&eacute;todo, y tu discurso de Jerem&iacute;as armado con &eacute;l.</p>
+
+    <div class="stats">
+      <div class="stat"><b>1.131</b><span>palabras del guion</span></div>
+      <div class="stat"><b>105</b><span>renglones</span></div>
+      <div class="stat"><b>19</b><span>preguntas al auditorio</span></div>
+      <div class="stat"><b>139</b><span>palabras que se leen, nunca se memorizan</span></div>
+    </div>
+  </header>
+
+  <!-- ============ 1 ============ -->
+  <section class="first">
+    <p class="snum">01 &mdash; El diagn&oacute;stico</p>
+    <h2>Por qu&eacute; se te queda la mente en blanco</h2>
+    <p class="sintro">Antes del m&eacute;todo, algo que conviene entender, porque cambia qu&eacute; ten&eacute;s que practicar.</p>
+
+    <p>Cuando alguien se queda en blanco arriba de una plataforma, casi nunca es porque <em>olvid&oacute; la idea</em>. La idea sigue ah&iacute;. Lo que se le borr&oacute; es <strong>c&oacute;mo empezar la frase</strong>.</p>
+
+    <p>Es la diferencia entre no acordarse de una canci&oacute;n y no acordarse de c&oacute;mo arranca. Si alguien te canta las primeras tres palabras, sale sola. Con el discurso pasa igual: una vez que empez&aacute;s una oraci&oacute;n que conoc&eacute;s, el resto viene detr&aacute;s sin esfuerzo.</p>
+
+    <p>Por eso el guion completo es una mala herramienta, aunque parezca la m&aacute;s segura. Te da <strong>todas</strong> las palabras, cuando lo que necesit&aacute;s son <strong>las primeras</strong> de cada bloque. Y como te da todas, el ojo tiene que buscar entre mil ciento treinta para reencontrar el lugar.</p>
+
+    <p>El m&eacute;todo que sigue no te pide que te sueltes de golpe. Te pide algo mucho m&aacute;s chico: que memorices <strong>seis frases</strong>.</p>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section>
+    <p class="snum">02 &mdash; El m&eacute;todo</p>
+    <h2>Las tres capas</h2>
+    <p class="sintro">Todo lo que dec&iacute;s cae en una de estas tres. Cada capa se prepara distinto, y esa es toda la t&eacute;cnica.</p>
+
+    <div class="layer">
+      <div class="layer-top"><span class="chip c-lit">Capa 1 &middot; Literal</span></div>
+      <h3>Se lee tal cual. Siempre.</h3>
+      <p>Los textos b&iacute;blicos, la primera frase del discurso y las dos &uacute;ltimas. Nunca se memorizan &mdash; y que se lean <em>no es</em> una debilidad: leer un vers&iacute;culo es lo que corresponde, y leer un cierre bien escrito suena mejor que improvisarlo.</p>
+      <div class="demo"><em>En tu discurso:</em><br>&ldquo;&iquest;C&oacute;mo se sinti&oacute; la &uacute;ltima vez que Jehov&aacute; lo disciplin&oacute;?&rdquo; &middot; los 6 textos &middot; &ldquo;Porque &eacute;l S&Iacute; sabe disciplinar a sus siervos hasta el grado debido.&rdquo;</div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-top"><span class="chip c-ramp">Capa 2 &middot; La rampa</span></div>
+      <h3>Una sola frase por bloque. Esto es lo &uacute;nico que memoriz&aacute;s.</h3>
+      <p>La primera oraci&oacute;n de cada parte. Se llama rampa porque su &uacute;nico trabajo es hacerte despegar: la dec&iacute;s de memoria y, cuando la termin&aacute;s, ya est&aacute;s hablando y el resto sale.</p>
+      <div class="demo"><em>En tu discurso son seis, una por bloque.</em> Por ejemplo la de la etapa 3:<br><strong>&ldquo;Pero eso no es todo, a todo tratamiento le falta una cosa m&aacute;s: la dosis.&rdquo;</strong></div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-top"><span class="chip c-key">Capa 3 &middot; Palabras clave</span></div>
+      <h3>El cuerpo. Se dice con tus palabras, distinto cada vez.</h3>
+      <p>Ac&aacute; no hay frases, hay <em>anclas</em>: tres o cuatro palabras sueltas que te recuerdan por d&oacute;nde va la idea. Si un d&iacute;a lo dec&iacute;s con otras palabras, no pas&oacute; nada. Nadie en el auditorio tiene tu guion.</p>
+      <div class="demo"><em>En tu discurso:</em> templo &middot; Jerusal&eacute;n &middot; destierro &nbsp;&nbsp;|&nbsp;&nbsp; menos no cura &middot; m&aacute;s hace da&ntilde;o &middot; 70 a&ntilde;os</div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-top"><span class="chip c-warn">La regla que m&aacute;s cuesta</span></div>
+      <h3>Lo que est&aacute; en capa 3 no se memoriza. Nunca.</h3>
+      <p>Es la trampa en la que cae todo el mundo: se aprenden las palabras clave <em>y adem&aacute;s</em> la frase que las une. Ah&iacute; volviste al guion completo, pero de memoria &mdash; que es peor, porque ahora s&iacute; se puede olvidar. Si te descubr&iacute;s recitando, par&aacute; y volv&eacute; a las anclas.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section>
+    <p class="snum">03 &mdash; La pr&aacute;ctica</p>
+    <h2>La escalera de cuatro ensayos</h2>
+    <p class="sintro">No se salta del guion completo al bosquejo de una vez. As&iacute; es como uno se pega el susto y no lo intenta nunca m&aacute;s. Se baja un escal&oacute;n por vez, y <strong>no se sube al siguiente hasta que el anterior salga c&oacute;modo</strong>.</p>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>Le&eacute;lo entero, en voz alta</h3>
+          <p>Solo, sin apuro, con el guion completo. No est&aacute;s memorizando nada todav&iacute;a: est&aacute;s escuchando c&oacute;mo suena y encontrando qu&eacute; frases no te salen naturales. Esas corregilas ahora, no despu&eacute;s.</p>
+          <span class="goal">Objetivo &middot; que el texto sea tuyo</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Le&eacute;lo otra vez, levantando la vista</h3>
+          <p>Igual que antes, pero al final de cada rengl&oacute;n levant&aacute;s la mirada y dec&iacute;s las &uacute;ltimas palabras mirando al frente. Vas a perder el lugar varias veces. Est&aacute; bien: eso es justamente lo que est&aacute;s entrenando.</p>
+          <span class="goal">Objetivo &middot; que el ojo aprenda a volver</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Con el bosquejo, y el guion escondido</h3>
+          <p>Us&aacute; el bosquejo de m&aacute;s abajo. Cada vez que te trab&aacute;s, abr&iacute;s <em>Ver el guion completo</em> de ese bloque, le&eacute;s, cerr&aacute;s y segu&iacute;s. Fijate cu&aacute;les tuviste que abrir: van a ser dos o tres, no seis. Esos son los &uacute;nicos que ten&eacute;s que trabajar.</p>
+          <span class="goal">Objetivo &middot; descubrir tus dos bloques d&eacute;biles</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Solo el bosquejo</h3>
+          <p>Sin abrir nada. Si sale, ya est&aacute;. Si no sale, volv&eacute;s al escal&oacute;n 3 sin ning&uacute;n drama y lo repet&iacute;s ma&ntilde;ana. Nadie baja los cuatro escalones el mismo d&iacute;a.</p>
+          <span class="goal">Objetivo &middot; comprobar que se puede</span>
+        </div>
+      </li>
+    </ol>
+
+    <p style="margin-top:1.2rem;color:var(--ink-2)">Para la primera vez, un consejo: <strong>llev&aacute; las dos cosas al Sal&oacute;n</strong>. El bosquejo arriba y el guion completo abajo. Saber que est&aacute; ah&iacute; alcanza para que no lo necesites.</p>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section>
+    <p class="snum">04 &mdash; El bosquejo</p>
+    <h2>Tu discurso, armado con el m&eacute;todo</h2>
+    <p class="sintro">Seis bloques. En cada uno: la <span class="chip c-ramp">rampa</span> que memoriz&aacute;s, las <span class="chip c-key">claves</span> que dec&iacute;s con tus palabras, y los <span class="chip c-lit">textos</span> que le&eacute;s. El guion completo est&aacute; escondido, a un toque.</p>
+
+    <div class="tools">
+      <button type="button" id="openAll">Abrir todo</button>
+      <button type="button" id="closeAll">Cerrar todo</button>
+    </div>
+
+    <!-- BLOQUE 1 -->
+    <div class="blk">
+      <div class="blk-top"><h3>Apertura</h3><span class="t">0:55</span></div>
+
+      <p class="ramp"><span class="lbl">Rampa &middot; de memoria</span>&iquest;C&oacute;mo se sinti&oacute; la &uacute;ltima vez que Jehov&aacute; lo disciplin&oacute;?</p>
+
+      <div class="keys">
+        <span>o le hago otra pregunta</span><span class="arrow">&rarr;</span><span>&iquest;cu&aacute;l fue su reacci&oacute;n?</span>
+      </div>
+      <p class="note">Pausa. Dej&aacute; que piensen.</p>
+
+      <div class="keys">
+        <span>recordar&aacute;</span><span>Jerem&iacute;as</span><span>fuerte DISCIPLINA</span><span>haciendo todo mal</span>
+      </div>
+
+      <div class="keys">
+        <span>&iquest;cu&aacute;l fue la disciplina?</span><span class="arrow">&rarr;</span><span>templo</span><span>Jerusal&eacute;n</span><span>destierro</span>
+      </div>
+      <p class="note">Los tres, uno por uno, sin apurar. Despu&eacute;s pausa larga.</p>
+
+      <p class="ramp"><span class="lbl">Bisagra &middot; de memoria</span>Pero la pregunta es&hellip; &iquest;Quedaron abandonados para siempre?</p>
+
+      <div class="keys">
+        <span>y no&hellip;</span><span>tratamiento para su curaci&oacute;n espiritual</span><span class="arrow">&rarr;</span><span>tres etapas</span>
+      </div>
+
+      <details>
+        <summary>Ver el guion completo</summary>
+        <div class="full">
+          <p>&iquest;C&oacute;mo se sinti&oacute; la &uacute;ltima vez que Jehov&aacute; lo disciplin&oacute;? O le hago otra pregunta&hellip; &iquest;Cu&aacute;l fue su reacci&oacute;n?</p>
+          <p>Bueno, recordar&aacute; un poco lo que pas&oacute; en tiempos de Jerem&iacute;as, cuando los jud&iacute;os recibieron una fuerte DISCIPLINA por parte de Jehov&aacute; porque estaban haciendo todo mal.</p>
+          <p>&iquest;Cu&aacute;l fue la disciplina? Jehov&aacute; permiti&oacute; que destruyeran su propio templo. Permiti&oacute; que destruyeran Jerusal&eacute;n. Y que su pueblo entero terminara desterrado en Babilonia.</p>
+          <p>Pero la pregunta es&hellip; &iquest;Quedaron abandonados para siempre?</p>
+          <p>Y no&hellip; La realidad es que a trav&eacute;s de esta disciplina&hellip; Jehov&aacute; les dio un tratamiento para su curaci&oacute;n espiritual. Y este tratamiento, ten&iacute;a tres etapas. Tres etapas que nos sirven de lecci&oacute;n para nuestros d&iacute;as.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- BLOQUE 2 -->
+    <div class="blk">
+      <div class="blk-top"><h3>Etapa 1 &middot; Qu&eacute; hacer para curarse</h3><span class="t">1:55</span></div>
+
+      <p class="ramp"><span class="lbl">Rampa &middot; de memoria</span>La primera lecci&oacute;n es que Jehov&aacute; les dijo a sus siervos, exactamente, lo que ten&iacute;an que hacer para curarse.</p>
+
+      <div class="keys">
+        <span>en todo tratamiento hay que saber qu&eacute; hacer</span><span class="arrow">&rarr;</span><span>&iquest;qu&eacute; ten&iacute;an que hacer los jud&iacute;os?</span>
+      </div>
+
+      <div class="verse">
+        <div class="ref">Leer &middot; Jerem&iacute;as 29:12, 13</div>
+        <q>Ustedes me llamar&aacute;n, acudir&aacute;n a m&iacute; en oraci&oacute;n, y yo los escuchar&eacute;. Ustedes me buscar&aacute;n y me encontrar&aacute;n, porque me buscar&aacute;n con todo el coraz&oacute;n.</q>
+      </div>
+
+      <div class="keys">
+        <span>buscarlo</span><span>pero no de cualquier manera</span><span class="arrow">&rarr;</span><span>con TODO el coraz&oacute;n</span>
+      </div>
+
+      <div class="keys">
+        <span>&iquest;c&oacute;mo se hace eso?</span><span class="arrow">&rarr;</span><span>la CLAVE est&aacute; en la ORACI&Oacute;N</span><span>ejemplo: David</span>
+      </div>
+
+      <div class="verse">
+        <div class="ref">Leer &middot; Salmo 25:4</div>
+        <q>Dame a conocer tus caminos, oh, Jehov&aacute;; ens&eacute;&ntilde;ame tus sendas.</q>
+      </div>
+
+      <div class="keys">
+        <span>no ped&iacute;a que le sacara el problema</span><span class="arrow">&rarr;</span><span>ped&iacute;a que le ENSE&Ntilde;ARA</span>
+      </div>
+
+      <div class="keys">
+        <span>no solo dejar lo malo y listo</span><span class="arrow">&rarr;</span><span>arrepentirnos y buscarlo de nuevo</span><span>con todo el CORAZ&Oacute;N</span>
+      </div>
+
+      <details>
+        <summary>Ver el guion completo</summary>
+        <div class="full">
+          <p>La primera lecci&oacute;n es que Jehov&aacute; les dijo a sus siervos, exactamente, lo que ten&iacute;an que hacer para curarse. Porque en todo tratamiento, antes que nada, uno tiene que saber qu&eacute; es lo que tiene que hacer.</p>
+          <p>&iquest;Y qu&eacute; es lo que ten&iacute;an que hacer los jud&iacute;os para su curaci&oacute;n? Leamos Jerem&iacute;as 29:12, 13.</p>
+          <p>&iquest;Se fijaron que era lo que ten&iacute;an que hacer? S&iacute;, Buscarlo&hellip; Pero no de cualquier manera. Buscarlo con TODO el coraz&oacute;n.</p>
+          <p>Ahora la pregunta es, &iquest;c&oacute;mo se hace eso? &iquest;C&oacute;mo se busca a Jehov&aacute; con todo el coraz&oacute;n? La CLAVE est&aacute; en la ORACI&Oacute;N. Y un ejemplo de esto es ver como David hablaba con Jehov&aacute;. F&iacute;jense lo que le ped&iacute;a en el Salmo 25:4.</p>
+          <p>O sea, David no le ped&iacute;a a Jehov&aacute; que le sacara el problema. &iquest;Qu&eacute; le ped&iacute;a David? Le ped&iacute;a que le ENSE&Ntilde;ARA a buscarlo&hellip;</p>
+          <p>Y eso es lo que debemos pedir nosotros cuando recibimos disciplina, no solo dejar de hacer lo que est&aacute; mal y listo&hellip; Lo m&aacute;s importante que pide Jehov&aacute; es que nos arrepintamos y lo busquemos de nuevo, con todo nuestro CORAZ&Oacute;N. Eso&hellip; es exactamente lo que necesita Jehov&aacute; para curarnos.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- BLOQUE 3 -->
+    <div class="blk">
+      <div class="blk-top"><h3>Etapa 2 &middot; Los beneficios</h3><span class="t">1:45</span></div>
+
+      <p class="ramp"><span class="lbl">Rampa &middot; de memoria</span>Ahora, &iquest;qu&eacute; nos promete Jehov&aacute; si continuamos con el tratamiento?</p>
+
+      <div class="keys">
+        <span>segunda etapa</span><span class="arrow">=</span><span>conocer los beneficios del tratamiento</span>
+      </div>
+
+      <div class="verse">
+        <div class="ref">Leer &middot; Jerem&iacute;as 29:14</div>
+        <q>Y yo dejar&eacute; que me encuentren &mdash;afirma Jehov&aacute;&mdash;. Reunir&eacute; a sus cautivos, los recoger&eacute; a ustedes de todas las naciones y de todos los lugares a los que los he dispersado &mdash;afirma Jehov&aacute;&mdash;. Y los traer&eacute; de vuelta al lugar del que los desterr&eacute;.</q>
+      </div>
+
+      <div class="keys">
+        <span>dejar&eacute; que me encuentren</span><span>los recoger&eacute;</span><span>los traer&eacute; de vuelta</span>
+      </div>
+      <p class="note">Los tres verbos, contados con los dedos. Despu&eacute;s: <em>todas acciones de Jehov&aacute;, no nuestras</em>.</p>
+
+      <div class="keys">
+        <span>&iquest;qu&eacute; lecci&oacute;n nos deja?</span><span class="arrow">&rarr;</span><span>nunca es un callej&oacute;n sin salida</span><span>siempre hay camino de vuelta</span>
+      </div>
+
+      <div class="keys">
+        <span>perdi&oacute; un privilegio</span><span>consejo fuerte</span><span>sacado de la congregaci&oacute;n</span>
+      </div>
+      <p class="note">Ac&aacute; mir&aacute; al auditorio en general, nunca a una persona.</p>
+
+      <div class="keys">
+        <span>no piense que Jehov&aacute; se olvid&oacute; de usted</span><span class="arrow">&rarr;</span><span>traerlo de vuelta a sus brazos</span>
+      </div>
+
+      <details>
+        <summary>Ver el guion completo</summary>
+        <div class="full">
+          <p>Ahora, &iquest;Qu&eacute; nos promete Jehov&aacute; si continuamos con el tratamiento? Bueno, aqu&iacute; esta la segunda etapa, que es conocer los beneficios del tratamiento.</p>
+          <p>Y &iquest;Qu&eacute; beneficio nos da Jehov&aacute; si nos arrepentimos y lo buscamos? Leamos ahora el Jerem&iacute;as 29 vers&iacute;culo 14.</p>
+          <p>Entonces &iquest;Cu&aacute;les son los beneficios que Jehov&aacute; promete, si lo buscamos? El texto es muy claro, &iquest;verdad?, all&iacute; dice: &ldquo;Dejar&eacute; que me encuentren&rdquo;, &ldquo;Los recoger&eacute;&rdquo;, &ldquo;Los traer&eacute; de vuelta&rdquo;. Osea, son todas acciones que hace Jehov&aacute;, no nosotros.</p>
+          <p>Por eso, &iquest;Qu&eacute; lecci&oacute;n nos deja esto? La realidad es que nos ense&ntilde;a algo muy importante: que la disciplina de Jehov&aacute; nunca es un callej&oacute;n sin salida. Jehov&aacute; siempre tiene un camino de vuelta para sus siervos.</p>
+          <p>Por eso, si hoy siente que est&aacute; lejos de Jehov&aacute;, por alguna situaci&oacute;n. Quiz&aacute;s porque ha perdido un privilegio&hellip; O ha recibi&oacute; un consejo fuerte&hellip; O incluso ha sido sacado de la congregaci&oacute;n. No piense ni por un segundo que Jehov&aacute; se olvid&oacute; de Usted.</p>
+          <p>Porque &eacute;l mismo, que PERMITIO esa disciplina, ya tiene preparado el camino para traerlo de vuelta a sus brazos. &iexcl;Que lindo es saber esto! &iquest;verdad?</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- BLOQUE 4 -->
+    <div class="blk">
+      <div class="blk-top"><h3>Etapa 3 &middot; La dosis</h3><span class="t">2:40</span></div>
+
+      <p class="ramp"><span class="lbl">Rampa &middot; de memoria</span>Pero eso no es todo, a todo tratamiento le falta una cosa m&aacute;s: la dosis.</p>
+
+      <div class="verse">
+        <div class="ref">Leer &middot; Jerem&iacute;as 30:11</div>
+        <q>Porque yo estoy contigo &mdash;afirma Jehov&aacute;&mdash; para salvarte. Pero voy a exterminar a todas las naciones por las que te he esparcido; sin embargo, a ti no te voy a exterminar. Te disciplinar&eacute; hasta el grado debido; de ninguna manera te dejar&eacute; sin castigo.</q>
+      </div>
+
+      <div class="keys">
+        <span>&iquest;se fijaron?</span><span class="arrow">&rarr;</span><span>&ldquo;hasta el grado debido&rdquo;</span><span class="arrow">=</span><span>la dosis de un remedio</span>
+      </div>
+
+      <div class="keys">
+        <span>menos &rarr; no cura</span><span>m&aacute;s &rarr; hace da&ntilde;o</span><span class="arrow">&rarr;</span><span>el buen m&eacute;dico calcula bien</span>
+      </div>
+
+      <div class="keys">
+        <span>70 a&ntilde;os</span><span>ni un a&ntilde;o m&aacute;s, ni un a&ntilde;o menos</span>
+      </div>
+
+      <div class="keys">
+        <span>&iquest;por qu&eacute; esa medida?</span><span class="arrow">&rarr;</span><span>m&aacute;s tiempo los exterminaba</span><span>libro p&aacute;g. 168</span>
+      </div>
+
+      <div class="keys">
+        <span>&iquest;para qu&eacute;?</span><span class="arrow">&rarr;</span><span>REFLEXIONARAN Y REGRESARAN</span><span>recibirlos con los brazos abiertos</span>
+      </div>
+
+      <div class="verse">
+        <div class="ref">Leer &middot; Hebreos 12:6</div>
+        <q>&hellip;porque Jehov&aacute; disciplina a quienes ama. De hecho, castiga a todo el que recibe como hijo.</q>
+      </div>
+
+      <div class="keys">
+        <span>no preguntar &ldquo;&iquest;por qu&eacute; a m&iacute;?&rdquo;</span><span class="arrow">&rarr;</span><span>Jehov&aacute; me AMA y me trata como a un hijo</span>
+      </div>
+
+      <details>
+        <summary>Ver el guion completo</summary>
+        <div class="full">
+          <p>Pero eso no es todo, a todo tratamiento le falta una cosa m&aacute;s: la dosis. Por eso, la &uacute;ltima Lecci&oacute;n sobre su disciplina, nos ense&ntilde;a que Jehov&aacute; mide exactamente la DOSIS que necesitamos para recuperarnos. &iquest;C&oacute;mo es esto? Leamos Jerem&iacute;as 30:11.</p>
+          <p>&iquest;Se fijaron en esta expresi&oacute;n?: Te disciplinar&eacute; &ldquo;hasta el grado debido&rdquo;. Si nos ponemos a pensar, esto es igual a la dosis de un remedio.</p>
+          <p>Porque si un m&eacute;dico nos da menos dosis de lo que necesitamos, no nos vamos a poder curarnos. Y si nos da de m&aacute;s, nos podr&iacute;a hacer da&ntilde;o. Por eso el buen m&eacute;dico calcula bien. La dosis exacta, y el tiempo exacto.</p>
+          <p>Bueno, eso mismo hizo Jehov&aacute; con su Pueblo. Hizo que estuvieran 70 a&ntilde;os en destierro, ni un a&ntilde;o m&aacute;s, ni un a&ntilde;o menos.</p>
+          <p>&iquest;Y por qu&eacute; esa medida y no otra? Bueno porque si les daba m&aacute;s tiempo, seguro, los exterminar&iacute;a&hellip; y no era ese el objetivo de Jehov&aacute;. Su objetivo era, lo que menciona all&iacute;, la referencia del libro de Jerem&iacute;as, en la p&aacute;gina 168. Al final dice; Que Jehov&aacute; iba a corregir a su pueblo&hellip;</p>
+          <p>&iquest;Para qu&eacute;? &hellip;Para ver si alguien REFLEXIONABA Y REGRESABA A &Eacute;L. Por eso, su objetivo siempre fue recibir de nuevo a sus siervos, con los brazos abiertos.</p>
+          <p>Y esto encaja perfecto con lo que dice el ap&oacute;stol Pablo en Hebreos 12:6. Si, Jehov&aacute; nos ama tanto que su disciplina es para que volvamos&hellip;</p>
+          <p>Por eso, cuando nos toca recibir una disciplina, la primera pregunta no deber&iacute;a ser &ldquo;&iquest;por qu&eacute; a m&iacute;?&rdquo; o &iquest;Es para tanto? Mejor, la primera conclusi&oacute;n que debemos sacar, es: &ldquo;Jehov&aacute; me AMA y me trata como a un hijo&rdquo;. Eso es lo que queremos pensar&hellip;</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- BLOQUE 5 -->
+    <div class="blk">
+      <div class="blk-top"><h3>Imagen y para meditar</h3><span class="t">0:50</span></div>
+
+      <p class="ramp"><span class="lbl">Rampa &middot; de memoria</span>Y si vemos all&iacute; la imagen de la gu&iacute;a, eso es lo que debe estar pensando este hermano.</p>
+
+      <div class="keys">
+        <span>reunido con tres ancianos</span><span>no discute</span><span>no mira a otro lado</span><span>no brazos cruzados</span>
+      </div>
+      <p class="note">Las tres negaciones seguidas, y despu&eacute;s el giro: <em>escucha con mucha atenci&oacute;n</em>.</p>
+
+      <div class="keys">
+        <span>no son sus enemigos</span><span class="arrow">&rarr;</span><span>el instrumento que Jehov&aacute; usa para curarlo</span>
+      </div>
+
+      <div class="verse">
+        <div class="ref">Leer &middot; pregunta de la gu&iacute;a</div>
+        <q>&iquest;C&oacute;mo debemos reaccionar cuando Jehov&aacute; nos disciplina?</q>
+      </div>
+
+      <div class="keys">
+        <span>si entendimos los beneficios</span><span class="arrow">&rarr;</span><span>ya sabemos c&oacute;mo reaccionar</span>
+      </div>
+
+      <details>
+        <summary>Ver el guion completo</summary>
+        <div class="full">
+          <p>Y si vemos all&iacute; la imagen de la gu&iacute;a, eso es lo que debe estar pensando este hermano. &Eacute;l all&iacute; esta reunido con tres ancianos.</p>
+          <p>Pero no esta discutiendo, no esta mirando para otro lado, tampoco est&aacute; de brazos cruzados. &Eacute;l est&aacute; escuchando con mucha atenci&oacute;n.</p>
+          <p>Y esa postura nos dice que &eacute;l entendi&oacute; algo muy importante: que esos tres hermanos no son sus enemigos. Son el instrumento que Jehov&aacute; est&aacute; usando para curarlo.</p>
+          <p>Por eso, que importante que es la pregunta que nos deja la gu&iacute;a para meditar: &iquest;C&oacute;mo debemos reaccionar cuando Jehov&aacute; nos disciplina?</p>
+          <p>Bueno, la realidad es que si hemos entendido los beneficios de la disciplina de Jehov&aacute;, ya sabemos como debe ser nuestra reacci&oacute;n.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- BLOQUE 6 -->
+    <div class="blk">
+      <div class="blk-top"><h3>Cierre</h3><span class="t">0:35</span></div>
+
+      <p class="ramp"><span class="lbl">Rampa &middot; de memoria</span>Por eso, si Jehov&aacute; nos da una disciplina&hellip;, por m&aacute;s dura que sea&hellip; no rechacemos su tratamiento.</p>
+
+      <div class="keys">
+        <span>1. buscarlo con todo el coraz&oacute;n</span><span>2. camino de vuelta preparado</span><span>3. la dosis siempre exacta</span>
+      </div>
+      <p class="note">Los tres con los dedos. Despu&eacute;s pausa, levant&aacute; la vista, y el final de memoria.</p>
+
+      <div class="verse">
+        <div class="ref">Literal &middot; las dos &uacute;ltimas frases</div>
+        <q>Por eso, nunca, le tengamos miedo a la disciplina de Jehov&aacute;. Porque &eacute;l S&Iacute; sabe disciplinar a sus siervos hasta el grado debido.</q>
+      </div>
+
+      <details>
+        <summary>Ver el guion completo</summary>
+        <div class="full">
+          <p>Por eso, si Jehov&aacute; nos da una Disciplina&hellip;, por m&aacute;s dura que sea&hellip; no rechacemos su tratamiento.</p>
+          <p>Mejor recordemos estas tres cosas: Que Jehov&aacute; nos pide NUEVAMENTE que lo busquemos con todo el coraz&oacute;n. Que &eacute;l ya tiene preparado nuestro camino de vuelta. Y que la dosis que nos da es siempre la exacta, porque nos ama.</p>
+          <p>Por eso, nunca, le tengamos miedo a la disciplina de Jehov&aacute;. Porque &eacute;l S&Iacute; sabe disciplinar a sus siervos hasta el grado debido.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section>
+    <p class="snum">05 &mdash; El seguro</p>
+    <h2>Si te qued&aacute;s en blanco</h2>
+    <p class="sintro">Te va a pasar alguna vez, y no es grave. Lo &uacute;nico que hace falta es tener decidido de antemano qu&eacute; hacer, para no tener que pensarlo justo en ese momento.</p>
+
+    <div class="sos">
+      <h3>Tu plan, en orden</h3>
+      <ol class="sosl">
+        <li><strong>Repet&iacute; la &uacute;ltima pregunta que hiciste.</strong> Te compra cinco segundos y suena totalmente intencional. Tu discurso tiene 19 preguntas: siempre hay una a mano.</li>
+        <li><strong>Mir&aacute; el bosquejo.</strong> Est&aacute; permitido y todos lo hacen. Bajar la vista dos segundos no se nota; lo que se nota es el apuro por disimularlo.</li>
+        <li><strong>Salt&aacute; al texto b&iacute;blico m&aacute;s cercano y leelo.</strong> Mientras le&eacute;s, tu cabeza se reordena sola. Ten&eacute;s seis repartidos por todo el discurso.</li>
+        <li><strong>No pidas disculpas.</strong> El auditorio no se dio cuenta de nada hasta que vos lo decl&aacute;s. Una pausa es autoridad; una disculpa es un problema que vos acabas de inventar.</li>
+      </ol>
+    </div>
+
+    <p style="margin-top:1.3rem;color:var(--ink-2)"><strong>Y algo que ya est&aacute;s haciendo bien sin darte cuenta:</strong> escrib&iacute;s mucha pregunta. Cada pregunta al auditorio es un descanso gratis &mdash; mientras ellos piensan la respuesta, vos mir&aacute;s tranquilo el bosquejo y arranc&aacute;s el bloque siguiente. Es la mejor herramienta contra los nervios y ya la ten&iacute;as puesta.</p>
+  </section>
+
+  <footer>
+    <p>Bosquejo armado sobre la versi&oacute;n 2 del discurso <em>&ldquo;Jehov&aacute; disciplina a sus siervos hasta el grado debido&rdquo;</em> &mdash; Tesoros de la Biblia, 24-30 de agosto de 2026. Los seis textos b&iacute;blicos son de la Traducci&oacute;n del Nuevo Mundo, revisi&oacute;n de 2019, verificados en jw.org.</p>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    "use strict";
+    var det = document.querySelectorAll("details");
+    function setAll(v) { for (var i = 0; i < det.length; i++) det[i].open = v; }
+    document.getElementById("openAll").addEventListener("click", function () { setAll(true); });
+    document.getElementById("closeAll").addEventListener("click", function () { setAll(false); });
+    if (window.matchMedia) {
+      var mq = window.matchMedia("print");
+      if (mq.addEventListener) mq.addEventListener("change", function (e) { if (e.matches) setAll(true); });
+    }
+    window.addEventListener("beforeprint", function () { setAll(true); });
+  })();
+</script>
+</body>
+</html>
