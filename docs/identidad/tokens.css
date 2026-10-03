@@ -1,0 +1,50 @@
+/* AgenZoft — tokens de identidad v3 (fuente única de verdad).
+   Uso: importar antes de cualquier hoja de estilos de pieza o de la web. */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Marca */
+  --az-violeta:   #6A5CFF;   /* principal */
+  --az-azul:      #00C2FF;   /* tecnología / acento */
+  --az-noche:     #0B0F1A;   /* fondo oscuro */
+  --az-hielo:     #E8EEFF;   /* gris claro de apoyo */
+
+  /* Escalas derivadas (apoyo, no marca) */
+  --az-violeta-600: #5A4CE8;
+  --az-violeta-300: #9B8CFF;
+  --az-noche-800:   #121830;   /* superficies elevadas sobre noche */
+  --az-noche-700:   #1B2342;
+  --az-texto-claro: #C7CCE6;   /* texto secundario sobre noche */
+  --az-texto-medio: #8F96B8;
+  --az-texto-oscuro:#5B6285;   /* texto secundario sobre hielo */
+  --az-blanco:      #FFFFFF;
+
+  /* Estados */
+  --az-ok:     #2BD9A0;
+  --az-aviso:  #FFB84D;
+  --az-error:  #FF5C7A;
+
+  /* Degradados */
+  --az-grad:        linear-gradient(135deg, #6A5CFF 0%, #00C2FF 100%);
+  --az-grad-suave:  linear-gradient(135deg, rgba(106,92,255,.22), rgba(0,194,255,.12));
+  --az-grad-fondo:  radial-gradient(120% 90% at 15% 0%, #2A2070 0%, #0B0F1A 55%);
+  --az-glow:        0 0 40px rgba(106,92,255,.45);
+
+  /* Tipografía */
+  --az-font-titulo: 'Nunito', 'Varela Round', system-ui, sans-serif;     /* 800 / 900 */
+  --az-font-texto:  'DM Sans', system-ui, sans-serif;                    /* 400 / 500 */
+  --az-font-mono:   'DM Mono', ui-monospace, monospace;
+
+  /* Forma */
+  --az-radio-s: 10px;
+  --az-radio-m: 16px;
+  --az-radio-l: 28px;
+  --az-radio-pill: 999px;
+  --az-borde: 1px solid rgba(255,255,255,.08);
+
+  /* Colores de línea de producto (acento secundario, nunca reemplazan el violeta) */
+  --az-comerciopro:    #00C2FF;
+  --az-supertecnico:   #6A5CFF;
+  --az-ferregestion:   #FF8A3D;
+  --az-inmobiliariapro:#2BD9A0;
+}

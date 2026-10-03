@@ -4,12 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ComercioPro — Punto de venta, stock y tienda online | AgenZoft</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="favicon%20AgenZoft.svg">
-<link rel="apple-touch-icon" href="favicon%20AgenZoft.svg">
-<meta name="theme-color" content="#6055D4">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0B0F1A">
 <meta name="description" content="ComercioPro — El sistema en la nube para comercios minoristas: punto de venta, stock, caja, cuenta corriente, compras, rentabilidad, facturación AFIP y tienda online. Hecho en Argentina por AgenZoft. 14 días gratis.">
 <link rel="stylesheet" href="style.css">
+<style>/* Acento de producto (identidad v3): el degradé de marca sigue siendo el violeta */
+:root{--accent:#00C2FF;--accent2:#5ED8FF;--accent-glow:rgba(0,194,255,0.28);--accent-dim:rgba(0,194,255,0.10);--accent-border:rgba(0,194,255,0.28);}</style>
 <link rel="stylesheet" href="floating-actions.css">
 <style>
 .product-hero {
@@ -37,7 +42,7 @@
   color: var(--accent2);
 }
 .product-name-big {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: clamp(40px, 5.5vw, 68px);
   font-weight: 800; letter-spacing: -2.5px;
   color: var(--white); line-height: 1;
@@ -47,7 +52,7 @@
 .product-brand-mark {
   width: 92px; height: 92px;
   display: block; margin: 0 auto 22px;
-  filter: drop-shadow(0 10px 30px rgba(96,85,212,0.45));
+  filter: drop-shadow(0 10px 30px rgba(106,92,255,0.45));
   animation: fadeUp 0.7s ease both;
 }
 .product-pitch-big {
@@ -106,7 +111,7 @@
 
 <nav id="mainNav">
   <a href="index.html" class="nav-logo" aria-label="AgenZoft inicio">
-    <img src="logo+AgenZoft.svg" alt="AgenZoft" class="brand-logo-img">
+    <img src="assets/brand/agenzoft-horizontal-oscuro.svg" alt="AgenZoft" class="brand-logo-img">
   </a>
   <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
     <span></span><span></span><span></span>
@@ -531,7 +536,7 @@
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
-  <img src="logo+AgenZoft.svg" alt="AgenZoft" class="footer-logo-img">
+  <img src="assets/brand/agenzoft-horizontal-oscuro.svg" alt="AgenZoft" class="footer-logo-img">
   <div class="footer-copy" style="font-size: 12.5px; color: var(--muted);">© 2026 AgenZoft · Río Cuarto, Córdoba, Argentina · Ingeniería de Software.</div>
 </footer>
 
@@ -565,13 +570,13 @@ document.querySelectorAll('a, button, .plan-card, .target-card, .faq-item, .feat
   el.addEventListener('mouseenter', () => {
     cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
     ring.style.transform   = 'translate(-50%,-50%) scale(1.6)';
-    ring.style.borderColor = 'rgba(139,127,232,0.7)';
-    ring.style.boxShadow   = '0 0 14px rgba(96,85,212,0.25)';
+    ring.style.borderColor = 'rgba(155,140,255,0.7)';
+    ring.style.boxShadow   = '0 0 14px rgba(106,92,255,0.25)';
   });
   el.addEventListener('mouseleave', () => {
     cursor.style.transform = 'translate(-50%,-50%) scale(1)';
     ring.style.transform   = 'translate(-50%,-50%) scale(1)';
-    ring.style.borderColor = 'rgba(139,127,232,0.4)';
+    ring.style.borderColor = 'rgba(155,140,255,0.4)';
     ring.style.boxShadow   = 'none';
   });
 });
@@ -587,7 +592,7 @@ const obs = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 60 ? 'rgba(96,85,212,0.18)' : 'rgba(96,85,212,0.08)';
+  document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 60 ? 'rgba(106,92,255,0.18)' : 'rgba(106,92,255,0.08)';
 });
 </script>
 <script src="floating-actions.js"></script>

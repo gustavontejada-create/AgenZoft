@@ -1,77 +1,92 @@
-/* Botones flotantes: WhatsApp + volver arriba */
+/* Botones flotantes: chat de Zoft + volver arriba (identidad v3) */
 .fab-stack {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  z-index: 9990;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
+  position: fixed; right: 24px; bottom: 24px; z-index: 9990;
+  display: flex; flex-direction: column; gap: 12px; align-items: center;
 }
-
 .fab-btn {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.3s ease, visibility 0.3s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-  text-decoration: none;
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: transform .2s ease, opacity .3s ease, visibility .3s ease, box-shadow .2s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,.35);
 }
-
-.fab-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.45);
-}
-
-.fab-btn svg {
-  display: block;
-}
+.fab-btn:hover { transform: scale(1.08); }
+.fab-btn svg { display: block; }
 
 .fab-back-top {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(12px);
-  background: rgba(18, 18, 31, 0.95);
-  border: 1px solid rgba(96, 85, 212, 0.35);
-  color: #f0eeff;
-  backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  background: rgba(15,20,38,.95); border: 1px solid rgba(106,92,255,.4);
+  color: #E8EEFF; backdrop-filter: blur(8px);
 }
+.fab-back-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
 
-.fab-back-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+/* Botón de Zoft (chico, solo la cara) */
+.fab-zoft {
+  width: 64px; height: 64px;
+  border: 2px solid transparent;
+  background: linear-gradient(#0B0F1A, #0B0F1A) padding-box, linear-gradient(135deg, #6A5CFF, #00C2FF) border-box;
+  box-shadow: 0 6px 24px rgba(106,92,255,.5);
 }
+.fab-zoft:hover { box-shadow: 0 8px 32px rgba(106,92,255,.7), 0 0 20px rgba(0,194,255,.35); }
+.fab-zoft svg { width: 38px; height: 42px; }
 
-.fab-whatsapp {
-  background: #25d366;
-  color: #fff;
+/* Ventana de chat */
+.zoft-chat {
+  position: fixed; right: 24px; bottom: 100px; z-index: 9991;
+  width: 340px; max-width: calc(100vw - 32px);
+  background: #0F1426; border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.55), 0 0 40px rgba(106,92,255,.2);
+  font-family: 'DM Sans', system-ui, sans-serif; color: #E8EEFF;
+  opacity: 0; visibility: hidden; transform: translateY(14px) scale(.98); transform-origin: bottom right;
+  transition: opacity .25s ease, transform .25s ease, visibility .25s;
 }
-
-.fab-whatsapp:hover {
-  background: #20bd5a;
-  color: #fff;
+.zoft-chat.open { opacity: 1; visibility: visible; transform: none; }
+.zoft-chat-head {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(106,92,255,.28), rgba(0,194,255,.12));
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
+.zoft-chat-avatar {
+  width: 42px; height: 42px; border-radius: 12px; flex: none;
+  background: #0B0F1A; border: 1px solid rgba(106,92,255,.5);
+  display: grid; place-items: center;
+}
+.zoft-chat-avatar svg { width: 26px; height: 28px; }
+.zoft-chat-title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 16px; color: #fff; line-height: 1.1; }
+.zoft-chat-sub { font-size: 11.5px; color: #9AA2C4; }
+.zoft-chat-close {
+  margin-left: auto; background: none; border: none; color: #9AA2C4;
+  font-size: 22px; line-height: 1; cursor: pointer; padding: 4px 8px; border-radius: 8px;
+}
+.zoft-chat-close:hover { color: #fff; background: rgba(255,255,255,.08); }
+.zoft-chat-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; max-height: 340px; overflow-y: auto; }
+.zoft-msg { background: #1B2342; color: #fff; padding: 11px 14px; border-radius: 16px 16px 16px 4px; font-size: 14px; line-height: 1.5; max-width: 90%; }
+.zoft-opts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.zoft-opt {
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 13px;
+  color: #E8EEFF; background: transparent; cursor: pointer;
+  border: 1.5px solid rgba(106,92,255,.6); border-radius: 999px; padding: 7px 14px;
+  transition: background .2s, border-color .2s;
+}
+.zoft-opt:hover { background: rgba(106,92,255,.25); border-color: #00C2FF; }
+.zoft-chat-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid rgba(255,255,255,.08); }
+.zoft-chat-form input {
+  flex: 1; min-width: 0; background: #1B2342; border: 1px solid transparent; border-radius: 999px;
+  padding: 10px 16px; color: #fff; font: inherit; font-size: 14px; outline: none;
+}
+.zoft-chat-form input:focus { border-color: #6A5CFF; }
+.zoft-chat-form input::placeholder { color: #9AA2C4; }
+.zoft-chat-form button {
+  width: 40px; height: 40px; flex: none; border: none; border-radius: 50%; cursor: pointer;
+  background: linear-gradient(135deg, #6A5CFF, #00C2FF); color: #fff; font-size: 17px;
+}
+.zoft-chat-note { font-size: 11px; color: #9AA2C4; text-align: center; padding: 0 14px 12px; }
 
 @media (max-width: 768px) {
-  .fab-stack {
-    right: 16px;
-    bottom: 16px;
-  }
-
-  .fab-btn {
-    width: 48px;
-    height: 48px;
-  }
-
-  .fab-btn svg {
-    width: 22px;
-    height: 22px;
-  }
+  .fab-stack { right: 16px; bottom: 16px; }
+  .zoft-chat { right: 16px; bottom: 88px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zoft-chat, .fab-btn { transition: none; }
 }

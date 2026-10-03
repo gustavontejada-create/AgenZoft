@@ -4,8 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SuperTécnico — AgenZoft</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="floating-actions.css">
 <style>
@@ -23,7 +27,7 @@
   margin-top: 40px;
 }
 .pricing-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 26px; font-weight: 800;
   color: var(--white); letter-spacing: -0.5px;
   margin-bottom: 8px; text-align: center;
@@ -39,22 +43,22 @@
 .plan-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
 .plan-card.featured {
   border-color: var(--accent);
-  background: linear-gradient(160deg, rgba(96,85,212,0.09) 0%, var(--surface) 60%);
+  background: linear-gradient(160deg, rgba(106,92,255,0.09) 0%, var(--surface) 60%);
 }
 .plan-card.featured::before {
   content: 'MÁS POPULAR';
   position: absolute; top: 16px; right: 16px;
   font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
-  background: var(--accent); color: #000;
+  background: var(--grad); color: #fff;
   padding: 3px 10px; border-radius: 100px;
 }
 .plan-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 14px; font-weight: 700; color: var(--muted);
   text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
 }
 .plan-price {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 40px; font-weight: 800;
   color: var(--white); letter-spacing: -1.5px;
   line-height: 1; margin-bottom: 4px;
@@ -77,14 +81,14 @@
   display: block; width: 100%; text-align: center;
   padding: 13px; border-radius: 8px;
   font-weight: 700; font-size: 14px;
-  text-decoration: none; cursor: none;
+  text-decoration: none; cursor: pointer;
   transition: all 0.2s;
 }
 .btn-plan-primary {
-  background: var(--accent); color: #000;
-  box-shadow: 0 0 24px rgba(96,85,212,0.3);
+  background: var(--grad); color: #fff;
+  box-shadow: 0 0 24px rgba(106,92,255,0.3);
 }
-.btn-plan-primary:hover { box-shadow: 0 0 40px rgba(96,85,212,0.45); transform: translateY(-1px); }
+.btn-plan-primary:hover { box-shadow: 0 0 40px rgba(106,92,255,0.45); transform: translateY(-1px); }
 .btn-plan-outline {
   background: transparent; color: var(--text);
   border: 1px solid var(--border);
@@ -98,11 +102,7 @@
 
 <nav id="mainNav">
   <a href="index.html" class="nav-logo">
-    <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-      <rect width="40" height="40" rx="8" fill="rgba(96,85,212,0.12)"/>
-      <path d="M11 12h18l-13 16h14" stroke="#6055D4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="nav-wordmark">Agen<span class="z">Z</span>oft</span>
+    <img src="assets/brand/agenzoft-horizontal-oscuro.svg" alt="AgenZoft" class="brand-logo-img">
   </a>
   <button class="menu-btn" id="menuBtn">
     <span></span><span></span><span></span>
@@ -118,7 +118,7 @@
 
 <div class="product-hero">
   <div style="font-size: 11.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; color:var(--accent);">Talleres · Reparaciones</div>
-  <div class="reveal" style="font-family: 'Outfit', sans-serif; font-size: clamp(36px, 4vw, 54px); font-weight: 800; letter-spacing: -2px; color: var(--white); line-height: 1; margin-bottom: 16px;">Super<span class="z" style="color:var(--accent);">T</span>écnico</div>
+  <div class="reveal" style="font-family: 'Nunito', sans-serif; font-size: clamp(36px, 4vw, 54px); font-weight: 800; letter-spacing: -2px; color: var(--white); line-height: 1; margin-bottom: 16px;">Super<span class="z" style="color:var(--accent);">T</span>écnico</div>
   <p class="section-sub reveal" style="margin: 0 auto 20px;">Control absoluto de órdenes de trabajo y seguimiento para clientes.</p>
   <div class="product-subdomain reveal" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 12.5px; color: var(--muted); background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; margin-bottom: 40px;">
     <div style="width: 6px; height: 6px; border-radius: 50%; background:var(--accent); animation: blink 2s infinite;"></div>
@@ -192,7 +192,7 @@
 </div>
 
 <footer>
-  <div class="footer-logo" style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--white);">Agen<span class="z" style="color:var(--accent);">Z</span>oft</div>
+  <img src="assets/brand/agenzoft-horizontal-oscuro.svg" alt="AgenZoft" class="footer-logo-img">
   <div class="footer-copy" style="font-size: 12.5px; color: var(--muted);">© 2025 AgenZoft · Río Cuarto, Córdoba, Argentina · Ingeniería de Software.</div>
 </footer>
 
@@ -232,7 +232,7 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 60 ? 'rgba(96,85,212,0.22)' : 'rgba(96,85,212,0.08)';
+  document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 60 ? 'rgba(106,92,255,0.22)' : 'rgba(106,92,255,0.08)';
 });
 </script>
 <script src="floating-actions.js"></script>

@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgenZoft — Manual de identidad v3</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--az-noche);color:var(--az-texto-claro);font-family:var(--az-font-texto);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--az-font-titulo);color:#fff;font-weight:800;line-height:1.1}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.grad{background:var(--az-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* nav */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(11,15,26,.88);backdrop-filter:blur(10px);border-bottom:var(--az-borde)}
+.topnav .wrap{display:flex;gap:6px;align-items:center;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+.topnav img{height:26px;margin-right:12px;flex:none}
+.topnav a{flex:none;text-decoration:none;font-size:13px;padding:6px 12px;border-radius:99px;color:var(--az-texto-medio);font-weight:500}
+.topnav a:hover{background:rgba(255,255,255,.07);color:#fff}
+/* hero */
+.cover{background:var(--az-grad-fondo);padding:90px 0 80px;position:relative;overflow:hidden}
+.cover .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.cover h1{font-size:clamp(40px,6vw,76px);margin:22px 0 16px}
+.cover p{max-width:520px;font-size:18px}
+.badge{display:inline-block;font-family:var(--az-font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--az-azul);border:1px solid rgba(0,194,255,.35);padding:5px 12px;border-radius:99px}
+.cover .mascota{width:min(330px,70%);margin:auto;filter:drop-shadow(0 0 50px rgba(106,92,255,.6))}
+/* secciones */
+section{padding:84px 0;border-top:var(--az-borde)}
+section.claro{background:var(--az-hielo);color:var(--az-texto-oscuro)}
+section.claro h2,section.claro h3,section.claro h4{color:var(--az-noche)}
+.num{font-family:var(--az-font-mono);font-size:13px;color:var(--az-azul);letter-spacing:.12em}
+section.claro .num{color:var(--az-violeta)}
+h2{font-size:clamp(30px,4vw,46px);margin:8px 0 14px}
+h3{font-size:22px;margin:34px 0 12px}
+h4{font-size:16px;margin-bottom:6px}
+.lead{max-width:720px;font-size:17px;margin-bottom:34px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:var(--az-noche-800);border:var(--az-borde);border-radius:var(--az-radio-m);padding:24px}
+section.claro .card{background:#fff;border:1px solid #D8DFF5}
+.card p,.card li{font-size:14.5px}
+.card ul{padding-left:18px}
+.tag{display:inline-block;font-size:11px;font-family:var(--az-font-mono);padding:3px 9px;border-radius:99px;background:rgba(106,92,255,.18);color:var(--az-violeta-300);margin-bottom:10px}
+.cap{font-family:var(--az-font-mono);font-size:11.5px;color:var(--az-texto-medio);margin-top:9px;letter-spacing:.02em}
+section.claro .cap{color:var(--az-texto-oscuro)}
+.stage{border-radius:var(--az-radio-m);display:grid;place-items:center;padding:34px;min-height:180px}
+.st-noche{background:var(--az-noche-800);border:var(--az-borde)}
+.st-claro{background:#fff;border:1px solid #D8DFF5}
+.st-grad{background:var(--az-grad)}
+.st-violeta{background:var(--az-violeta)}
+.st-azul{background:var(--az-azul)}
+.st img{max-height:90px}
+/* colores */
+.sw{border-radius:var(--az-radio-m);overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.sw .c{height:120px;display:flex;align-items:flex-end;padding:12px;font-family:var(--az-font-titulo);font-weight:800;font-size:20px}
+.sw .i{padding:12px 14px;background:var(--az-noche-800);font-size:12.5px;font-family:var(--az-font-mono);color:var(--az-texto-claro);line-height:1.7}
+.bar{height:56px;border-radius:12px;background:var(--az-grad)}
+.prop{display:flex;height:34px;border-radius:99px;overflow:hidden;margin:14px 0 6px}
+.prop span{display:grid;place-items:center;font-size:11px;font-family:var(--az-font-mono);font-weight:500}
+/* tipografía */
+.big{font-family:var(--az-font-titulo);font-weight:900;font-size:clamp(56px,9vw,110px);line-height:1;color:#fff}
+.dd{display:flex;gap:14px;align-items:flex-start;margin-top:10px}
+.dd b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:14px}
+.si{background:rgba(43,217,160,.18);color:var(--az-ok)} .no{background:rgba(255,92,122,.18);color:var(--az-error)}
+/* mockups: escalan con cqw */
+.mk{container-type:inline-size;position:relative;overflow:hidden;border-radius:calc(2.2cqw);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.mk *{min-width:0}
+.fondo-noche{background:var(--az-grad-fondo)}
+.fondo-claro{background:#fff;color:var(--az-noche)}
+.fondo-hielo{background:var(--az-hielo);color:var(--az-noche)}
+.fondo-grad{background:var(--az-grad);color:#fff}
+.t{font-family:var(--az-font-titulo);font-weight:800;line-height:1.05;color:inherit}
+.chip{display:inline-block;font-family:var(--az-font-mono);letter-spacing:.08em;text-transform:uppercase;border-radius:99px}
+.btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--az-font-titulo);font-weight:800;background:var(--az-grad);color:#fff;border-radius:99px}
+.qr{background:#fff;border-radius:6%;padding:5%;display:block}
+.qr svg{width:100%;height:100%;display:block}
+.orb{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(106,92,255,.55),transparent 65%);filter:blur(4px);pointer-events:none}
+.wm{font-family:var(--az-font-titulo);font-weight:800;letter-spacing:-.02em}
+.wm i{font-style:normal;background:var(--az-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bubble{border-radius:18px;padding:.8em 1em;background:var(--az-noche-700);color:#fff;font-size:.9em}
+.bubble.yo{background:var(--az-grad);margin-left:auto}
+.row{display:flex}
+.rowc{display:flex;align-items:center}
+.pad{padding:7cqw}
+.fila-pieza{display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap}
+.mini{font-size:12.5px;color:var(--az-texto-medio)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+th{font-family:var(--az-font-mono);font-size:11.5px;color:var(--az-azul);text-transform:uppercase;letter-spacing:.08em}
+section.claro th{color:var(--az-violeta)} section.claro td,section.claro th{border-color:#D8DFF5}
+.steps{counter-reset:s}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:15px}
+.steps li::before{content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--az-grad);color:#fff;display:grid;place-items:center;font-family:var(--az-font-titulo);font-weight:800;font-size:14px}
+footer{padding:50px 0;text-align:center;color:var(--az-texto-medio);font-size:13px;border-top:var(--az-borde)}
+@media(max-width:860px){.cover .wrap,.g2,.g3,.g4{grid-template-columns:1fr}.g4{grid-template-columns:1fr 1fr}.cover .mascota{margin:0 auto}}
+</style>
+</head>
+<body>
+
+<div class="topnav"><div class="wrap">
+  <img src="logos/az-monograma.svg" alt="AZ">
+  <a href="#esencia">Esencia</a><a href="#logo">Logo</a><a href="#color">Color</a><a href="#tipo">Tipografía</a><a href="#zoft">Zoft</a><a href="#web">Web</a><a href="#tarjetas">Tarjetas</a><a href="#instagram">Instagram</a><a href="#carteleria">Cartelería</a><a href="#folletos">Folletos</a><a href="#papeleria">Papelería y digital</a><a href="#assets">Archivos</a><a href="#plan">Plan</a>
+</div></div>
+
+<header class="cover"><div class="orb" style="width:520px;height:520px;right:-120px;top:-160px"></div>
+<div class="wrap">
+  <div>
+    <span class="badge">Manual de identidad · v3</span>
+    <h1>Agencia <span class="grad">+ Software</span> + Agente IA</h1>
+    <p>Sistema visual completo de AgenZoft y de su agente Zoft: web, agente, tarjetas, Instagram, cartelería, folletos y papelería. Moderna, amigable y profesional.</p>
+    <div style="margin-top:30px"><img src="logos/agenzoft-horizontal-lema-oscuro.svg" alt="AgenZoft" style="height:74px"></div>
+  </div>
+  <img class="mascota" src="logos/zoft-mascota.svg" alt="Zoft">
+</div></header>
+
+<!-- 01 ESENCIA -->
+<section id="esencia"><div class="wrap">
+  <span class="num">01 / ESENCIA</span>
+  <h2>Qué es y cómo suena la marca</h2>
+  <p class="lead">AgenZoft es una agencia de software que además tiene un agente de IA propio. La identidad tiene que sentirse <b style="color:#fff">cercana como una persona, confiable como una empresa y moderna como una tecnología</b>. Las formas redondeadas dan la cercanía; el violeta a azul da la tecnología; el azul noche da la seriedad.</p>
+  <div class="g3">
+    <div class="card"><span class="tag">propósito</span><h4>Ordenar el negocio de las PyMEs</h4><p>Software hecho a medida y productos propios (ComercioPro, SuperTécnico, FerreGestión, InmobiliariaPro) que ahorran trabajo, apoyados por un agente de IA que atiende y automatiza.</p></div>
+    <div class="card"><span class="tag">personalidad</span><h4>Moderna · Amigable · Profesional</h4><p>Hablamos claro, en voseo, sin tecnicismos innecesarios. Cercanos sin ser informales de más. Prometemos solo lo que el producto hace.</p></div>
+    <div class="card"><span class="tag">pilares</span><h4>Cuatro ideas, siempre las mismas</h4><ul><li>Automatización inteligente</li><li>Procesos más eficientes</li><li>Seguridad y confianza</li><li>Escalabilidad sin límites</li></ul></div>
+  </div>
+  <h3>Arquitectura de marca</h3>
+  <div class="g3">
+    <div class="card"><img src="logos/icono-agenzoft-app.svg" style="width:64px;border-radius:14px;margin-bottom:12px"><h4>AgenZoft · marca madre</h4><p>Firma de agencia. Aparece en todo: web, tarjetas, cartelería, folletos. Lema: <i>Agencia + Software + Agente IA</i>.</p></div>
+    <div class="card"><img src="logos/icono-zoft-app.svg" style="width:64px;border-radius:14px;margin-bottom:12px"><h4>Zoft · agente de IA</h4><p>Personaje y voz de la marca. Aparece donde hay conversación o ayuda: chat, WhatsApp, redes, QR. Lema: <i>Tu agente de IA</i>.</p></div>
+    <div class="card"><div style="display:flex;gap:6px;margin-bottom:12px"><span style="width:64px;height:64px;border-radius:14px;background:var(--az-noche);border:2px solid var(--az-comerciopro)"></span></div><h4>Productos · submarcas</h4><p>Cada producto usa el sistema AgenZoft y suma un color de acento propio. Firma: <i>"Un producto AgenZoft"</i>. Ver Color.</p></div>
+  </div>
+  <div class="card" style="margin-top:22px;border-color:rgba(0,194,255,.4)"><span class="tag">regla de oro</span><h4>AgenZoft es la marca; Zoft es el chat</h4><p>El monograma AZ y el logotipo AgenZoft son los protagonistas de web, tarjetas, folletos y cartelería. <b style="color:#fff">Zoft aparece siempre chico</b> y solo donde se habla con el agente: el botón y la ventana de chat, el perfil de WhatsApp, un QR "hablá con Zoft" o un post sobre el agente. Nunca como imagen principal del hero ni de piezas institucionales.</p></div>
+  <h3>Voz y tono</h3>
+  <div class="g2">
+    <div class="card"><h4>Sí</h4>
+      <div class="dd"><b class="si">✓</b><span>"Tu agencia de software, agente de IA."</span></div>
+      <div class="dd"><b class="si">✓</b><span>"Automatizamos procesos, potenciamos equipos y llevamos tu negocio al siguiente nivel."</span></div>
+      <div class="dd"><b class="si">✓</b><span>Frases cortas, verbos de acción, ejemplos concretos del rubro.</span></div></div>
+    <div class="card"><h4>No</h4>
+      <div class="dd"><b class="no">✕</b><span>Jerga ("disruptivo", "sinergia", "revolucionario").</span></div>
+      <div class="dd"><b class="no">✕</b><span>Prometer funciones que el producto no tiene.</span></div>
+      <div class="dd"><b class="no">✕</b><span>Exceso de signos de exclamación o de emojis (máximo 1 por pieza).</span></div></div>
+  </div>
+</div></section>
+
+<!-- 02 LOGO -->
+<section id="logo" class="claro"><div class="wrap">
+  <span class="num">02 / LOGO</span>
+  <h2>Sistema de logos</h2>
+  <p class="lead">Tres piezas: el monograma <b>AZ</b> (cinta que une la A y la Z), el logotipo <b>AgenZoft</b> (Agen en blanco o azul noche, Zoft con degradé) y el personaje <b>Zoft</b>, una "Z" amigable con rostro.</p>
+  <div class="g2">
+    <div><div class="stage st-noche"><img src="logos/agenzoft-horizontal-lema-oscuro.svg" style="max-height:80px" alt=""></div><p class="cap">Principal sobre fondo oscuro (versión preferida)</p></div>
+    <div><div class="stage st-claro"><img src="logos/agenzoft-horizontal-lema-claro.svg" style="max-height:80px" alt=""></div><p class="cap">Principal sobre fondo claro</p></div>
+    <div><div class="stage st-noche"><img src="logos/zoft-horizontal-oscuro.svg" style="max-height:90px" alt=""></div><p class="cap">Zoft · agente (oscuro)</p></div>
+    <div><div class="stage st-claro"><img src="logos/zoft-horizontal-claro.svg" style="max-height:90px" alt=""></div><p class="cap">Zoft · agente (claro)</p></div>
+  </div>
+  <h3>Íconos y versiones de un solo color</h3>
+  <div class="g4">
+    <div><div class="stage st-noche" style="min-height:150px"><img src="logos/icono-agenzoft-app.svg" style="width:96px;border-radius:22px"></div><p class="cap">Ícono app AgenZoft (AZ)</p></div>
+    <div><div class="stage st-noche" style="min-height:150px"><img src="logos/icono-zoft-app.svg" style="width:96px;border-radius:22px"></div><p class="cap">Ícono app Zoft</p></div>
+    <div><div class="stage st-noche" style="min-height:150px"><img src="logos/icono-z.svg" style="width:96px;border-radius:22px"></div><p class="cap">Ícono de app (AZ con fondo)</p></div>
+    <div><div class="stage st-noche" style="min-height:150px"><img src="logos/favicon.svg" style="width:56px"><img src="logos/favicon.svg" style="width:24px;margin-top:10px"></div><p class="cap">Favicon: solo la AZ, sin fondo</p></div>
+    <div><div class="stage st-violeta" style="min-height:130px"><img src="logos/az-monograma-blanco.svg" style="height:60px"></div><p class="cap">Monocromo blanco</p></div>
+    <div><div class="stage st-azul" style="min-height:130px"><img src="logos/az-monograma-oscuro.svg" style="height:60px"></div><p class="cap">Monocromo azul noche (sobre cian)</p></div>
+    <div><div class="stage st-claro" style="min-height:130px"><img src="logos/az-monograma.svg" style="height:60px"></div><p class="cap">Monograma color</p></div>
+    <div><div class="stage st-noche" style="min-height:130px"><img src="logos/zoft-mascota.svg" style="height:90px"></div><p class="cap">Mascota sola</p></div>
+  </div>
+  <h3>Reglas</h3>
+  <div class="g3">
+    <div class="card"><h4>Zona de respeto</h4><p>Alrededor del logo, como mínimo la altura de la <b>"Z" del monograma ÷ 2</b>. Nada de texto ni bordes invade esa zona.</p></div>
+    <div class="card"><h4>Tamaños mínimos</h4><ul><li>Logo horizontal: 28 mm / 110 px de ancho</li><li>Monograma: 8 mm / 24 px</li><li>Favicon: solo el monograma AZ, sin fondo y lo más grande posible</li><li>Zoft: 12 mm / 40 px; por debajo, solo la cara</li></ul></div>
+    <div class="card"><h4>Qué no hacer</h4><ul><li>No estirar, rotar ni inclinar</li><li>No cambiar el degradé ni usar otros colores</li><li>No poner el logo claro sobre fondos claros</li><li>No agregar sombras duras ni contornos</li><li>No usar texto blanco sobre cian</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 03 COLOR -->
+<section id="color"><div class="wrap">
+  <span class="num">03 / COLOR</span>
+  <h2>Paleta</h2>
+  <p class="lead">Cuatro colores de marca y un degradé. El fondo es azul noche; el violeta lidera y el azul tecnológico aparece como acento y como segundo extremo del degradé.</p>
+  <div class="g4">
+    <div class="sw"><div class="c" style="background:#6A5CFF">Violeta</div><div class="i">#6A5CFF<br>RGB 106 92 255<br>CMYK 58 64 0 0<br>Principal</div></div>
+    <div class="sw"><div class="c" style="background:#00C2FF;color:#0B0F1A">Azul tecnología</div><div class="i">#00C2FF<br>RGB 0 194 255<br>CMYK 70 0 0 0<br>Acento</div></div>
+    <div class="sw"><div class="c" style="background:#0B0F1A;color:#fff">Azul noche</div><div class="i">#0B0F1A<br>RGB 11 15 26<br>CMYK 80 70 55 85<br>Fondo y texto</div></div>
+    <div class="sw"><div class="c" style="background:#E8EEFF;color:#0B0F1A">Hielo</div><div class="i">#E8EEFF<br>RGB 232 238 255<br>CMYK 8 5 0 0<br>Fondos claros</div></div>
+  </div>
+  <h3>Degradé de marca</h3>
+  <div class="bar"></div>
+  <p class="cap">linear-gradient(135deg, #6A5CFF → #00C2FF) · en horizontal para logotipos y botones, en diagonal para fondos y fichas</p>
+  <h3>Proporción de uso</h3>
+  <div class="prop"><span style="flex:60;background:#0B0F1A;color:#8F96B8;border:1px solid rgba(255,255,255,.12)">Azul noche 60%</span><span style="flex:20;background:#E8EEFF;color:#0B0F1A">Hielo 20%</span><span style="flex:15;background:#6A5CFF;color:#fff">Violeta 15%</span><span style="flex:5;background:#00C2FF;color:#0B0F1A">5%</span></div>
+  <p class="cap">En piezas claras se invierte: hielo/blanco 60 · noche 20 · violeta 15 · azul 5</p>
+  <h3>Contraste (accesibilidad)</h3>
+  <table>
+    <tr><th>Texto</th><th>Sobre</th><th>Contraste</th><th>Uso</th></tr>
+    <tr><td>Blanco</td><td>Azul noche</td><td>≈ 18 : 1</td><td>Todo el texto</td></tr>
+    <tr><td>Blanco</td><td>Violeta #6A5CFF</td><td>≈ 4,6 : 1</td><td>Botones y textos de 16 px o más</td></tr>
+    <tr><td>Azul noche</td><td>Azul #00C2FF</td><td>≈ 9 : 1</td><td>Etiquetas sobre cian</td></tr>
+    <tr><td>Blanco</td><td>Azul #00C2FF</td><td>≈ 2 : 1 ✕</td><td><b>Prohibido</b></td></tr>
+    <tr><td>Azul noche</td><td>Hielo</td><td>≈ 16 : 1</td><td>Texto en piezas claras</td></tr>
+  </table>
+  <h3>Acento por producto</h3>
+  <div class="g4">
+    <div class="card" style="border-top:4px solid var(--az-comerciopro)"><h4>ComercioPro</h4><p class="mini">#00C2FF</p></div>
+    <div class="card" style="border-top:4px solid var(--az-supertecnico)"><h4>SuperTécnico</h4><p class="mini">#6A5CFF</p></div>
+    <div class="card" style="border-top:4px solid var(--az-ferregestion)"><h4>FerreGestión</h4><p class="mini">#FF8A3D</p></div>
+    <div class="card" style="border-top:4px solid var(--az-inmobiliariapro)"><h4>InmobiliariaPro</h4><p class="mini">#2BD9A0</p></div>
+  </div>
+  <p class="cap">El acento va en una franja, ícono o etiqueta; el logo AgenZoft y el degradé siguen siendo los protagonistas.</p>
+</div></section>
+
+<!-- 04 TIPOGRAFIA -->
+<section id="tipo" class="claro"><div class="wrap">
+  <span class="num">04 / TIPOGRAFÍA</span>
+  <h2>Redondeada, clara y amigable</h2>
+  <p class="lead">El logotipo usa una sans geométrica de terminaciones redondeadas. Para titulares y piezas se usa <b>Nunito</b> (gratuita, Google Fonts), que respeta ese carácter. Para texto corrido se mantiene <b>DM Sans</b>, que ya usa la web.</p>
+  <div class="g2">
+    <div class="card"><span class="tag">titulares</span><div class="big" style="color:var(--az-noche)">Agen<span class="grad">Zoft</span></div><p style="margin-top:12px"><b>Nunito ExtraBold 800 / Black 900</b> · títulos, números destacados, botones. Interlineado 1.05–1.15. Tracking −1 a −2%.</p></div>
+    <div class="card"><span class="tag">texto</span><div style="font-family:var(--az-font-texto);font-size:28px;line-height:1.3;color:var(--az-noche)">Automatizamos procesos y llevamos tu negocio al siguiente nivel.</div><p style="margin-top:12px"><b>DM Sans 400 / 500</b> · párrafos, descripciones, interfaz. Interlineado 1.5–1.6.</p></div>
+    <div class="card"><span class="tag">datos</span><div style="font-family:var(--az-font-mono);font-size:22px;color:var(--az-noche)">01 / ETIQUETA · hola@agenzoft.com</div><p style="margin-top:12px"><b>DM Mono 400 / 500</b> · etiquetas, numeración, datos técnicos, códigos.</p></div>
+    <div class="card"><h4>Jerarquía</h4>
+      <table><tr><th>Nivel</th><th>Fuente</th><th>Web</th><th>Impreso</th></tr>
+      <tr><td>Título</td><td>Nunito 800</td><td>48–72 px</td><td>28–40 pt</td></tr>
+      <tr><td>Subtítulo</td><td>Nunito 700</td><td>22–28 px</td><td>16–20 pt</td></tr>
+      <tr><td>Texto</td><td>DM Sans 400</td><td>16–18 px</td><td>9–11 pt</td></tr>
+      <tr><td>Etiqueta</td><td>DM Mono 500</td><td>12 px</td><td>7 pt</td></tr></table></div>
+  </div>
+  <p class="cap">Tarjetas y folletos impresos: si no hay conexión para cargar fuentes, instalar Nunito y DM Sans en el equipo de diseño.</p>
+</div></section>
+
+<!-- 05 ZOFT -->
+<section id="zoft"><div class="wrap">
+  <span class="num">05 / ZOFT</span>
+  <h2>El agente de IA de AgenZoft</h2>
+  <p class="lead">Zoft es la cara amable de la marca: una "Z" con rostro y un visor oscuro donde viven sus ojos. Es un asistente, no un robot frío. Aparece siempre que hay <b style="color:#fff">ayuda, respuesta o automatización</b>.</p>
+  <div class="g3">
+    <div class="card"><h4>Rasgos</h4><ul><li>Cercano, paciente y resolutivo</li><li>Siempre sonríe (sonrisa suave, no exagerada)</li><li>Ojos redondos: es lo único que cambia de expresión</li><li>Nunca tiene brazos ni cuerpo humano</li></ul></div>
+    <div class="card"><h4>Cómo habla</h4><ul><li>Primera persona, voseo: "Soy Zoft, tu agente de IA"</li><li>Una idea por mensaje, máx. 3 renglones</li><li>Pregunta antes de suponer</li><li>Si no sabe, lo dice y ofrece derivar a una persona</li></ul></div>
+    <div class="card"><h4>Dónde aparece</h4><ul><li>Chat flotante en la web</li><li>WhatsApp (foto de perfil)</li><li>Cartelería con QR</li><li>Instagram: tips, respuestas, humor leve</li></ul></div>
+  </div>
+  <h3>Expresiones</h3>
+  <div class="g4" id="expr"></div>
+  <p class="cap">Se cambian solo los ojos y la boca sobre el mismo cuerpo. Kit de expresiones a vectorizar desde el original en la fase de implementación.</p>
+
+  <h3>Chat de Zoft</h3>
+  <div class="fila-pieza">
+    <div class="mk fondo-noche" style="width:290px;border-radius:32px;border:6px solid #1c2038;padding:18px 14px;font-size:13px">
+      <div class="rowc" style="gap:10px;padding-bottom:12px;border-bottom:var(--az-borde)"><img src="logos/icono-zoft-app.svg" style="width:36px;border-radius:10px"><div><div class="t" style="font-size:16px">Zoft</div><div style="font-size:11px;color:var(--az-ok)">● en línea · Tu agente de IA</div></div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;padding:14px 0;color:#fff">
+        <div class="bubble" style="max-width:85%">¡Hola! Soy Zoft, tu agente de IA. Puedo ayudarte con información, resolver dudas y automatizar tareas. ¿Qué necesitás hoy?</div>
+        <div class="bubble yo" style="max-width:75%">Quiero ordenar el stock de mi local</div>
+        <div class="bubble" style="max-width:85%">Dale. ¿Qué rubro es? Así te muestro la solución que mejor encaja.</div>
+      </div>
+      <div class="rowc" style="gap:8px;background:var(--az-noche-700);border-radius:99px;padding:6px 6px 6px 14px;color:var(--az-texto-medio)"><span style="flex:1">Escribí tu mensaje…</span><span style="width:30px;height:30px;border-radius:50%;background:var(--az-grad);display:grid;place-items:center;color:#fff">→</span></div>
+    </div>
+    <div class="card" style="flex:1;min-width:260px"><h4>Especificaciones del widget</h4>
+      <ul><li>Botón flotante: círculo azul noche de 64 px con el Zoft completo (la Z con carita), aro degradé y glow violeta suave.</li><li>Cabecera: avatar + "Zoft" + estado "Tu agente de IA".</li><li>Burbuja de Zoft: azul noche elevado (#1B2342). Burbuja del usuario: degradé de marca.</li><li>Radio de burbujas: 18 px. Campo de texto en píldora.</li><li>Saludo inicial siempre igual y con la pregunta final abierta.</li><li>Estado "escribiendo": tres puntos que suben y bajan en degradé.</li></ul>
+      <h4 style="margin-top:18px">Mensajes tipo</h4>
+      <p class="mini">Saludo · "¡Hola! Soy Zoft, tu agente de IA. ¿Qué necesitás hoy?"<br>No sabe · "Eso no lo tengo claro. ¿Querés que te contacte una persona del equipo?"<br>Cierre · "Listo. Cualquier cosa, acá estoy."</p></div>
+  </div>
+</div></section>
+
+<!-- 06 WEB -->
+<section id="web" class="claro"><div class="wrap">
+  <span class="num">06 / WEB</span>
+  <h2>Lenguaje visual de la web</h2>
+  <p class="lead">Fondo azul noche con luz violeta, tipografía Nunito en titulares, botones en píldora con degradé. El hero lleva el logo AgenZoft; Zoft aparece solo como botón de chat chico en la esquina.</p>
+  <div class="mk fondo-noche" style="max-width:1080px;margin:0 auto;box-shadow:0 30px 60px rgba(11,15,26,.35)">
+    <div class="orb" style="width:60cqw;height:60cqw;right:-10cqw;top:5cqw"></div>
+    <div class="rowc" style="justify-content:space-between;padding:2.2cqw 4cqw;font-size:1.25cqw;color:#fff;border-bottom:var(--az-borde)">
+      <div class="rowc" style="gap:1cqw"><img src="logos/az-monograma.svg" style="height:2.6cqw"><span class="wm" style="font-size:2cqw">Agen<i>Zoft</i></span></div>
+      <div class="rowc" style="gap:3cqw"><span>Soluciones</span><span>Productos</span><span>Nosotros</span><span>Contacto</span></div>
+      <span class="btn" style="padding:.9cqw 2cqw;font-size:1.3cqw">Comenzar</span>
+    </div>
+    <div class="row" style="padding:6cqw 4cqw 6cqw;position:relative;align-items:center">
+      <div style="flex:1.1">
+        <span class="chip" style="font-size:1cqw;padding:.5cqw 1.4cqw;color:var(--az-azul);border:1px solid rgba(0,194,255,.4)">Agencia + Software + Agente IA</span>
+        <div class="t" style="font-size:5.8cqw;margin:2cqw 0 1.6cqw;color:#fff">Tu agencia de software, <span class="grad">agente de IA.</span></div>
+        <p style="font-size:1.6cqw;max-width:36cqw;color:var(--az-texto-claro)">Automatizamos procesos, potenciamos equipos y llevamos tu negocio al siguiente nivel.</p>
+        <div class="row" style="gap:1.2cqw;margin-top:3cqw"><span class="btn" style="padding:1.2cqw 3cqw;font-size:1.6cqw">Comenzar →</span><span style="border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:99px;padding:1.2cqw 3cqw;font-size:1.6cqw;font-family:var(--az-font-titulo);font-weight:800">Ver productos</span></div>
+      </div>
+      <div style="flex:.9;display:grid;place-items:center"><img src="logos/az-monograma.svg" style="width:30cqw;filter:drop-shadow(0 0 5cqw rgba(106,92,255,.6))"></div>
+    </div>
+    <div style="position:absolute;right:2.5cqw;bottom:2.5cqw;width:5.2cqw;height:5.2cqw;border-radius:50%;background:var(--az-grad);display:grid;place-items:center;box-shadow:var(--az-glow)"><img src="logos/zoft-mascota.svg" style="width:3.2cqw"></div><div class="row" style="gap:2cqw;padding:0 4cqw 4cqw">
+      <div style="flex:1;background:var(--az-noche-800);border:var(--az-borde);border-radius:2cqw;padding:2cqw;color:#fff"><div style="font-size:1.4cqw;color:var(--az-azul)">⚡ Automatización inteligente</div></div>
+      <div style="flex:1;background:var(--az-noche-800);border:var(--az-borde);border-radius:2cqw;padding:2cqw;color:#fff"><div style="font-size:1.4cqw;color:var(--az-azul)">⚙ Procesos más eficientes</div></div>
+      <div style="flex:1;background:var(--az-noche-800);border:var(--az-borde);border-radius:2cqw;padding:2cqw;color:#fff"><div style="font-size:1.4cqw;color:var(--az-azul)">🛡 Seguridad y confianza</div></div>
+      <div style="flex:1;background:var(--az-noche-800);border:var(--az-borde);border-radius:2cqw;padding:2cqw;color:#fff"><div style="font-size:1.4cqw;color:var(--az-azul)">📈 Escalabilidad sin límites</div></div>
+    </div>
+  </div>
+  <h3>Componentes</h3>
+  <div class="g3">
+    <div class="card"><h4>Botones</h4><div class="rowc" style="gap:10px;flex-wrap:wrap;margin:10px 0"><span class="btn" style="padding:12px 26px;font-size:15px">Comenzar →</span><span style="border:1.5px solid var(--az-violeta);color:var(--az-violeta);border-radius:99px;padding:10px 24px;font-size:15px;font-family:var(--az-font-titulo);font-weight:800">Secundario</span></div><p class="mini" style="color:var(--az-texto-oscuro)">Píldora, Nunito 800. Primario con degradé; secundario con borde violeta. Hover: sube 2 px y suma glow.</p></div>
+    <div class="card"><h4>Tarjetas</h4><div style="background:var(--az-noche);border-radius:16px;padding:18px;color:#fff;margin:10px 0"><div class="t" style="font-size:18px">Comercio<span class="grad">Pro</span></div><p class="mini" style="margin-top:4px">Franja de color del producto arriba.</p></div><p class="mini" style="color:var(--az-texto-oscuro)">Radio 16 px, borde 1 px blanco 8%, fondo noche elevado.</p></div>
+    <div class="card"><h4>Íconos</h4><p style="font-size:26px;margin:10px 0;color:var(--az-violeta)">⚡ ⚙ 🛡 📈</p><p class="mini" style="color:var(--az-texto-oscuro)">Línea de 2 px con terminaciones redondeadas, en azul #00C2FF sobre noche o violeta sobre claro (usar set tipo Lucide/Phosphor; los emojis son solo ilustrativos).</p></div>
+  </div>
+  <div class="g3" style="margin-top:22px">
+    <div class="card"><h4>Fondo</h4><p>Azul noche + <code>--az-grad-fondo</code> arriba a la izquierda y destellos de violeta. Se elimina el grano y el cursor personalizado del diseño anterior.</p></div>
+    <div class="card"><h4>Movimiento</h4><p>Zoft flota (6 s, ±8 px) y parpadea cada 5 s. Entradas con fade + 16 px. Máx. 300 ms en interacciones. Respetar <code>prefers-reduced-motion</code>.</p></div>
+    <div class="card"><h4>Secciones claras</h4><p>Para contraste, alternar con bloques en hielo (#E8EEFF) con texto azul noche y tarjetas blancas.</p></div>
+  </div>
+</div></section>
+
+<!-- 07 TARJETAS -->
+<section id="tarjetas"><div class="wrap">
+  <span class="num">07 / TARJETAS PERSONALES</span>
+  <h2>Tarjetas</h2>
+  <p class="lead">Formato 90 × 50 mm, sangrado 3 mm, papel 350 g con laminado mate. Frente oscuro con el monograma; dorso claro con los datos. Sin laminado brillante: estropea el degradé.</p>
+  <h3>AgenZoft</h3>
+  <div class="g2">
+    <div><div class="mk fondo-noche" style="aspect-ratio:9/5;box-shadow:0 20px 50px rgba(0,0,0,.5)"><div class="orb" style="width:60cqw;height:60cqw;right:-20cqw;top:-25cqw"></div><div style="position:absolute;inset:0;display:grid;place-items:center"><div style="text-align:center"><img src="logos/agenzoft-horizontal-oscuro.svg" style="width:60cqw;margin:auto"><div style="font-size:2.6cqw;letter-spacing:.3em;color:var(--az-texto-medio);margin-top:3cqw;text-transform:uppercase">Agencia · Software · Agente IA</div></div></div></div><p class="cap">Frente</p></div>
+    <div><div class="mk fondo-hielo" style="aspect-ratio:9/5"><div class="row" style="height:100%;padding:6cqw;justify-content:space-between;align-items:flex-end"><div><div class="t" style="font-size:6cqw">Nombre Apellido</div><div style="font-size:3cqw;color:var(--az-violeta);font-weight:700;margin-bottom:5cqw">Fundador · AgenZoft</div><div style="font-size:3cqw;line-height:1.7;color:var(--az-noche)">+54 9 261 515 4308<br>hola@agenzoft.com<br>agenzoft.com · Río Cuarto, Córdoba</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:3cqw"><img src="logos/az-monograma.svg" style="width:10cqw"><div class="qr" style="width:17cqw;height:17cqw" data-qr="a"></div></div></div><div style="position:absolute;left:0;top:0;bottom:0;width:2cqw;background:var(--az-grad)"></div></div><p class="cap">Dorso · el QR abre WhatsApp</p></div>
+  </div>
+  <h3>Zoft (tarjeta de presentación del agente)</h3>
+  <div class="g2">
+    <div><div class="mk fondo-grad" style="aspect-ratio:9/5"><div class="row rowc" style="height:100%;padding:0 8cqw;gap:6cqw"><img src="logos/zoft-mascota.svg" style="width:26cqw;filter:drop-shadow(0 3cqw 4cqw rgba(11,15,26,.35))"><div><div class="t" style="font-size:11cqw">Zoft</div><div style="font-size:3.6cqw;font-weight:500;opacity:.92">Tu agente de IA</div></div></div></div><p class="cap">Frente · degradé completo</p></div>
+    <div><div class="mk fondo-noche" style="aspect-ratio:9/5"><div class="row" style="height:100%;padding:6cqw;align-items:center;gap:6cqw"><div style="flex:1"><div class="t" style="font-size:6.4cqw">Escribile a Zoft<br><span class="grad">24 horas</span></div><div style="font-size:3cqw;margin-top:3cqw;color:var(--az-texto-claro)">Escaneá el código o escribí al<br>WhatsApp +54 9 261 515 4308</div><div style="margin-top:3cqw" class="wm"><span style="font-size:3.4cqw;color:#fff">Agen<i>Zoft</i></span></div></div><div class="qr" style="width:26cqw;height:26cqw" data-qr="b"></div></div></div><p class="cap">Dorso · para dejar en mostrador o entregar al cliente</p></div>
+  </div>
+</div></section>
+
+<!-- 08 INSTAGRAM -->
+<section id="instagram" class="claro"><div class="wrap">
+  <span class="num">08 / INSTAGRAM</span>
+  <h2>Publicidad en Instagram</h2>
+  <p class="lead">Tres plantillas de feed (4:5 · 1080×1350), historias (9:16 · 1080×1920), portadas de destacadas y foto de perfil. Reglas: un mensaje por pieza, titular en Nunito 800, máximo 8 palabras, logo siempre abajo, Zoft solo en posts que hablan del agente.</p>
+  <h3>Feed · 1080 × 1350</h3>
+  <div class="g4">
+    <div><div class="mk fondo-noche" style="aspect-ratio:4/5"><div class="orb" style="width:90cqw;height:90cqw;right:-35cqw;top:-20cqw"></div><div style="position:absolute;inset:0;padding:8cqw;display:flex;flex-direction:column;justify-content:space-between"><span class="chip" style="font-size:3.2cqw;padding:1.4cqw 3.4cqw;color:var(--az-azul);border:1px solid rgba(0,194,255,.4);align-self:flex-start">Presentación</span><div><div class="t" style="font-size:14cqw;color:#fff">Tu agencia de software, <span class="grad">agente de IA.</span></div></div><div class="rowc" style="justify-content:space-between"><img src="logos/agenzoft-horizontal-oscuro.svg" style="width:38cqw"><span class="btn" style="font-size:3.4cqw;padding:2cqw 4cqw">Conocé más →</span></div></div></div><p class="cap">A · Portada de carrusel / institucional</p></div>
+    <div><div class="mk fondo-claro" style="aspect-ratio:4/5;background:var(--az-hielo)"><div style="position:absolute;inset:0;padding:8cqw;display:flex;flex-direction:column;justify-content:space-between"><div class="rowc" style="gap:3cqw"><span style="width:3cqw;height:8cqw;background:var(--az-comerciopro);border-radius:9px"></span><span class="chip" style="font-size:3.2cqw;color:var(--az-violeta)">ComercioPro</span></div><div class="t" style="font-size:12.5cqw;color:var(--az-noche)">Ordená tu negocio <span style="color:var(--az-violeta)">sin planillas.</span></div><div style="background:#fff;border-radius:5cqw;padding:5cqw;font-size:4cqw;color:var(--az-texto-oscuro)">Ventas, stock y caja en un solo sistema.</div><div class="rowc" style="justify-content:space-between"><img src="logos/agenzoft-horizontal-lema-claro.svg" style="width:52cqw"></div></div></div><p class="cap">B · Producto (acento del producto)</p></div>
+    <div><div class="mk fondo-grad" style="aspect-ratio:4/5"><img src="logos/zoft-mascota.svg" style="position:absolute;width:40cqw;right:6cqw;bottom:16cqw;filter:drop-shadow(0 4cqw 5cqw rgba(11,15,26,.35))"><div style="position:absolute;inset:0;padding:8cqw;display:flex;flex-direction:column;justify-content:space-between"><span class="chip" style="font-size:3.2cqw;padding:1.4cqw 3.4cqw;background:rgba(11,15,26,.3);align-self:flex-start">Tip de Zoft</span><div class="t" style="font-size:12cqw;width:75%">Lo que se repite, se automatiza.</div><img src="logos/az-monograma-blanco.svg" style="width:14cqw"></div></div><p class="cap">C · Tip de Zoft (degradé + mascota)</p></div>
+    <div><div class="mk fondo-noche" style="aspect-ratio:4/5"><div style="position:absolute;inset:0;padding:8cqw;display:flex;flex-direction:column;justify-content:space-between"><div class="t" style="font-size:9cqw;color:var(--az-azul)">01 / 04</div><div style="display:grid;gap:3cqw"><div class="bubble" style="font-size:4.2cqw;max-width:90%">¿A qué hora cierran hoy?</div><div class="bubble yo" style="font-size:4.2cqw;max-width:90%">Hoy cerramos a las 20 h. ¿Querés reservar?</div><div class="rowc" style="gap:2cqw;font-size:3.2cqw;color:var(--az-texto-medio)"><img src="logos/icono-zoft-app.svg" style="width:7cqw;border-radius:2cqw">Zoft respondió en 2 segundos</div></div><img src="logos/agenzoft-horizontal-oscuro.svg" style="width:38cqw"></div></div><p class="cap">D · Caso / conversación con Zoft</p></div>
+  </div>
+  <div class="g4" style="margin-top:34px">
+    <div><h3 style="margin-top:0">Historia 9:16</h3><div class="mk fondo-noche" style="aspect-ratio:9/16;max-width:260px"><div class="orb" style="width:120cqw;height:120cqw;left:-20cqw;top:20cqw"></div><div style="position:absolute;inset:0;padding:9cqw;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center"><img src="logos/az-monograma.svg" style="width:22cqw"><div><img src="logos/zoft-mascota.svg" style="width:52cqw;margin:0 auto 8cqw"><div class="t" style="font-size:12cqw;color:#fff">¿Tu negocio ya <span class="grad">trabaja solo?</span></div></div><div><span class="btn" style="font-size:5cqw;padding:3cqw 8cqw">Escribinos →</span><div style="font-size:3.4cqw;margin-top:5cqw;color:var(--az-texto-medio)">agenzoft.com</div></div></div></div></div>
+    <div><h3 style="margin-top:0">Reel · portada</h3><div class="mk fondo-grad" style="aspect-ratio:9/16;max-width:260px"><div style="position:absolute;inset:0;padding:9cqw;display:flex;flex-direction:column;justify-content:flex-end"><img src="logos/zoft-mascota.svg" style="width:60cqw;position:absolute;top:14cqw;right:6cqw;filter:drop-shadow(0 4cqw 5cqw rgba(11,15,26,.4))"><div class="t" style="font-size:15cqw">3 tareas que Zoft hace por vos</div><div style="font-size:4cqw;margin-top:4cqw;font-weight:500">Seguí hasta el final</div></div></div></div>
+    <div><h3 style="margin-top:0">Destacadas</h3><div class="row" style="gap:16px;flex-wrap:wrap">
+      <div style="text-align:center"><div style="width:68px;height:68px;border-radius:50%;background:var(--az-noche);border:3px solid transparent;background-image:linear-gradient(var(--az-noche),var(--az-noche)),var(--az-grad);background-origin:border-box;background-clip:padding-box,border-box;display:grid;place-items:center"><img src="logos/zoft-mascota.svg" style="width:34px"></div><div class="mini" style="margin-top:5px;color:var(--az-texto-oscuro)">Zoft</div></div>
+      <div style="text-align:center"><div style="width:68px;height:68px;border-radius:50%;background-image:linear-gradient(var(--az-noche),var(--az-noche)),var(--az-grad);background-origin:border-box;background-clip:padding-box,border-box;border:3px solid transparent;display:grid;place-items:center;font-size:26px">🛒</div><div class="mini" style="margin-top:5px;color:var(--az-texto-oscuro)">Productos</div></div>
+      <div style="text-align:center"><div style="width:68px;height:68px;border-radius:50%;background-image:linear-gradient(var(--az-noche),var(--az-noche)),var(--az-grad);background-origin:border-box;background-clip:padding-box,border-box;border:3px solid transparent;display:grid;place-items:center;font-size:26px">💬</div><div class="mini" style="margin-top:5px;color:var(--az-texto-oscuro)">Clientes</div></div>
+      <div style="text-align:center"><div style="width:68px;height:68px;border-radius:50%;background-image:linear-gradient(var(--az-noche),var(--az-noche)),var(--az-grad);background-origin:border-box;background-clip:padding-box,border-box;border:3px solid transparent;display:grid;place-items:center;font-size:26px">❓</div><div class="mini" style="margin-top:5px;color:var(--az-texto-oscuro)">Consultas</div></div></div>
+      <p class="cap">Fondo azul noche, ícono lineal en azul, aro en degradé. Los ejemplos usan emojis solo para mostrar el esquema.</p>
+      <h3>Perfil</h3><div class="rowc" style="gap:20px"><div style="width:90px;height:90px;border-radius:50%;overflow:hidden"><img src="logos/icono-agenzoft-app.svg" style="width:100%"></div><div style="width:90px;height:90px;border-radius:50%;overflow:hidden"><img src="logos/icono-zoft-app.svg" style="width:100%"></div></div><p class="cap">@agenzoft usa el AZ; el agente puede tener su cuenta o contacto de WhatsApp con la cara de Zoft.</p></div>
+    <div><h3 style="margin-top:0">Reglas del feed</h3><div class="card"><ul><li>Cuadrícula alternada: noche → hielo → degradé → noche.</li><li>Una sola fuente por pieza: Nunito 800 + DM Sans.</li><li>Logo abajo, nunca arriba del titular.</li><li>Cierre con acción: "Escribinos", "Conocé más".</li><li>Sin capturas de pantalla borrosas: usar mockups sobre noche.</li><li>Hashtags solo en el texto, no en la imagen.</li></ul></div></div>
+  </div>
+</div></section>
+
+<!-- 09 CARTELERIA -->
+<section id="carteleria"><div class="wrap">
+  <span class="num">09 / CARTELERÍA</span>
+  <h2>Cartelería y vía pública</h2>
+  <p class="lead">Se lee de lejos: titular enorme, un solo mensaje, contraste máximo y el QR a Zoft como llamada a la acción. Imprimir siempre en vectorial (SVG/PDF) y probar el degradé en el material final.</p>
+  <h3>Cartel de frente · 3 × 1 m (proporción 3:1)</h3>
+  <div class="mk fondo-noche" style="aspect-ratio:3/1;box-shadow:0 20px 50px rgba(0,0,0,.5)"><div class="orb" style="width:70cqw;height:70cqw;right:-15cqw;top:-30cqw"></div><div class="row rowc" style="height:100%;padding:0 6cqw;justify-content:center"><img src="logos/agenzoft-horizontal-lema-oscuro.svg" style="height:56%"></div></div>
+  <p class="cap">Fachada: solo el logo principal. Acrílico o lona con LED frontal. Alternativa solo AZ para espacios chicos.</p>
+  <div class="g3" style="margin-top:34px">
+    <div><h3 style="margin-top:0">Roll-up · 85 × 200 cm</h3><div class="mk fondo-noche" style="aspect-ratio:85/200;max-width:260px"><div class="orb" style="width:130cqw;height:130cqw;left:-30cqw;top:40cqw"></div><div style="position:absolute;inset:0;padding:8cqw;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center"><img src="logos/agenzoft-horizontal-oscuro.svg" style="width:72cqw"><div><img src="logos/az-monograma.svg" style="width:62cqw;margin:0 auto 10cqw"><div class="t" style="font-size:14cqw;color:#fff">Tu agencia de software, <span class="grad">agente de IA.</span></div></div><div style="width:100%"><div class="qr" style="width:42cqw;height:42cqw;margin:0 auto" data-qr="c"></div><div class="rowc" style="justify-content:center;gap:2.5cqw;margin-top:4cqw"><img src="logos/icono-zoft-app.svg" style="width:8cqw;border-radius:2cqw"><span style="font-size:5cqw;color:#fff;font-weight:700">Escaneá y hablá con Zoft</span></div><div style="font-size:4cqw;color:var(--az-texto-medio);margin-top:1cqw">agenzoft.com</div></div></div></div></div>
+    <div><h3 style="margin-top:0">Cartel A3 de mostrador</h3><div class="mk fondo-grad" style="aspect-ratio:297/420;max-width:300px"><div style="position:absolute;inset:0;padding:9cqw;display:flex;flex-direction:column;justify-content:space-between"><div class="t" style="font-size:11.5cqw">¿Dudas? <br>Preguntale a Zoft.</div><img src="logos/zoft-mascota.svg" style="width:34cqw;align-self:flex-end;filter:drop-shadow(0 4cqw 5cqw rgba(11,15,26,.35))"><div class="rowc" style="gap:5cqw"><div class="qr" style="width:30cqw;height:30cqw;flex:none" data-qr="d"></div><div style="font-size:4.4cqw;font-weight:700;line-height:1.25">Escaneá el QR o escribinos por WhatsApp.<div style="font-size:3.6cqw;font-weight:500;opacity:.9;margin-top:2cqw">Atiende Zoft, tu agente de IA</div></div></div></div></div></div>
+    <div><h3 style="margin-top:0">Vidriera · sticker 30 cm</h3><div class="stage" style="padding:0;background:repeating-conic-gradient(#ddd 0 25%,#f4f4f4 0 50%) 0 0/20px 20px;border-radius:16px;aspect-ratio:1"><div class="mk" style="width:70%;aspect-ratio:1;border-radius:50%;background:var(--az-noche);box-shadow:none"><div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:10cqw"><div><img src="logos/zoft-mascota.svg" style="width:34cqw;margin:0 auto 4cqw"><div class="t" style="font-size:9cqw;color:#fff">Atendemos con<br><span class="grad">Zoft</span></div><div style="font-size:5cqw;margin-top:4cqw;color:var(--az-texto-medio)">Tu agente de IA · 24 h</div></div></div></div></div><p class="cap">Vinilo troquelado circular. Para locales que usan Zoft.</p></div>
+  </div>
+  <h3>Especificaciones de impresión</h3>
+  <table>
+    <tr><th>Pieza</th><th>Medida</th><th>Material</th><th>Archivo</th></tr>
+    <tr><td>Cartel de frente</td><td>Según fachada (3:1)</td><td>Lona frontlight / acrílico con LED</td><td>PDF vectorial, textos en curvas</td></tr>
+    <tr><td>Roll-up</td><td>85 × 200 cm (+10 cm base)</td><td>Lona mate 440 g</td><td>PDF 100 dpi a escala 1:1</td></tr>
+    <tr><td>Cartel A3 mostrador</td><td>297 × 420 mm</td><td>Papel 250 g mate o PVC 2 mm</td><td>PDF CMYK + 3 mm sangrado</td></tr>
+    <tr><td>Vinilo vidriera</td><td>30 cm Ø</td><td>Vinilo adhesivo cortado</td><td>SVG/PDF + línea de corte</td></tr>
+  </table>
+</div></section>
+
+<!-- 10 FOLLETOS -->
+<section id="folletos" class="claro"><div class="wrap">
+  <span class="num">10 / FOLLETOS</span>
+  <h2>Folletos y flyers</h2>
+  <p class="lead">Folleto A5 (148 × 210 mm) frente y dorso, y tríptico A4 plegado en tres. Frente de impacto en azul noche; dorso claro y ordenado para leer.</p>
+  <div class="fila-pieza">
+    <div style="width:min(300px,100%)"><div class="mk fondo-noche" style="aspect-ratio:148/210"><div class="orb" style="width:100cqw;height:100cqw;right:-30cqw;top:-10cqw"></div><div style="position:absolute;inset:0;padding:9cqw;display:flex;flex-direction:column;justify-content:space-between"><img src="logos/agenzoft-horizontal-oscuro.svg" style="width:50cqw"><div><img src="logos/az-monograma.svg" style="width:46cqw;margin:0 0 6cqw auto"><div class="t" style="font-size:14cqw;color:#fff">Software que <span class="grad">ordena tu negocio.</span></div></div><div class="btn" style="font-size:4.6cqw;padding:3cqw 7cqw;align-self:flex-start">agenzoft.com →</div></div></div><p class="cap">A5 · frente</p></div>
+    <div style="width:min(300px,100%)"><div class="mk fondo-hielo" style="aspect-ratio:148/210"><div style="position:absolute;inset:0;padding:9cqw;display:flex;flex-direction:column;gap:3.4cqw"><div class="t" style="font-size:8cqw">Qué hacemos</div><div style="display:grid;gap:2.6cqw;font-size:3.6cqw;color:var(--az-noche)"><div style="background:#fff;border-radius:3cqw;padding:3cqw;border-left:1.6cqw solid var(--az-violeta)"><b>Automatización inteligente</b><br><span style="color:var(--az-texto-oscuro)">Menos tareas manuales.</span></div><div style="background:#fff;border-radius:3cqw;padding:3cqw;border-left:1.6cqw solid var(--az-azul)"><b>Procesos más eficientes</b><br><span style="color:var(--az-texto-oscuro)">Todo ordenado en un sistema.</span></div><div style="background:#fff;border-radius:3cqw;padding:3cqw;border-left:1.6cqw solid var(--az-violeta)"><b>Seguridad y confianza</b><br><span style="color:var(--az-texto-oscuro)">Tus datos, protegidos.</span></div><div style="background:#fff;border-radius:3cqw;padding:3cqw;border-left:1.6cqw solid var(--az-azul)"><b>Escalabilidad sin límites</b><br><span style="color:var(--az-texto-oscuro)">Crece sin cambiar de sistema.</span></div></div><div class="rowc" style="margin-top:auto;gap:4cqw"><div class="qr" style="width:22cqw;height:22cqw;flex:none;border:1px solid #D8DFF5" data-qr="e"></div><div style="font-size:3.4cqw;line-height:1.5">Hablá con Zoft<br><b>+54 9 261 515 4308</b><br>hola@agenzoft.com</div></div></div></div><p class="cap">A5 · dorso</p></div>
+    <div style="flex:1;min-width:300px"><div class="mk fondo-claro" style="aspect-ratio:297/210;background:#fff"><div class="row" style="height:100%"><div class="fondo-noche" style="flex:1;padding:4cqw;display:flex;flex-direction:column;justify-content:space-between"><img src="logos/az-monograma.svg" style="width:9cqw"><div class="t" style="font-size:3.6cqw;color:#fff">Tu agencia de software, <span class="grad">agente de IA.</span></div><div style="font-size:1.5cqw;color:var(--az-texto-medio)">Panel 1 · Portada</div></div><div style="flex:1;padding:4cqw;background:var(--az-hielo);display:flex;flex-direction:column;gap:1.4cqw"><div class="t" style="font-size:3cqw">Productos</div><div style="font-size:1.6cqw;line-height:1.9;color:var(--az-noche)"><span style="color:var(--az-comerciopro)">●</span> ComercioPro<br><span style="color:var(--az-supertecnico)">●</span> SuperTécnico<br><span style="color:var(--az-ferregestion)">●</span> FerreGestión<br><span style="color:var(--az-inmobiliariapro)">●</span> InmobiliariaPro</div><div style="font-size:1.5cqw;color:var(--az-texto-oscuro);margin-top:auto">Panel 2 · Productos</div></div><div class="fondo-grad" style="flex:1;padding:4cqw;display:flex;flex-direction:column;justify-content:space-between"><img src="logos/zoft-mascota.svg" style="width:11cqw"><div><div class="t" style="font-size:3cqw">Hablá con Zoft</div><div style="font-size:1.6cqw;margin-top:1cqw">+54 9 261 515 4308<br>agenzoft.com</div></div><div style="font-size:1.5cqw;opacity:.85">Panel 3 · Contacto</div></div></div></div><p class="cap">Tríptico A4 apaisado (3 paneles de 99 mm)</p></div>
+  </div>
+  <h3>Reglas de maquetación</h3>
+  <div class="g3">
+    <div class="card"><h4>Márgenes</h4><p>10 mm mínimo al borde; el degradé y las luces pueden sangrar. Grilla de 4 columnas.</p></div>
+    <div class="card"><h4>Jerarquía</h4><p>1) Titular Nunito 800 · 2) subtítulo corto · 3) bloques con una idea cada uno · 4) llamada a la acción con QR.</p></div>
+    <div class="card"><h4>Imagen</h4><p>Mockups de pantallas reales sobre azul noche, o Zoft. No usar fotos de stock genéricas de gente sonriendo.</p></div>
+  </div>
+</div></section>
+
+<!-- 11 PAPELERIA -->
+<section id="papeleria"><div class="wrap">
+  <span class="num">11 / PAPELERÍA Y DIGITAL</span>
+  <h2>Papelería, firma y canales</h2>
+  <div class="fila-pieza">
+    <div style="width:min(300px,100%)"><h3 style="margin-top:0">Hoja membretada A4</h3><div class="mk fondo-claro" style="aspect-ratio:210/297"><div style="position:absolute;left:0;top:0;right:0;height:2.2cqw;background:var(--az-grad)"></div><div style="position:absolute;inset:0;padding:9cqw 9cqw 7cqw;display:flex;flex-direction:column"><img src="logos/agenzoft-horizontal-claro.svg" style="width:42cqw"><div style="margin-top:14cqw;font-size:3.1cqw;line-height:1.7;color:var(--az-texto-oscuro)"><div style="height:2cqw;width:34%;background:var(--az-hielo);border-radius:9px;margin-bottom:6cqw"></div>Estimado/a:<br><br><div style="height:1.6cqw;background:var(--az-hielo);border-radius:9px;margin-bottom:2cqw"></div><div style="height:1.6cqw;background:var(--az-hielo);border-radius:9px;margin-bottom:2cqw"></div><div style="height:1.6cqw;background:var(--az-hielo);border-radius:9px;width:70%"></div></div><div style="margin-top:auto;font-size:2.6cqw;color:var(--az-texto-oscuro);display:flex;justify-content:space-between;border-top:1px solid #D8DFF5;padding-top:3cqw"><span>agenzoft.com</span><span>hola@agenzoft.com</span><span>+54 9 261 515 4308</span></div></div></div></div>
+    <div style="flex:1;min-width:300px"><h3 style="margin-top:0">Firma de email</h3>
+      <div class="card" style="background:#fff;color:var(--az-noche);border:1px solid #D8DFF5"><div class="rowc" style="gap:18px"><img src="logos/icono-agenzoft-app.svg" style="width:64px;border-radius:14px"><div style="border-left:3px solid var(--az-violeta);padding-left:16px"><div class="t" style="font-size:18px;color:var(--az-noche)">Nombre Apellido</div><div style="font-size:13px;color:var(--az-violeta);font-weight:700">Fundador · AgenZoft</div><div style="font-size:13px;color:var(--az-texto-oscuro);margin-top:6px">+54 9 261 515 4308 · hola@agenzoft.com<br>agenzoft.com</div></div></div><div style="margin-top:14px;padding-top:12px;border-top:1px solid #D8DFF5;font-size:12.5px;color:var(--az-texto-oscuro)"><b style="color:var(--az-violeta)">Agencia + Software + Agente IA</b> · Río Cuarto, Córdoba</div></div>
+      <p class="cap">Máx. 600 px de ancho, logo en PNG @2x con fondo transparente, sin imágenes pesadas.</p>
+      <h3>WhatsApp Business</h3>
+      <div class="fila-pieza"><div style="width:84px;height:84px;border-radius:50%;overflow:hidden"><img src="logos/icono-zoft-app.svg" style="width:100%"></div><div class="card" style="flex:1;min-width:220px"><h4>Perfil</h4><p><b>Foto:</b> ícono Zoft. <b>Nombre:</b> AgenZoft · Zoft IA. <b>Descripción:</b> "Software que ordena tu negocio. Escribinos y te atiende Zoft, tu agente de IA."</p><p class="mini" style="margin-top:8px">Mensaje de bienvenida: "¡Hola! Soy Zoft, tu agente de IA. Contame qué necesitás y te ayudo."</p></div></div>
+    </div>
+  </div>
+  <h3>Estados de WhatsApp y merchandising</h3>
+  <div class="g4">
+    <div><div class="mk fondo-noche" style="aspect-ratio:9/16;max-width:200px"><div style="position:absolute;inset:0;padding:8cqw;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center"><img src="logos/az-monograma.svg" style="width:20cqw"><div><div class="t" style="font-size:12cqw;color:#fff">Software que <span class="grad">ordena tu negocio</span></div></div><span class="btn" style="font-size:5cqw;padding:3cqw 8cqw">Escribinos</span></div></div><p class="cap">Estado · 1080 × 1920</p></div>
+    <div><div class="mk" style="aspect-ratio:1;max-width:200px;background:var(--az-noche);display:grid;place-items:center;border-radius:12cqw"><img src="logos/zoft-mascota.svg" style="width:50cqw"></div><p class="cap">Sticker Zoft · vinilo troquelado</p></div>
+    <div><div class="mk" style="aspect-ratio:1;max-width:200px;background:var(--az-noche);display:grid;place-items:center"><div style="width:44cqw;height:50cqw;background:linear-gradient(180deg,#1B2342,#0B0F1A);border-radius:6cqw 6cqw 10cqw 10cqw;border:1px solid rgba(255,255,255,.1);display:grid;place-items:center"><img src="logos/az-monograma.svg" style="width:26cqw"></div></div><p class="cap">Taza / remera: AZ centrado, color o blanco</p></div>
+    <div><div class="mk fondo-grad" style="aspect-ratio:1;max-width:200px;display:grid;place-items:center"><div style="text-align:center"><img src="logos/zoft-mascota.svg" style="width:44cqw;margin:0 auto"><div class="t" style="font-size:10cqw">Zoft</div></div></div><p class="cap">Avatar de redes · 1080 × 1080</p></div>
+  </div>
+</div></section>
+
+<!-- 12 ARCHIVOS -->
+<section id="assets" class="claro"><div class="wrap">
+  <span class="num">12 / ARCHIVOS ENTREGADOS</span>
+  <h2>Qué hay en esta carpeta</h2>
+  <div class="g2">
+    <div class="card"><h4>docs/identidad/</h4><ul><li><b>manual-de-identidad.html</b> · este manual</li><li><b>tokens.css</b> · colores, fuentes, degradés, radios (usar en la web)</li><li><b>logos/*.svg</b> · 14 archivos vectoriales (horizontal claro/oscuro con y sin lema, Zoft claro/oscuro, mascota, monogramas color/blanco/oscuro, íconos de app, favicon)</li></ul></div>
+    <div class="card"><h4>⚠ Importante: calidad de los vectores</h4><p>El monograma AZ y Zoft de <b>logos/</b> son <b>redibujados a partir de la lámina PNG</b> (que es una imagen y no tiene vectores). Los textos "AgenZoft" y "Zoft" sí están convertidos a curvas desde Nunito. Para imprenta grande (roll-up, fachada) conviene pedir a quien generó el logo los vectores originales (Illustrator/Figma) o mandar a vectorizar el PNG definitivo y reemplazar los 3 archivos fuente: <i>az-monograma, zoft-mascota, icono-z</i>. El resto de las piezas se actualiza sola.</p></div>
+  </div>
+</div></section>
+
+<!-- 13 PLAN -->
+<section id="plan"><div class="wrap">
+  <span class="num">13 / PRÓXIMOS PASOS</span>
+  <h2>Propuesta de plan de implementación</h2>
+  <p class="lead">Para aprobar antes de tocar la web. Ordenado de menor a mayor riesgo.</p>
+  <ol class="steps" style="max-width:820px">
+    <li><div><b style="color:#fff">Validar el manual.</b> Revisar colores, tipografía (Nunito), logos y piezas. Ajustes que pidas se aplican en <code>tokens.css</code> y los SVG.</div></li>
+    <li><div><b style="color:#fff">Vectores definitivos.</b> Reemplazar monograma y Zoft por vectores originales o vectorizados; generar PNG @1x/@2x, ícono 192/512, apple-touch-icon y <code>favicon.ico</code>.</div></li>
+    <li><div><b style="color:#fff">Favicon y logos de la web.</b> Cambiar <code>favicon AgenZoft.svg</code>, <code>logo+AgenZoft.svg</code> y los PNG claro/oscuro; agregar <code>apple-touch-icon</code>, <code>manifest</code> y metaetiquetas Open Graph con la nueva marca.</div></li>
+    <li><div><b style="color:#fff">Tokens en la web.</b> Importar <code>tokens.css</code> en <code>style.css</code> y mapear las variables actuales (<code>--accent</code> → violeta nuevo, etc.). Cargar Nunito. Probar contraste.</div></li>
+    <li><div><b style="color:#fff">Home.</b> Hero con el logo AgenZoft, navegación con logo nuevo, botones y tarjetas; quitar grano y cursor personalizado. Sin Zoft grande.</div></li>
+    <li><div><b style="color:#fff">Widget de Zoft.</b> Actualizar <code>floating-actions.css/js</code> con el Zoft completo (la Z con carita) en un botón chico de 64 px, el saludo y el estilo de burbujas del manual.</div></li>
+    <li><div><b style="color:#fff">Páginas de producto</b> (ComercioPro, SuperTécnico, FerreGestión, InmobiliariaPro) con acento propio y firma "Un producto AgenZoft".</div></li>
+    <li><div><b style="color:#fff">Piezas de marketing.</b> Actualizar plantillas de <code>publicaciones/</code> (posts, historias, reels) y <code>plan-marketing.html</code> con el nuevo sistema; exportar PDFs de tarjetas, folletos y cartelería listos para imprenta.</div></li>
+  </ol>
+</div></section>
+
+<footer><div class="wrap"><img src="logos/agenzoft-horizontal-oscuro.svg" style="height:38px;margin:0 auto 14px"><p>Manual de identidad AgenZoft v3 · Octubre 2026 · Derivado de la lámina <code>docs/agenzoft-chatgpt.png</code></p></div></footer>
+
+<script>
+// Expresiones de Zoft (mismo cuerpo, cambian ojos y boca)
+(function(){
+  var ex=[["Contento","e","M86 78 Q100 90 114 78","<circle cx='82' cy='60' r='8.5' fill='#fff'/><circle cx='118' cy='60' r='8.5' fill='#fff'/>"],
+          ["Pensando","e","M90 80 H112","<circle cx='84' cy='56' r='8.5' fill='#fff'/><circle cx='120' cy='56' r='8.5' fill='#fff'/>"],
+          ["Sorprendido","e","","<circle cx='82' cy='58' r='10' fill='#fff'/><circle cx='118' cy='58' r='10' fill='#fff'/><ellipse cx='100' cy='82' rx='6' ry='7' fill='#fff'/>"],
+          ["Feliz (celebra)","e","M84 74 Q100 96 116 74","<path d='M72 62 Q82 50 92 62' stroke='#fff' stroke-width='5' fill='none' stroke-linecap='round'/><path d='M108 62 Q118 50 128 62' stroke='#fff' stroke-width='5' fill='none' stroke-linecap='round'/>"]];
+  var h="";ex.forEach(function(e,i){
+    var id="x"+i;
+    h+="<div><div class='stage st-noche' style='min-height:190px'><svg viewBox='0 0 210 230' width='130'><defs><linearGradient id='"+id+"' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#6A5CFF'/><stop offset='1' stop-color='#00C2FF'/></linearGradient></defs>"
+    +"<path d='M138 112 L66 192 H150' fill='none' stroke='url(#"+id+")' stroke-width='46' stroke-linecap='round' stroke-linejoin='round'/><circle cx='168' cy='190' r='27' fill='#9B8CFF'/><ellipse cx='100' cy='68' rx='80' ry='60' fill='url(#"+id+")'/><ellipse cx='100' cy='66' rx='58' ry='36' fill='#0B0F1A'/>"
+    +e[3]+(e[2]?"<path d='"+e[2]+"' fill='none' stroke='#fff' stroke-width='5' stroke-linecap='round'/>":"")+"</svg></div><p class='cap'>"+e[0]+"</p></div>";});
+  document.getElementById("expr").innerHTML=h;
+})();
+// QR de demostración (patrón decorativo; reemplazar por QR real al imprimir)
+document.querySelectorAll("[data-qr]").forEach(function(el){
+  var n=21,s=el.getAttribute("data-qr").charCodeAt(0),r=function(){s=(s*9301+49297)%233280;return s/233280};
+  var f=function(x,y){return (x<7&&y<7)||(x>n-8&&y<7)||(x<7&&y>n-8)};
+  var o="<svg viewBox='0 0 21 21' shape-rendering='crispEdges'>";
+  for(var y=0;y<n;y++)for(var x=0;x<n;x++){
+    var on;
+    if(f(x,y)){var a=x<7?x:x-(n-7),b=y<7?y:y-(n-7);on=(a==0||a==6||b==0||b==6||(a>=2&&a<=4&&b>=2&&b<=4));
+      if((x<7&&y<7)||(x>n-8&&y<7)||(x<7&&y>n-8)){}
+      if(x==7||y==7||x==n-8||y==n-8)on=false;}
+    else on=r()>.52;
+    if(on)o+="<rect x='"+x+"' y='"+y+"' width='1' height='1' fill='#0B0F1A'/>";}
+  el.innerHTML=o+"</svg>";
+});
+</script>
+</body>
+</html>

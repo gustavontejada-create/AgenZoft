@@ -1,8 +1,28 @@
+/* Zoft: botón de chat chico + volver arriba.
+   Mientras el agente no esté conectado, Zoft deriva la conversación al WhatsApp del equipo.
+   Para conectar el agente real: reemplazar open() por la llamada a su API. */
 (function () {
-  var WA_URL =
-    'https://wa.me/5492615154308?text=' +
-    encodeURIComponent('Hola! Quiero info sobre AgenZoft');
+  var WA = 'https://wa.me/5492615154308?text=';
   var SCROLL_THRESHOLD = 400;
+  var OPTIONS = [
+    ['ComercioPro', 'Hola! Quiero info sobre ComercioPro'],
+    ['SuperTécnico', 'Hola! Quiero info sobre SuperTécnico'],
+    ['InmobiliariaPro', 'Hola! Quiero info sobre InmobiliariaPro'],
+    ['Otra consulta', 'Hola! Quiero info sobre AgenZoft']
+  ];
+
+  // Zoft completo (la Z con carita) para el botón y el avatar
+  var uid = 0;
+  function face() {
+    var id = 'zg' + (uid++);
+    return '<svg viewBox="0 0 210 230" aria-hidden="true"><defs><linearGradient id="' + id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6A5CFF"/><stop offset="1" stop-color="#00C2FF"/></linearGradient></defs>' +
+      '<path d="M138 112 L66 192 H150" fill="none" stroke="url(#' + id + ')" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="168" cy="190" r="27" fill="#9B8CFF"/>' +
+      '<ellipse cx="100" cy="68" rx="80" ry="60" fill="url(#' + id + ')"/><ellipse cx="100" cy="66" rx="58" ry="36" fill="#0B0F1A"/>' +
+      '<circle cx="82" cy="60" r="8.5" fill="#fff"/><circle cx="118" cy="60" r="8.5" fill="#fff"/>' +
+      '<path d="M86 78 Q100 90 114 78" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>';
+  }
+  function openWA(text) { window.open(WA + encodeURIComponent(text), '_blank', 'noopener'); }
 
   var stack = document.createElement('div');
   stack.className = 'fab-stack';
@@ -12,31 +32,56 @@
   backBtn.type = 'button';
   backBtn.className = 'fab-btn fab-back-top';
   backBtn.setAttribute('aria-label', 'Volver arriba');
-  backBtn.innerHTML =
-    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-    '<path d="M12 19V5M5 12l7-7 7 7"/></svg>';
-  backBtn.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  backBtn.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  backBtn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  var zoftBtn = document.createElement('button');
+  zoftBtn.type = 'button';
+  zoftBtn.className = 'fab-btn fab-zoft';
+  zoftBtn.setAttribute('aria-label', 'Hablar con Zoft');
+  zoftBtn.setAttribute('aria-expanded', 'false');
+  zoftBtn.innerHTML = face();
+
+  var chat = document.createElement('div');
+  chat.className = 'zoft-chat';
+  chat.setAttribute('role', 'dialog');
+  chat.setAttribute('aria-label', 'Chat con Zoft');
+  chat.innerHTML =
+    '<div class="zoft-chat-head"><div class="zoft-chat-avatar">' + face() + '</div>' +
+    '<div><div class="zoft-chat-title">Zoft</div><div class="zoft-chat-sub">Tu agente de IA · AgenZoft</div></div>' +
+    '<button type="button" class="zoft-chat-close" aria-label="Cerrar chat">×</button></div>' +
+    '<div class="zoft-chat-body"><div class="zoft-msg">¡Hola! Soy Zoft, tu agente de IA. ¿Sobre qué querés saber?</div><div class="zoft-opts"></div></div>' +
+    '<form class="zoft-chat-form"><input type="text" placeholder="Escribí tu mensaje…" aria-label="Escribí tu mensaje" maxlength="300"><button type="submit" aria-label="Enviar">→</button></form>' +
+    '<div class="zoft-chat-note">Seguimos la conversación por WhatsApp con el equipo.</div>';
+
+  var opts = chat.querySelector('.zoft-opts');
+  OPTIONS.forEach(function (o) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'zoft-opt'; b.textContent = o[0];
+    b.addEventListener('click', function () { openWA(o[1]); });
+    opts.appendChild(b);
+  });
+  var input = chat.querySelector('input');
+  chat.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var t = input.value.trim();
+    if (t) { openWA(t); input.value = ''; }
   });
 
-  var waBtn = document.createElement('a');
-  waBtn.href = WA_URL;
-  waBtn.target = '_blank';
-  waBtn.rel = 'noopener noreferrer';
-  waBtn.className = 'fab-btn fab-whatsapp';
-  waBtn.setAttribute('aria-label', 'Escribinos por WhatsApp');
-  waBtn.innerHTML =
-    '<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
-    '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.89-11.893a11.821 11.821 0 00-3.48-8.413z"/>' +
-    '</svg>';
-
-  stack.append(backBtn, waBtn);
-  document.body.appendChild(stack);
-
-  function onScroll() {
-    backBtn.classList.toggle('visible', window.scrollY > SCROLL_THRESHOLD);
+  function toggle(show) {
+    var on = typeof show === 'boolean' ? show : !chat.classList.contains('open');
+    chat.classList.toggle('open', on);
+    zoftBtn.setAttribute('aria-expanded', String(on));
+    if (on) setTimeout(function () { input.focus(); }, 250);
   }
+  zoftBtn.addEventListener('click', function () { toggle(); });
+  chat.querySelector('.zoft-chat-close').addEventListener('click', function () { toggle(false); zoftBtn.focus(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && chat.classList.contains('open')) toggle(false); });
 
+  stack.append(backBtn, zoftBtn);
+  document.body.append(stack, chat);
+
+  function onScroll() { backBtn.classList.toggle('visible', window.scrollY > SCROLL_THRESHOLD); }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
