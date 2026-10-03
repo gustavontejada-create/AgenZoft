@@ -19,8 +19,8 @@
       '<path d="M138 112 L66 192 H150" fill="none" stroke="url(#' + id + ')" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<circle cx="168" cy="190" r="27" fill="#9B8CFF"/>' +
       '<ellipse cx="100" cy="68" rx="80" ry="60" fill="url(#' + id + ')"/><ellipse cx="100" cy="66" rx="58" ry="36" fill="#0B0F1A"/>' +
-      '<circle cx="82" cy="60" r="8.5" fill="#fff"/><circle cx="118" cy="60" r="8.5" fill="#fff"/>' +
-      '<path d="M86 78 Q100 90 114 78" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>';
+      '<circle class="zf-eye zf-eye-l" cx="82" cy="60" r="8.5" fill="#fff"/><circle class="zf-eye zf-eye-r" cx="118" cy="60" r="8.5" fill="#fff"/>' +
+      '<path class="zf-mouth" d="M86 78 Q100 90 114 78" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>';
   }
   function openWA(text) { window.open(WA + encodeURIComponent(text), '_blank', 'noopener'); }
 

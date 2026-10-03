@@ -20,15 +20,29 @@
 }
 .fab-back-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
 
-/* Botón de Zoft (chico, solo la cara) */
+/* Botón de Zoft: sin fondo, con su propia forma */
 .fab-zoft {
-  width: 64px; height: 64px;
-  border: 2px solid transparent;
-  background: linear-gradient(#0B0F1A, #0B0F1A) padding-box, linear-gradient(135deg, #6A5CFF, #00C2FF) border-box;
-  box-shadow: 0 6px 24px rgba(106,92,255,.5);
+  width: 64px; height: 72px; border-radius: 0;
+  background: none; box-shadow: none; padding: 0;
+  filter: drop-shadow(0 6px 14px rgba(106,92,255,.55));
+  transition: transform .25s ease, filter .25s ease;
 }
-.fab-zoft:hover { box-shadow: 0 8px 32px rgba(106,92,255,.7), 0 0 20px rgba(0,194,255,.35); }
-.fab-zoft svg { width: 38px; height: 42px; }
+.fab-zoft:hover, .fab-zoft:focus-visible {
+  transform: translateY(-4px) rotate(-5deg) scale(1.06);
+  filter: drop-shadow(0 8px 20px rgba(106,92,255,.8)) drop-shadow(0 0 12px rgba(0,194,255,.45));
+}
+.fab-zoft svg { width: 100%; height: 100%; overflow: visible; }
+.fab-zoft .zf-eye, .fab-zoft .zf-mouth {
+  transform-box: fill-box; transform-origin: center;
+  transition: transform .2s ease;
+}
+/* parpadeo suave cada tanto */
+.fab-zoft .zf-eye { animation: zfBlink 6s infinite; }
+@keyframes zfBlink { 0%, 94%, 100% { transform: scaleY(1); } 96.5% { transform: scaleY(.12); } }
+/* al pasar el mouse: guiño con el ojo derecho y sonrisa más grande */
+.fab-zoft:hover .zf-eye-r, .fab-zoft:focus-visible .zf-eye-r { animation: none; transform: scaleY(.14) scaleX(1.25); }
+.fab-zoft:hover .zf-eye-l, .fab-zoft:focus-visible .zf-eye-l { animation: none; }
+.fab-zoft:hover .zf-mouth, .fab-zoft:focus-visible .zf-mouth { transform: scale(1.3, 1.5) translateY(1px); }
 
 /* Ventana de chat */
 .zoft-chat {
@@ -48,11 +62,10 @@
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .zoft-chat-avatar {
-  width: 42px; height: 42px; border-radius: 12px; flex: none;
-  background: #0B0F1A; border: 1px solid rgba(106,92,255,.5);
-  display: grid; place-items: center;
+  width: 40px; height: 44px; flex: none;
+  filter: drop-shadow(0 3px 8px rgba(106,92,255,.5));
 }
-.zoft-chat-avatar svg { width: 26px; height: 28px; }
+.zoft-chat-avatar svg { width: 100%; height: 100%; display: block; }
 .zoft-chat-title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 16px; color: #fff; line-height: 1.1; }
 .zoft-chat-sub { font-size: 11.5px; color: #9AA2C4; }
 .zoft-chat-close {
@@ -89,4 +102,5 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .zoft-chat, .fab-btn { transition: none; }
+  .fab-zoft .zf-eye { animation: none; }
 }
