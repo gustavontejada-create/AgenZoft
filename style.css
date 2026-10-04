@@ -30,24 +30,24 @@ body {
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
+  cursor: none;
 }
 
 
 /* ── CURSOR ── */
-.cursor, .cursor-ring { display: none !important; }
 .cursor {
   width: 10px; height: 10px;
-  background: var(--accent);
+  background: var(--grad);
   border-radius: 50%;
   position: fixed; pointer-events: none;
   z-index: 9999;
   transform: translate(-50%,-50%);
   transition: transform 0.1s ease;
-  box-shadow: 0 0 12px var(--accent);
+  box-shadow: 0 0 12px rgba(106,92,255,0.8), 0 0 18px rgba(0,194,255,0.45);
 }
 .cursor-ring {
   width: 38px; height: 38px;
-  border: 1px solid rgba(155,140,255,0.4);
+  border: 1px solid rgba(0,194,255,0.4);
   border-radius: 50%;
   position: fixed; pointer-events: none;
   z-index: 9998;
@@ -220,7 +220,7 @@ nav {
   padding: 14px 32px; border-radius: 999px;
   font-family: var(--font-title);
   font-weight: 800; font-size: 15px;
-  text-decoration: none; cursor: pointer;
+  text-decoration: none; cursor: none;
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   box-shadow: 0 6px 24px rgba(106,92,255,0.32);
 }
@@ -231,7 +231,7 @@ nav {
   padding: 13px 30px; border-radius: 999px;
   font-family: var(--font-title);
   font-weight: 800; font-size: 15px;
-  text-decoration: none; cursor: pointer;
+  text-decoration: none; cursor: none;
   border: 1px solid var(--dimmer);
   transition: border-color 0.2s, color 0.2s;
 }
@@ -443,7 +443,7 @@ nav {
   padding: 13px; border-radius: 999px;
   font-family: var(--font-title);
   font-weight: 800; font-size: 14.5px;
-  text-decoration: none; cursor: pointer;
+  text-decoration: none; cursor: none;
   transition: all 0.2s;
 }
 .btn-plan-primary {
@@ -535,7 +535,7 @@ nav {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 12px; padding: 18px 24px;
   text-decoration: none; color: var(--text);
-  transition: border-color 0.2s, transform 0.2s; cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s; cursor: none;
 }
 .contact-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
 .contact-card-icon { font-size: 26px; }
@@ -571,7 +571,7 @@ footer {
   
   .menu-btn {
     display: flex; flex-direction: column; gap: 5px;
-    cursor: pointer; z-index: 300; padding: 10px;
+    cursor: none; z-index: 300; padding: 10px;
     background: transparent; border: none;
   }
   .menu-btn span {
@@ -757,7 +757,7 @@ footer {
 }
 .faq-item:hover { border-color: var(--accent-border); }
 .faq-item summary {
-  padding: 20px 24px; cursor: pointer;
+  padding: 20px 24px; cursor: none;
   font-family: var(--font-title);
   font-size: 16px; font-weight: 600; color: var(--text);
   display: flex; justify-content: space-between; align-items: center;
@@ -920,4 +920,11 @@ footer {
 @media(max-width: 960px) {
   .equipo-grid { grid-template-columns: 1fr; gap: 36px; }
   .equipo-stats { gap: 24px; }
+}
+
+/* Cursor personalizado (punto + aro que siguen al mouse): todo el sitio lo usa, incluidos widgets */
+body:has(#cursor), body:has(#cursor) * { cursor: none !important; }
+@media (hover: none), (pointer: coarse) {
+  body:has(#cursor), body:has(#cursor) * { cursor: auto !important; }
+  .cursor, .cursor-ring { display: none !important; }
 }
