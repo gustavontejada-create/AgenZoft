@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /docs/
+Disallow: /notas/
+Sitemap: https://agenzoft.com/sitemap.xml

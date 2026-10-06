@@ -8,7 +8,7 @@
   var OPTIONS = [
     ['ComercioPro', 'Hola! Quiero info sobre ComercioPro'],
     ['SuperTécnico', 'Hola! Quiero info sobre SuperTécnico'],
-    ['InmobiliariaPro', 'Hola! Quiero info sobre InmobiliariaPro'],
+    ['Raíces', 'Hola! Quiero info sobre Raíces'],
     ['Otra consulta', 'Hola! Quiero info sobre AgenZoft']
   ];
 
