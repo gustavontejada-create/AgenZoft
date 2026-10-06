@@ -1,0 +1,103 @@
+{
+  "actualizado": "2026-10-04",
+  "moneda": "ARS",
+  "prueba_gratis_dias": 14,
+  "productos": {
+    "comerciopro": {
+      "nombre": "ComercioPro",
+      "url": "https://comerciopro.agenzoft.com",
+      "planes": [
+        {
+          "id": "basico",
+          "nombre": "Basico",
+          "descripcion": "Comercio chico, local unico",
+          "mensual": 31800,
+          "anual": 349800,
+          "usuarios": 2,
+          "puestos": 2,
+          "locales": 1,
+          "consultas_ia_mes": 15
+        },
+        {
+          "id": "profesional",
+          "nombre": "Profesional",
+          "descripcion": "Comercio en crecimiento, creditos y proveedores",
+          "mensual": 53400,
+          "anual": 587400,
+          "usuarios": 4,
+          "puestos": 4,
+          "locales": 1,
+          "consultas_ia_mes": 30
+        },
+        {
+          "id": "enterprise",
+          "nombre": "Enterprise",
+          "descripcion": "Cadena de locales, AFIP, WhatsApp",
+          "mensual": 85900,
+          "anual": 944900,
+          "usuarios": 10,
+          "puestos": 10,
+          "locales": 3,
+          "consultas_ia_mes": 60
+        }
+      ]
+    },
+    "supertecnico": {
+      "nombre": "SuperTecnico",
+      "url": "https://supertecnico.agenzoft.com",
+      "planes": [
+        {
+          "id": "basico",
+          "nombre": "Basico",
+          "mensual": 35000,
+          "anual": 385000,
+          "usuarios": 1,
+          "puestos": 2,
+          "sucursales": 1,
+          "clientes": 300
+        },
+        {
+          "id": "profesional",
+          "nombre": "Profesional",
+          "mensual": 55000,
+          "anual": 550000,
+          "usuarios": 3,
+          "puestos": 4,
+          "sucursales": 1,
+          "clientes": 600
+        },
+        {
+          "id": "enterprise",
+          "nombre": "Enterprise",
+          "mensual": 69000,
+          "anual": 690000,
+          "usuarios": 10,
+          "puestos": 11
+        }
+      ]
+    },
+    "raices": {
+      "nombre": "Raices",
+      "url": "https://raices.agenzoft.com",
+      "planes": [
+        {
+          "id": "profesional",
+          "nombre": "Profesional",
+          "mensual": 53000,
+          "anual": 583000,
+          "usuarios": 3,
+          "puestos": 4,
+          "propiedades": 200
+        },
+        {
+          "id": "enterprise",
+          "nombre": "Enterprise",
+          "mensual": 79000,
+          "anual": 869000,
+          "usuarios": 10,
+          "puestos": 10
+        }
+      ]
+    }
+  }
+}

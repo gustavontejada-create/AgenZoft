@@ -1,0 +1,17 @@
+{
+  "name": "zoft-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Zoft, el agente de IA de la web de AgenZoft: responde sobre sistemas, planes y precios con una base de conocimiento cerrada.",
+  "type": "module",
+  "main": "src/servidor.js",
+  "scripts": {
+    "start": "node src/servidor.js",
+    "dev": "node --watch src/servidor.js",
+    "probar": "node scripts/probar.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@google/genai": "^2.27.0"
+  }
+}

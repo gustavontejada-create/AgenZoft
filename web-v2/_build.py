@@ -29,7 +29,7 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/web.css?v={V}">
-<link rel="stylesheet" href="../floating-actions.css?v=3">
+<link rel="stylesheet" href="../floating-actions.css?v=4">
 </head>"""
 
 def header(pagina):
@@ -64,7 +64,8 @@ PIE = f"""<footer class="pie-sitio">
 </footer>
 
 <script src="js/web.js?v={V}"></script>
-<script src="../floating-actions.js?v=3"></script>
+<script>window.ZOFT_API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8787/chat' : 'https://zoft.agenzoft.com/chat';</script>
+<script src="../floating-actions.js?v=4"></script>
 </body>
 </html>
 """

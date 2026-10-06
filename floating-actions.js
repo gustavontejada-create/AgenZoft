@@ -1,6 +1,7 @@
 /* Zoft: botón de chat chico + volver arriba.
-   Mientras el agente no esté conectado, Zoft deriva la conversación al WhatsApp del equipo.
-   Para conectar el agente real: reemplazar open() por la llamada a su API. */
+   Sin agente conectado, Zoft deriva la conversación al WhatsApp del equipo.
+   Con agente: la página define window.ZOFT_API (URL del endpoint /chat de zoft-api) antes de este
+   script, y Zoft responde con IA; el botón "Hablar con una persona" sigue disponible siempre. */
 (function () {
   var WA = 'https://wa.me/5492615154308?text=';
   var SCROLL_THRESHOLD = 400;
@@ -55,18 +56,100 @@
     '<div class="zoft-chat-note">Seguimos la conversación por WhatsApp con el equipo.</div>';
 
   var opts = chat.querySelector('.zoft-opts');
-  OPTIONS.forEach(function (o) {
+  var input = chat.querySelector('input');
+  var IA = window.ZOFT_API;
+  if (IA) iniciarIA();
+  else OPTIONS.forEach(function (o) {
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'zoft-opt'; b.textContent = o[0];
     b.addEventListener('click', function () { openWA(o[1]); });
     opts.appendChild(b);
   });
-  var input = chat.querySelector('input');
-  chat.querySelector('form').addEventListener('submit', function (e) {
+  if (!IA) chat.querySelector('form').addEventListener('submit', function (e) {
     e.preventDefault();
     var t = input.value.trim();
     if (t) { openWA(t); input.value = ''; }
   });
+
+  // ── Modo agente de IA ──
+  function iniciarIA() {
+    var body = chat.querySelector('.zoft-chat-body');
+    var historial = [];
+    var ocupado = false;
+    chat.querySelector('.zoft-msg').textContent = '¡Hola! Soy Zoft, el agente de IA de AgenZoft. ¿En qué te ayudo?';
+    chat.querySelector('.zoft-chat-note').innerHTML = 'No compartas datos personales en este chat. · <a href="#" class="zoft-persona">Hablar con una persona</a>';
+    chat.querySelector('.zoft-persona').addEventListener('click', function (e) { e.preventDefault(); openWA(resumen()); });
+    input.maxLength = 500;
+    input.placeholder = 'Escribí tu pregunta…';
+    ['¿Qué sistema me sirve?', 'Ver planes y precios', 'Quiero un desarrollo a medida'].forEach(function (t) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'zoft-opt'; b.textContent = t;
+      b.addEventListener('click', function () { enviar(t); });
+      opts.appendChild(b);
+    });
+    chat.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var t = input.value.trim();
+      if (t) { input.value = ''; enviar(t); }
+    });
+
+    function resumen() {
+      var ult = historial.filter(function (m) { return m.rol === 'usuario'; }).slice(-1)[0];
+      return ult ? 'Hola, vengo de hablar con Zoft en la web. Mi consulta: ' + ult.texto : 'Hola, quiero hacer una consulta sobre AgenZoft.';
+    }
+    function esc(t) { return t.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function formato(t) {
+      return esc(t)
+        .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+        .replace(/(https?:\/\/[^\s<)]+[^\s<).,])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')
+        .replace(/^- (.*)$/gm, '• $1')
+        .replace(/\n/g, '<br>');
+    }
+    function burbuja(html, clase) {
+      var d = document.createElement('div');
+      d.className = 'zoft-msg' + (clase ? ' ' + clase : '');
+      d.innerHTML = html;
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+      return d;
+    }
+    function botonPersona() {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'zoft-opt zoft-wa'; b.textContent = 'Seguir por WhatsApp con el equipo';
+      b.addEventListener('click', function () { openWA(resumen()); });
+      body.appendChild(b);
+      body.scrollTop = body.scrollHeight;
+    }
+    function enviar(texto) {
+      if (ocupado) return;
+      ocupado = true;
+      opts.style.display = 'none';
+      burbuja(esc(texto), 'yo');
+      historial.push({ rol: 'usuario', texto: texto });
+      var esperando = burbuja('<span class="zoft-dots"><i></i><i></i><i></i></span>', 'pensando');
+      fetch(IA, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mensajes: historial.slice(-12) }) })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, status: r.status, d: d }; }); })
+        .then(function (x) {
+          esperando.remove();
+          if (!x.ok || !x.d.respuesta) {
+            burbuja(x.status === 429 ? 'Por ahora llegamos al límite de consultas. Escribinos por WhatsApp y te respondemos.' : 'Ahora no puedo responder. ¿Te paso con una persona por WhatsApp?');
+            botonPersona();
+            historial.pop();
+            return;
+          }
+          historial.push({ rol: 'zoft', texto: x.d.respuesta });
+          burbuja(formato(x.d.respuesta));
+          if (x.d.derivar) botonPersona();
+        })
+        .catch(function () {
+          esperando.remove();
+          historial.pop();
+          burbuja('Ahora no puedo responder. ¿Te paso con una persona por WhatsApp?');
+          botonPersona();
+        })
+        .then(function () { ocupado = false; input.focus(); });
+    }
+  }
 
   function toggle(show) {
     var on = typeof show === 'boolean' ? show : !chat.classList.contains('open');

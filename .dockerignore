@@ -1,0 +1,10 @@
+.git
+zoft-api
+propuesta-web-v2
+publicaciones
+notas
+docs/*-precios.jpg
+docs/Raices-precios.jpg
+web-v2/_src
+web-v2/_build.py
+**/node_modules
