@@ -409,3 +409,29 @@ section { position: relative; padding: 110px 0; }
   .stat b { font-size: 42px; }
   .prod .pie { flex-direction: column; align-items: flex-start; }
 }
+
+
+/* ── Ajustes de celular: nada se sale de la pantalla ── */
+html, body { max-width: 100%; overflow-x: clip; }
+.hero .wrap > *, .feat > *, .medida .wrap > *, .contacto .wrap > *, .grid > *, .planes > *, .fila > * { min-width: 0; }
+img, svg, video { max-width: 100%; }
+.phones { display: flex; gap: 22px; justify-content: center; align-items: flex-start; }
+.phones .phone + .phone { margin-top: 46px; }
+
+/* ── Logo de cada sistema ── */
+.pmarca { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+.pmarca img { height: 64px; width: auto; max-width: 100%; display: block; }
+.pmarca .nombre { font-family: var(--font-t); font-weight: 900; font-size: 36px; letter-spacing: -.02em; color: #fff; line-height: 1; }
+.pmarca .nombre b { color: #00C2FF; font-weight: 900; }
+.pmarca.raices img { height: 128px; }
+.pmarca.supertecnico img { height: 56px; }
+.plogo { width: 44px; height: 44px; border-radius: 12px; object-fit: contain; flex: none; }
+.prod h3 { display: flex; align-items: center; gap: 12px; }
+.prod h3 .plogo { margin-left: -2px; }
+@media (max-width: 900px) {
+  .phones .phone { width: min(44vw, 190px); }
+  .pmarca img { height: 52px; }
+  .pmarca.raices img { height: 104px; }
+  .pmarca.supertecnico img { height: 46px; }
+  .pmarca .nombre { font-size: 30px; }
+}

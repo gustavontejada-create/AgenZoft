@@ -122,3 +122,14 @@
 .zoft-chat-body { flex: 1; min-height: 0; max-height: none; }
 .zoft-chat-head, .zoft-chat-form, .zoft-chat-note { flex: none; }
 @media (max-width: 768px) { .zoft-chat { max-height: calc(100vh - 110px); } }
+
+
+/* Sin el recuadro gris/azul que el celular dibuja detrás al tocar */
+.fab-btn, .zoft-opt, .zoft-chat-close, .zoft-chat-form button { -webkit-tap-highlight-color: transparent; }
+.fab-btn:focus, .zoft-opt:focus, .zoft-chat-close:focus { outline: none; }
+.fab-zoft:focus-visible { outline: 2px solid #00C2FF; outline-offset: 4px; border-radius: 22px; }
+.fab-back-top:focus-visible, .zoft-opt:focus-visible, .zoft-chat-close:focus-visible { outline: 2px solid #00C2FF; outline-offset: 2px; }
+@media (hover: none) {
+  /* en pantallas táctiles el "hover" se queda pegado después del toque */
+  .fab-zoft:hover { transform: none; filter: drop-shadow(0 6px 14px rgba(106,92,255,.55)); }
+}

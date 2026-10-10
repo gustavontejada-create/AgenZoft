@@ -9,7 +9,7 @@ RAIZ = FUENTE.parent   # las páginas generadas van en la raíz del repo
 SITIO = "https://agenzoft.com"
 sprite = (RAIZ / "assets/icons.svg").read_text(encoding="utf-8")
 ICONOS = '<svg width="0" height="0" style="position:absolute" aria-hidden="true">' + sprite[sprite.index("<defs>"):sprite.rindex("</svg>")] + "</svg>"
-V = "5"  # subir para saltear la caché de Cloudflare cuando cambien css/js
+V = "6"  # subir para saltear la caché de Cloudflare cuando cambien css/js
 
 NAV = [("a-medida.html", "A medida"), ("zoft.html", "Zoft"), ("index.html#contacto", "Contacto")]
 SISTEMAS = [("comerciopro.html", "#00C2FF", "ComercioPro", "Para comercios"),
@@ -44,7 +44,7 @@ def head(title, desc, pagina):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/web.css?v={V}">
-<link rel="stylesheet" href="floating-actions.css?v=5">
+<link rel="stylesheet" href="floating-actions.css?v=6">
 </head>"""
 
 def header(pagina):
@@ -80,7 +80,7 @@ PIE = f"""<footer class="pie-sitio">
 
 <script src="js/web.js?v={V}"></script>
 <script>window.ZOFT_API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8787/chat' : 'https://zoft.agenzoft.com/chat';</script>
-<script src="floating-actions.js?v=5"></script>
+<script src="floating-actions.js?v=6"></script>
 </body>
 </html>
 """
