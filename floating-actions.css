@@ -133,3 +133,17 @@
   /* en pantallas táctiles el "hover" se queda pegado después del toque */
   .fab-zoft:hover { transform: none; filter: drop-shadow(0 6px 14px rgba(106,92,255,.55)); }
 }
+
+
+/* Saltito al tocar a Zoft: se agacha, salta y vuelve a caer con un rebote */
+.fab-zoft svg { transform-origin: 50% 100%; }
+.fab-zoft.salto svg { animation: zoftSalto .65s cubic-bezier(.3,.7,.4,1) 1; }
+@keyframes zoftSalto {
+  0%   { transform: translateY(0) scale(1, 1); }
+  14%  { transform: translateY(2px) scale(1.14, .84); }
+  42%  { transform: translateY(-26px) scale(.92, 1.12); }
+  68%  { transform: translateY(0) scale(1.1, .9); }
+  82%  { transform: translateY(-7px) scale(.97, 1.04); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
+@media (prefers-reduced-motion: reduce) { .fab-zoft.salto svg { animation: none; } }

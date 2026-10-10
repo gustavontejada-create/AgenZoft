@@ -157,7 +157,11 @@
     zoftBtn.setAttribute('aria-expanded', String(on));
     if (on) setTimeout(function () { input.focus(); }, 250);
   }
-  zoftBtn.addEventListener('click', function () { toggle(); });
+  zoftBtn.addEventListener('click', function () {
+    zoftBtn.classList.remove('salto'); void zoftBtn.offsetWidth; zoftBtn.classList.add('salto');
+    toggle();
+  });
+  zoftBtn.addEventListener('animationend', function () { zoftBtn.classList.remove('salto'); });
   chat.querySelector('.zoft-chat-close').addEventListener('click', function () { toggle(false); zoftBtn.focus(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && chat.classList.contains('open')) toggle(false); });
 

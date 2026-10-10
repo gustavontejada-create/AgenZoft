@@ -435,3 +435,19 @@ img, svg, video { max-width: 100%; }
   .pmarca.supertecnico img { height: 46px; }
   .pmarca .nombre { font-size: 30px; }
 }
+
+
+/* Logo + nombre + bajada de cada sistema (ComercioPro y Raíces) */
+.pmarca .txt { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+.pmarca .bajada { font-family: var(--font-t); font-weight: 700; font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--texto-medio); line-height: 1.35; }
+.pmarca.comerciopro img { height: 72px; }
+.pmarca.comerciopro .bajada { color: #7FD8F5; }
+.pmarca.raices img { height: 84px; }
+.pmarca.raices .nombre { background: linear-gradient(135deg, #E9C374, #C99A44); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 44px; }
+.pmarca.raices .bajada { color: #D9B26A; }
+@media (max-width: 900px) {
+  .pmarca.comerciopro img { height: 60px; }
+  .pmarca.raices img { height: 68px; }
+  .pmarca.raices .nombre { font-size: 36px; }
+  .pmarca .bajada { font-size: 11px; letter-spacing: .12em; }
+}
