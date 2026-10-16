@@ -34,7 +34,8 @@ def head(title, desc, pagina):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{SITIO}/assets/brand/og-agenzoft.png">
+<meta property="og:image" content="{SITIO}/assets/brand/og-agenzoft-avatar.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png?v=3">
