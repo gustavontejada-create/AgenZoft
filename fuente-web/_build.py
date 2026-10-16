@@ -9,7 +9,7 @@ RAIZ = FUENTE.parent   # las páginas generadas van en la raíz del repo
 SITIO = "https://agenzoft.com"
 sprite = (RAIZ / "assets/icons.svg").read_text(encoding="utf-8")
 ICONOS = '<svg width="0" height="0" style="position:absolute" aria-hidden="true">' + sprite[sprite.index("<defs>"):sprite.rindex("</svg>")] + "</svg>"
-V = "8"  # subir para saltear la caché de Cloudflare cuando cambien css/js
+V = "9"  # subir para saltear la caché de Cloudflare cuando cambien css/js
 
 NAV = [("a-medida.html", "A medida"), ("zoft.html", "Zoft"), ("index.html#contacto", "Contacto")]
 SISTEMAS = [("comerciopro.html", "#00C2FF", "ComercioPro", "Para comercios"),
